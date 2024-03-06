@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Http\Controllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/makereservation', function (){
-    return view('makereservation');
-});
+Route::get('/makereservation', [MakeReservationController::class, 'show']);
+
+Route::post('/makereservation', [MakeReservationController::class, 'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
