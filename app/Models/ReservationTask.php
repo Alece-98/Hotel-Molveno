@@ -14,7 +14,7 @@ class ReservationTask extends Task
     private Employee $creator; #Employee
     private Guest $reservingGuest; #Guest
     private array $guests = [];
-    private string $uuid;
+    private string $uuid = "";
     private bool $hasBreakfast = false;
     private array $comments = [];
 
