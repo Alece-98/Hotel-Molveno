@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReservationTask extends Model
+class ReservationTask extends Task
 {
     use HasFactory;
 
@@ -15,8 +15,8 @@ class ReservationTask extends Model
     private Guest $reservingGuest; #Guest
     private array $guests = [];
     private string $uuid;
-    private bool $hasBreakfast;
-    private array $comments;
+    private bool $hasBreakfast = false;
+    private array $comments = [];
 
     public function __construct(){
         #UUID Method here

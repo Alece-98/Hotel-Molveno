@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ReservationTask;
 use App\Models\Guest;
 use App\Models\Room;
+use App\Enums\RoomType;
+use App\Enums\RoomView;
 
 class MakeReservationController extends Controller
 {
@@ -14,7 +16,7 @@ class MakeReservationController extends Controller
         return view('makereservation', );
     }
 
-    public function store(Request $request){
+    public function store(){
         $reservation = new ReservationTask();
         $reservingGuest = new Guest();
         $room = new Room();
@@ -30,6 +32,12 @@ class MakeReservationController extends Controller
         $reservingGuest->setCountry(request('country'));
         $reservation->setReservingGuest($reservingGuest);
         $reservation->addGuest($reservingGuest);
+        $room->setRoomType(request('roomtype'));
+        $room->setRoomView(request('roomview'));
+        //$room->setRoomType('Standard');
+        //$room->setRoomView('Standard');
+        $room->addReservation($reservation);
+        return view('roomreserved', ['room' => $room]);
     }
 
 

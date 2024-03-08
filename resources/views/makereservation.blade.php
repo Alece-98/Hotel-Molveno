@@ -34,15 +34,15 @@
             <input type="number" name="children" id="children" required/>
             <label for="roomtype">Room type:</label>
             <select name="roomtype" id="roomtype" required>
-                <option value="economy">Economy</option>
-                <option value="standard">Standard</option>
-                <option value="luxury">Luxury</option>
+                <option value="Economy">Economy</option>
+                <option value="Standard" selected>Standard</option>
+                <option value="Luxurious">Luxurious</option>
             </select>
-            <label for="roomview">Room view:</label>
+            <label for="roomview" >Room view:</label>
             <select name="roomview" id="roomview" required>
-                <option value="standard">Standard</option>
-                <option value="mountain">Mountain</option>
-                <option value="lake">Lake</option>
+                <option value="Standard" selected>Standard</option>
+                <option value="Mountain">Mountain</option>
+                <option value="Lake">Lake</option>
             </select>
             <label for="babybed">Baby Bed: </label>
             <input type="checkbox" name="babybed" id="babybed"/>
