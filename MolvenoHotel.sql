@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 08, 2024 at 09:09 AM
+-- Generation Time: Mar 08, 2024 at 11:30 AM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `MolvenoHotel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_info`
+--
+
+CREATE TABLE `employee_info` (
+  `first_name` char(111) NOT NULL,
+  `last_name` char(111) NOT NULL,
+  `email` varchar(111) NOT NULL,
+  `phone_number` int NOT NULL,
+  `id` int NOT NULL,
+  `timestamp` timestamp NOT NULL,
+  `position` varchar(111) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -48,6 +64,28 @@ CREATE TABLE `flights` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guest_info`
+--
+
+CREATE TABLE `guest_info` (
+  `first_name` char(111) NOT NULL,
+  `last_name` char(111) NOT NULL,
+  `email` varchar(111) NOT NULL,
+  `phone_number` varchar(111) NOT NULL,
+  `nationality` varchar(111) NOT NULL,
+  `street_name` varchar(111) NOT NULL,
+  `city` varchar(111) NOT NULL,
+  `house_number` int NOT NULL,
+  `zip_code` int NOT NULL,
+  `country` char(111) NOT NULL,
+  `id` int NOT NULL,
+  `time_stamp` timestamp NOT NULL,
+  `passport_control` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -192,6 +230,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indexes for table `employee_info`
+--
+ALTER TABLE `employee_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -202,6 +246,12 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `flights`
 --
 ALTER TABLE `flights`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `guest_info`
+--
+ALTER TABLE `guest_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -242,6 +292,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `employee_info`
+--
+ALTER TABLE `employee_info`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -252,6 +308,12 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `flights`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `guest_info`
+--
+ALTER TABLE `guest_info`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
