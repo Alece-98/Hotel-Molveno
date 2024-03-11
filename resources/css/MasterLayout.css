@@ -22,6 +22,10 @@ body {
     background-color: #ffffff;
 }
 
+html {
+	overflow-y: scroll;
+}
+
 .gridLayoutContainer {
     display: grid;
     grid-template-columns: 300px auto;
@@ -62,6 +66,7 @@ body {
 .content {
     grid-area: mainContent;
     z-index: 1;
+    width: 100%;
 }
 
 .footer {
