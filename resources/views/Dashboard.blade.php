@@ -1,0 +1,3 @@
+<x-MasterLayout>
+
+</x-MasterLayout>
