@@ -20,7 +20,7 @@
                 <label class="width150" for="Phone">
                     <p>Phone Number:</p>
                 </label>
-                <input class="flexGrow" id="Phone" type="number" placeholder="0612345678">
+                <input class="flexGrow" id="Phone" type="number" placeholder="0612345678" maxlength="10">
             </div>
 
             <div class="flex widthFull">
@@ -127,17 +127,17 @@
 
             <div class="gap20 flex widthFull">
                 <div class="column withHalf">
-                    <label class="width100" for="adults">
+                    <label class="width100" for="Arrival">
                         <p>Arrival:</p>
                     </label>
-                    <input class="smallInput" id="adults" type="date">
+                    <input class="smallInput" id="Arrival" type="date">
                 </div>
 
                 <div class="column withHalf">
-                    <label class="width100" for="children">
+                    <label class="width100" for="Departure">
                         <p>Departure:</p>
                     </label>
-                    <input class="smallInput" id="children" type="date">
+                    <input class="smallInput" id="Departure" type="date">
                 </div>
             </div>
 
