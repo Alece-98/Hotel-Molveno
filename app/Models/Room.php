@@ -13,37 +13,25 @@ class Room extends Model
 {
     use HasFactory;
 
-    private int $roomNumber = 0;
-    private int $singleBeds = 0;
-    private int $twinBeds = 0;
-    private int $floor = 0; #Moet dit een int zijn?
-    private RoomView $roomView = RoomView::Standard;
-    private RoomType $roomType = RoomType::Standard;
-    private bool $hasHandicapFacility = false;
-    private bool $hasBabyBedOption = false;
-    private array $cleaningTasks = [];
-    private array $maintenanceTasks = [];
-    private array $bookingTasks = [];
-    private array $reservations = [];
-    private int $price = 0;
-    private string $uuid;
+    //Table name for database
+    protected $table = 'rooms';
 
     public function __construct(){
         #UUID komt hier
     }
 
-        // Room number
+    // Room number
     public function getRoomNumber(): int {
-        return $this->roomNumber;
+        return $this->attributes['room_number'];
     }
 
     public function setRoomNumber(int $roomNumber): void {
-        $this->roomNumber = $roomNumber;
+       //$this->roomNumber = $roomNumber;
+       $this->attributes['room_number'] = $roomNumber;
     }
 
     // Single beds
     public function getSingleBeds(): int {
-        return $this->singleBeds;
     }
 
     public function setSingleBeds(int $singleBeds): void {
@@ -61,11 +49,11 @@ class Room extends Model
 
     // Floor
     public function getFloor(): int {
-        return $this->floor;
+        return $this->attributes['floor'];
     }
 
     public function setFloor(int $floor): void {
-        $this->floor = $floor;
+        $this->attributes['floor'] = $floor;
     }
 
     // Room view
@@ -87,21 +75,21 @@ class Room extends Model
     }
 
     // Handicap facility
-    public function hasHandicapFacility(): bool {
-        return $this->hasHandicapFacility;
+    public function isHandicapAccessible(): bool {
+        return $this->attributes['handicap_accessible'];
     }
 
-    public function setHasHandicapFacility(bool $hasHandicapFacility): void {
-        $this->hasHandicapFacility = $hasHandicapFacility;
+    public function setHandicapAccessible(bool $isHandicapAccessible): void {
+        $this->attributes['handicap_accessible'] = $isHandicapAccessible;
     }
 
     // Baby bed option
     public function hasBabyBedOption(): bool {
-        return $this->hasBabyBedOption;
+        return $this->attributes['baby_bed'];
     }
 
     public function setHasBabyBedOption(bool $hasBabyBedOption): void {
-        $this->hasBabyBedOption = $hasBabyBedOption;
+        $this->attributes['baby_bed'] = $hasBabyBedOption;
     }
 
     // Cleaning tasks
@@ -133,7 +121,7 @@ class Room extends Model
 
     // Reservations
     public function getReservations(): array {
-        return $this->reservations;
+        return [];
     }
 
     public function setReservations(array $reservations): void {
@@ -141,16 +129,15 @@ class Room extends Model
     }
 
     public function addReservation(ReservationTask $reservation): void{
-        array_push($this->reservations, $reservation);
     }
 
     // Price
-    public function getPrice(): int {
-        return $this->price;
+    public function getPricePerNight(): int {
+        return $this->attributes['price_per_night'];
     }
 
-    public function setPrice(int $price): void {
-        $this->price = $price;
+    public function setPricePerNight(int $price): void {
+        $this->attributes['price_per_night'] = $price;
     }
 }
 

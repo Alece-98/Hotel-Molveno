@@ -23,6 +23,10 @@ Route::get('/makereservation', [MakeReservationController::class, 'show']);
 
 Route::post('/makereservation', [MakeReservationController::class, 'store']);
 
+Route::get('/availablerooms', [AvailableRoomsController::class, 'show']);
+
+Route::post('/availablerooms', [AvailableRoomsController::class, 'store']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
