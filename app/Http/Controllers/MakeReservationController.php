@@ -13,7 +13,7 @@ use App\Enums\RoomView;
 class MakeReservationController extends Controller
 {
     public function show(){
-        return view('makereservation', );
+        return view('MakeReservation', );
     }
 
     public function store(){
