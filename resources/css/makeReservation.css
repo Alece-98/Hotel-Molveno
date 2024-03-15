@@ -1,0 +1,97 @@
+.reservationContainer {
+    justify-content: space-between !important;
+    padding: 20px;
+    gap: 20px;
+    max-width: 100%;
+    height: 100%;
+}
+
+.column {
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    height: 100%;
+}
+
+.normalHeight {
+    height: 42px;
+}
+
+.normalizeStyle {
+    padding: 8px 12px;
+}
+
+.checkBox {
+    justify-content: flex-start !important;
+}
+
+.widthFull {
+    width: 100%;
+}
+
+.width45 {
+    width: 45%;
+}
+
+.withHalf {
+    width: 50%;
+}
+
+.width55 {
+    width: 55%;
+}
+
+.width100 {
+    width: 100px;
+}
+
+.width150 {
+    width: 150px;
+}
+
+.flexGrow {
+    flex-grow: 1;
+}
+
+.gap20 {
+    gap: 20px;
+}
+
+.smallInput {
+    width: 10px;
+    flex-grow: 1;
+}
+
+.spaceBetween {
+    justify-content: space-between !important;
+}
+
+.comment {
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+}
+
+.paddin8
+{
+    padding-top: 8px;
+}
+.textArea
+{
+    height: 240px;
+    resize: none !important;
+    padding: 8px 12px;
+}
+
+/* hide arrows from numerical inputs /
+/ https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp /
+/ Chrome, Safari, Edge, Opera /
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/ Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

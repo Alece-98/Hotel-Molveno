@@ -27,9 +27,9 @@ Route::get('/MakeReservation', function () {
     return view('MakeReservation');
 });
 
-Route::get('/makereservation', [MakeReservationController::class, 'show']);
+Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
-Route::post('/makereservation', [MakeReservationController::class, 'store']);
+Route::post('/MakeReservation', [MakeReservationController::class, 'store']);
 
 Route::get('/availablerooms', [AvailableRoomsController::class, 'show']);
 
