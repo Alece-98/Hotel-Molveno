@@ -12,9 +12,11 @@
     opacity: 0.1;
     position: fixed;
     z-index: -1;
-    scale: 2;
-    top: 10%;
-    right: 30%;
+
+    scale: 0.9;
+    top: -450px;
+    left: -700px;
+
 }
 
 body {
@@ -22,9 +24,6 @@ body {
     background-color: #ffffff;
 }
 
-html {
-	overflow-y: scroll;
-}
 
 .gridLayoutContainer {
     display: grid;
@@ -66,7 +65,7 @@ html {
 .content {
     grid-area: mainContent;
     z-index: 1;
-    width: 100%;
+
 }
 
 .footer {
