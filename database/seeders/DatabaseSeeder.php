@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
              // WORKS
 
 
-            // 'phone_number' => Hash::make ('0123456789')
+            'phone_number' => Hash::make ('0123456789')
 
         ]);
     }
