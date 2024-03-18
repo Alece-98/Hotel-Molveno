@@ -18,7 +18,7 @@ class Room extends Model
     //Table name for database
     protected $table = 'rooms';
     
-    protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night'];
+    protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description'];
 
     public function __construct(){
         #UUID komt hier
@@ -57,11 +57,11 @@ class Room extends Model
     */
 
     public function getBeds(){
-        return $this->attributes['beds'];
+        return $this->attributes['bed_description'];
     }
 
     public function setBeds(string $beds){
-        $this->attributes['beds'] = $beds;
+        $this->attributes['bed_description'] = $beds;
     }
 
     // Floor
@@ -142,6 +142,14 @@ class Room extends Model
 
     public function setPricePerNight(int $price): void {
         $this->attributes['price_per_night'] = $price;
+    }
+
+    public function getRoomCapacity(): int{
+        return $this->attributes['capacity'];
+    }
+
+    public function setRoomCapacity(int $capacity): void{
+        $this->attributes['capacity'] = $capacity;
     }
 }
 
