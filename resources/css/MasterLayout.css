@@ -1,0 +1,90 @@
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexVertical {
+    flex-direction: column;
+}
+
+.backgroundImgContainer {
+    opacity: 0.1;
+    position: fixed;
+    z-index: -1;
+
+    scale: 0.9;
+    top: -450px;
+    left: -700px;
+
+}
+
+body {
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+
+.gridLayoutContainer {
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: 80px auto 50px;
+    grid-template-areas:
+        "header header"
+        "nav mainContent"
+        "footer footer";
+}
+
+.backgroundColor {
+    background-color: #d8d0c5;
+    opacity: 60%;
+    z-index: 0;
+}
+
+.header {
+    grid-area: header;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.headerLinks {
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.sideNav {
+    grid-area: nav;
+    z-index: 1;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.content {
+    grid-area: mainContent;
+    z-index: 1;
+
+}
+
+.footer {
+    grid-area: footer;
+    z-index: 1;
+    justify-content: right;
+}
+
+.width300 {
+    width: 300px;
+}
+
+.imgContainer {
+    height: 80%;
+    justify-content: flex-end;
+}
+
+.molvenoLogo,
+.cap-abelLogo {
+    height: 100%;
+    margin-right: 30px;
+}
