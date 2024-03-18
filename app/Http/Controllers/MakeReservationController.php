@@ -85,14 +85,19 @@ class MakeReservationController extends Controller
     }
 
     private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
-        //Hier if statements met $handicapAccessible, $babyBed
         return Room::where([
             ['capacity', '>=', $capacity],
             ['type', $roomType],
             ['view', $roomView],
-            ['baby_bed', $babyBed],
-            ['handicap_accessible', $handicapAccessible],
+            $this->returnTruthyStatementIfFalse(['baby_bed', $babyBed]),
+            $this->returnTruthyStatementIfFalse(['handicap_accessible', $handicapAccessible]),
         ])->get();
+    }
+
+    private function returnTruthyStatementIfFalse(array $array){
+        //Vraag Jeroen om betere oplossing? Is hacky, maar werkt wel
+        return $array[1] ? $array : ['capacity', ">=", 0];
+        //return $array[1] ? $array : [true];
     }
 
 
