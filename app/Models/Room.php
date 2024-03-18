@@ -20,9 +20,26 @@ class Room extends Model
     
     protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night'];
 
+    private int $roomNumber = 0;
+    private int $singleBeds = 0;
+    private int $twinBeds = 0;
+    private int $floor = 0; #Moet dit een int zijn?
+    private RoomView $roomView = RoomView::Standard;
+    private RoomType $roomType = RoomType::Standard;
+    private bool $hasHandicapFacility = false;
+    private bool $hasBabyBedOption = false;
+    private array $cleaningTasks = [];
+    private array $maintenanceTasks = [];
+    private array $bookingTasks = [];
+    private array $reservations = [];
+    private int $price = 0;
+    private string $uuid;
+
+
     public function __construct(){
         #UUID komt hier
     }
+
 
     // Room number
     public function getRoomNumber(): int {
@@ -31,6 +48,7 @@ class Room extends Model
 
     public function setRoomNumber(int $roomNumber): void {
        //$this->roomNumber = $roomNumber;
+
        $this->attributes['number'] = $roomNumber;
     }
 
@@ -40,6 +58,25 @@ class Room extends Model
 
     // Single beds
     /*public function getSingleBeds(): int {
+
+       $this->attributes['room_number'] = $roomNumber;
+
+        // Room number
+    public function getRoomNumber(): int {
+        return $this->roomNumber;
+    }
+
+    public function setRoomNumber(int $roomNumber): void {
+        $this->roomNumber = $roomNumber;
+
+    }
+
+    // Single beds
+    public function getSingleBeds(): int {
+
+        return $this->singleBeds;
+
+
     }
 
     public function setSingleBeds(int $singleBeds): void {
@@ -66,11 +103,19 @@ class Room extends Model
 
     // Floor
     public function getFloor(): int {
+
         return $this->attributes['floor'];
     }
 
     public function setFloor(int $floor): void {
         $this->attributes['floor'] = $floor;
+
+        return $this->floor;
+    }
+
+    public function setFloor(int $floor): void {
+        $this->floor = $floor;
+
     }
 
     // Room view
@@ -92,21 +137,42 @@ class Room extends Model
     }
 
     // Handicap facility
+
     public function isHandicapAccessible(): bool {
         return $this->attributes['handicap_accessible'];
     }
 
     public function setHandicapAccessible(bool $isHandicapAccessible): void {
         $this->attributes['handicap_accessible'] = $isHandicapAccessible;
+
+    public function hasHandicapFacility(): bool {
+        return $this->hasHandicapFacility;
+    }
+
+    public function setHasHandicapFacility(bool $hasHandicapFacility): void {
+        $this->hasHandicapFacility = $hasHandicapFacility;
+
     }
 
     // Baby bed option
+
     public function hasBabyBed(): bool {
+
+    public function hasBabyBedOption(): bool {
+
+
         return $this->attributes['baby_bed'];
     }
 
     public function setHasBabyBed(bool $hasBabyBedOption): void {
         $this->attributes['baby_bed'] = $hasBabyBedOption;
+
+        return $this->hasBabyBedOption;
+    }
+
+    public function setHasBabyBedOption(bool $hasBabyBedOption): void {
+        $this->hasBabyBedOption = $hasBabyBedOption;
+
     }
 
     // Cleaning tasks
@@ -131,8 +197,25 @@ class Room extends Model
     }
 
     // Reservations
+
     public function getReservations(): HasMany {
         return $this->hasMany(ReservationTask::class);
+
+    public function getReservations(): array {
+
+        return [];
+
+        return $this->reservations;
+
+    }
+
+    public function setReservations(array $reservations): void {
+        $this->reservations = $reservations;
+    }
+
+    public function addReservation(ReservationTask $reservation): void{
+
+
     }
 
     // Price
@@ -142,6 +225,18 @@ class Room extends Model
 
     public function setPricePerNight(int $price): void {
         $this->attributes['price_per_night'] = $price;
+
+        array_push($this->reservations, $reservation);
+    }
+
+    // Price
+    public function getPrice(): int {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): void {
+        $this->price = $price;
+
     }
 }
 

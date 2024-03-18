@@ -12,15 +12,18 @@
     opacity: 0.1;
     position: fixed;
     z-index: -1;
+
     scale: 0.9;
     top: -450px;
     left: -700px;
+
 }
 
 body {
     min-height: 100vh;
     background-color: #ffffff;
 }
+
 
 .gridLayoutContainer {
     display: grid;
@@ -62,6 +65,7 @@ body {
 .content {
     grid-area: mainContent;
     z-index: 1;
+
 }
 
 .footer {
