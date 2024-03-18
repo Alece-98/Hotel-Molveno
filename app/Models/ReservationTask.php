@@ -12,26 +12,10 @@ class ReservationTask extends Task
 {
     use HasFactory;
 
-
     //Table name for database
     protected $table = 'reservations';
 
     protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments'];
-
-    private DateTime $dateStart;
-    private DateTime $dateEnd;
-    private Employee $creator; #Employee
-    private Guest $reservingGuest; #Guest
-    private array $guests = [];
-    private string $uuid = "";
-    private bool $hasBreakfast = false;
-    private array $comments = [];
-
-
-    //Table name for database
-    protected $table = 'reservations';
-
-
 
     public function __construct(){
         #UUID Method here
@@ -169,14 +153,7 @@ class ReservationTask extends Task
     }
 
     public function calculateNights(): int{
-
         $this->attributes['date_end'] - $this->attributes['date_start'];
-
-        $dateInterval = $this->dateStart->diff($dateEnd);
-
-        return $dateInterval;
-
-
     }
 
     public function calculateDays(): int{

@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 Route::get('/MakeReservation', function () {
     return view('MakeReservation');
+});
 
 Route::get('/RoomOverview', function () {
     return view('RoomOverview');
