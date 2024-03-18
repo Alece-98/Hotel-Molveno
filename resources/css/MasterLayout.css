@@ -12,9 +12,9 @@
     opacity: 0.1;
     position: fixed;
     z-index: -1;
-    scale: 0.9;
-    top: -450px;
-    left: -700px;
+    scale: 2;
+    top: 10%;
+    right: 30%;
 }
 
 body {

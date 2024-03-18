@@ -18,6 +18,11 @@ class ReservationTask extends Task
     private bool $hasBreakfast = false;
     private array $comments = [];
 
+
+    //Table name for database
+    protected $table = 'reservations';
+
+
     public function __construct(){
         #UUID Method here
         $guests = [];
@@ -133,7 +138,9 @@ class ReservationTask extends Task
 
     public function calculateNights(): int{
         $dateInterval = $this->dateStart->diff($dateEnd);
-        return $dateInterval->d;
+
+        return $dateInterval;
+
     }
 
     public function calculateDays(): int{
