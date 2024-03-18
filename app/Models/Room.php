@@ -17,7 +17,7 @@ class Room extends Model
 
     //Table name for database
     protected $table = 'rooms';
-    
+
     protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night'];
 
     private int $roomNumber = 0;
@@ -144,7 +144,7 @@ class Room extends Model
 
     public function setHandicapAccessible(bool $isHandicapAccessible): void {
         $this->attributes['handicap_accessible'] = $isHandicapAccessible;
-
+    }
     public function hasHandicapFacility(): bool {
         return $this->hasHandicapFacility;
     }
@@ -156,7 +156,6 @@ class Room extends Model
 
     // Baby bed option
 
-    public function hasBabyBed(): bool {
 
     public function hasBabyBedOption(): bool {
 
@@ -200,7 +199,7 @@ class Room extends Model
 
     public function getReservations(): HasMany {
         return $this->hasMany(ReservationTask::class);
-
+    }
     public function getReservations(): array {
 
         return [];
