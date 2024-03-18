@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Http\Controllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('Dashboard');
 });
+
+Route::get('/RoomOverview', function () {
+    return view('RoomOverview');
+});
+
+Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
+
+Route::post('/MakeReservation', [MakeReservationController::class, 'store']);
+
+Route::get('/availablerooms', [AvailableRoomsController::class, 'show']);
+
+Route::post('/availablerooms', [AvailableRoomsController::class, 'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,5 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';
