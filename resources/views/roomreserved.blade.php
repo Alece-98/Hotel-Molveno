@@ -4,8 +4,8 @@
 </head>
 
 <body>
-    @foreach ($room->getReservations() as $reservation)
-        <p>{{$reservation->getReservingGuest()->getFirstName()}} {{$reservation->getReservingGuest()->getLastName()}}</p>
+    @foreach ($rooms as $room)
+        <p>{{$room->getRoomNumber()}}</p>
         <p>{{$room->getRoomType()}}</p>
     @endforeach
 </body>

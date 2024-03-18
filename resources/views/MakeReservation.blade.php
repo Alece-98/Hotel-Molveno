@@ -1,3 +1,4 @@
+
 @vite(['resources/css/makeReservation.css'])
 <x-MasterLayout>
     <form class="flex reservationContainer" method="POST">
@@ -156,3 +157,4 @@
         </div>
     </form>
 </x-MasterLayout>
+

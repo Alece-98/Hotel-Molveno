@@ -26,8 +26,13 @@ Route::get('/', function () {
     return view('Dashboard');
 });
 
+
+Route::get('/MakeReservation', function () {
+    return view('MakeReservation');
+
 Route::get('/RoomOverview', function () {
     return view('RoomOverview');
+
 });
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
