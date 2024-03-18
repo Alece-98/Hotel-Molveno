@@ -182,7 +182,7 @@ class ReservationTask extends Task
     public function calculateDays(): int{
         return calculateNights() + 1;
     }
-    
+
     //Gekoppeld aan room_id in de database
     public function room() : BelongsTo {
         return $this->belongsTo(Room::class);
