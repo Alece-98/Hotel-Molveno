@@ -1,7 +1,4 @@
-node_modules
-node_modules
-node_modules
-node_modules
+
 .env.example
 
 # /.phpunit.cache
@@ -24,3 +21,4 @@ node_modules
 # /.fleet
 # /.idea
 # /.vscode
+
