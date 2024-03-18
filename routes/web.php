@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// Route voor het weergeven van het reserveringsformulier
+Route::get('/reservation', function () {
+    return view('reservation_form');
+});
+
+// Route voor het verwerken van de reserveringsaanvraag
+Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
