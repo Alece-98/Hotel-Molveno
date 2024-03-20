@@ -13,7 +13,7 @@
     <div>
     @foreach ($rooms as $room)
     <div class="grid grid-cols-5 divide-x h-12 m-4">
-        <div class=">{{$room->getRoomNumber()}}</div>
+        <div>{{$room->getRoomNumber()}}</div>
         <div>{{$room->getRoomType()}}</div>
         <div>{{$room->getRoomView()}}</div>
         <div>{{$room->getRoomCapacity()}}</div>
