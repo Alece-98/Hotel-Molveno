@@ -52,7 +52,7 @@
     <nav class="sideNav flex flexVertical">
         <h2><a href="/MakeReservation">Make Reservation</a></h2>
         {{-- <h2><a href="">Search Reserevation</a></h2> --}}
-        {{-- <h2><a href="/RoomOverview">Room Overview</a></h2> --}}
+        <h2><a href="/RoomOverview">Room Overview</a></h2>
     </nav>
 
     <main class="content">
