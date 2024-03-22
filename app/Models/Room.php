@@ -16,6 +16,10 @@ class Room extends Model
     //Table name for database
     protected $table = 'rooms';
 
+    
+    protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description'];
+
+
     public function __construct(){
         #UUID komt hier
     }
@@ -27,11 +31,17 @@ class Room extends Model
 
     public function setRoomNumber(int $roomNumber): void {
        //$this->roomNumber = $roomNumber;
-       $this->attributes['room_number'] = $roomNumber;
+
+       $this->attributes['number'] = $roomNumber;
+    }
+
+    public function reservation() : HasMany {
+        $this->hasMany(ReservationTask::class);
     }
 
     // Single beds
-    public function getSingleBeds(): int {
+    /*public function getSingleBeds(): int {
+
     }
 
     public function setSingleBeds(int $singleBeds): void {
@@ -46,6 +56,17 @@ class Room extends Model
     public function setTwinBeds(int $twinBeds): void {
         $this->twinBeds = $twinBeds;
     }
+
+    */
+
+    public function getBeds(){
+        return $this->attributes['bed_description'];
+    }
+
+    public function setBeds(string $beds){
+        $this->attributes['bed_description'] = $beds;
+    }
+
 
     // Floor
     public function getFloor(): int {
@@ -84,11 +105,13 @@ class Room extends Model
     }
 
     // Baby bed option
-    public function hasBabyBedOption(): bool {
+
+    public function hasBabyBed(): bool {
         return $this->attributes['baby_bed'];
     }
 
-    public function setHasBabyBedOption(bool $hasBabyBedOption): void {
+    public function setHasBabyBed(bool $hasBabyBedOption): void {
+
         $this->attributes['baby_bed'] = $hasBabyBedOption;
     }
 
@@ -120,15 +143,10 @@ class Room extends Model
     }
 
     // Reservations
-    public function getReservations(): array {
-        return [];
-    }
 
-    public function setReservations(array $reservations): void {
-        $this->reservations = $reservations;
-    }
+    public function getReservations(): HasMany {
+        return $this->hasMany(ReservationTask::class);
 
-    public function addReservation(ReservationTask $reservation): void{
     }
 
     // Price
@@ -138,6 +156,16 @@ class Room extends Model
 
     public function setPricePerNight(int $price): void {
         $this->attributes['price_per_night'] = $price;
+
+    }
+
+    public function getRoomCapacity(): int{
+        return $this->attributes['capacity'];
+    }
+
+    public function setRoomCapacity(int $capacity): void{
+        $this->attributes['capacity'] = $capacity;
+
     }
 }
 

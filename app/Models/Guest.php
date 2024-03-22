@@ -9,19 +9,11 @@ use App\Interfaces\IPerson;
 
 class Guest extends Model implements IPerson
 {
-    private string $firstName;
-    private string $lastName;
-    private string $phoneNumber;
-    private string $email;
-    private string $streetName;
-    private int $houseNumber;
-    private string $houseNumberAddition;
-    private string $city;
-    private string $zipcode;
-    private string $country;
 
     //Table name for database
-    protected $table = 'guest';
+    protected $table = 'guests';
+    private int $amountOfPeople = 0;
+
 
     public function __construct(){
         #UUID Method here
