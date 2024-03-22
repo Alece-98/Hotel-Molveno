@@ -6,13 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Interfaces\IPerson;
-use Illuminate\Database\Eloquent\Relations;
 
 class Guest extends Model implements IPerson
 {
+
     //Table name for database
     protected $table = 'guests';
     private int $amountOfPeople = 0;
+
 
     public function __construct(){
         #UUID Method here
@@ -27,7 +28,7 @@ class Guest extends Model implements IPerson
     }
 
     public function getPhoneNumber(): string {
-        return $this->attributes['phone'];
+        return $this->phoneNumber;
     }
 
     public function getEmail(): string {
@@ -35,71 +36,70 @@ class Guest extends Model implements IPerson
     }
 
     public function getStreetName(): string {
-        return $this->attributes['street_name'];
+        return $this->streetName;
     }
 
     public function getHouseNumber(): int {
-        return $this->attributes['house_number'];
+        return $this->houseNumber;
+    }
+
+    public function getHouseNumberAddition(): ?string {
+        return $this->houseNumberAddition;
     }
 
     public function getCity(): string {
-        return $this->attributes['city'];
+        return $this->city;
     }
 
     public function getZipcode(): string {
-        return $this->attributes['zipcode'];
+        return $this->zipcode;
     }
 
     public function getCountry(): string {
-        return $this->attributes['country'];
-    }
-
-    public function getAmountOfPeople(): int{
-        return $this->amountOfPeople();
+        return $this->country;
     }
 
     public function setFirstName(string $firstName): void {
-        $this->attributes['first_name'] = $firstName;
+        $this->firstName = $firstName;
     }
 
     public function setLastName(string $lastName): void {
-        $this->attributes['last_name'] = $lastName;
+        $this->lastName = $lastName;
     }
 
     public function setPhoneNumber(string $phoneNumber): void {
-        $this->attributes['phone'] = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
     }
 
     public function setEmail(string $email): void {
-        $this->attributes['email'] = $email;
+        $this->email = $email;
     }
 
     public function setStreetName(string $streetName): void {
-        $this->attributes['street_name'] = $streetName;
+        $this->streetName = $streetName;
     }
 
     public function setHouseNumber(int $houseNumber): void {
-        $this->attributes['house_number'] = $houseNumber;
+        $this->houseNumber = $houseNumber;
+    }
+
+    public function setHouseNumberAddition(?string $houseNumberAddition): void {
+        if (is_null($houseNumberAddition)){
+            $houseNumberAddition = "";
+        }
+        $this->houseNumberAddition = $houseNumberAddition;
     }
 
     public function setCity(string $city): void {
-        $this->attributes['city'] = $city;
+        $this->city = $city;
     }
 
     public function setZipcode(string $zipcode): void {
-        $this->attributes['zipcode'] = $zipcode;
+        $this->zipcode = $zipcode;
     }
 
     public function setCountry(string $country): void {
-        $this->attributes['country'] = $country;
-    }
-
-    public function setPeople(int $people): void{
-        $this->people = $people;
-    }
-
-    public function reservationTask(): BelongsToMany {
-        return $this->belongsToMany(ReservationTask::class);
+        $this->country = $country;
     }
 }
 

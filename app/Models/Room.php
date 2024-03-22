@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use App\Models\ReservationTask;
-use Illuminate\Database\Eloquent\Relations;
 
 
 class Room extends Model
 {
     use HasFactory;
 
-
     //Table name for database
     protected $table = 'rooms';
+
     
     protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description'];
+
 
     public function __construct(){
         #UUID komt hier
@@ -26,11 +26,12 @@ class Room extends Model
 
     // Room number
     public function getRoomNumber(): int {
-        return $this->attributes['number'];
+        return $this->attributes['room_number'];
     }
 
     public function setRoomNumber(int $roomNumber): void {
        //$this->roomNumber = $roomNumber;
+
        $this->attributes['number'] = $roomNumber;
     }
 
@@ -40,6 +41,7 @@ class Room extends Model
 
     // Single beds
     /*public function getSingleBeds(): int {
+
     }
 
     public function setSingleBeds(int $singleBeds): void {
@@ -54,6 +56,7 @@ class Room extends Model
     public function setTwinBeds(int $twinBeds): void {
         $this->twinBeds = $twinBeds;
     }
+
     */
 
     public function getBeds(){
@@ -63,6 +66,7 @@ class Room extends Model
     public function setBeds(string $beds){
         $this->attributes['bed_description'] = $beds;
     }
+
 
     // Floor
     public function getFloor(): int {
@@ -75,20 +79,20 @@ class Room extends Model
 
     // Room view
     public function getRoomView(): RoomView {
-        return RoomView::tryFrom($this->attributes['view']);
+        return $this->roomView;
     }
 
     public function setRoomView(string $roomView): void {
-        $this->attributes['view'] = RoomView::tryFrom($roomView);
+        $this->roomView = RoomView::tryFrom($roomView);
     }
 
     // Room type
     public function getRoomType(): RoomType {
-        return RoomType::tryFrom($this->attributes['type']);
+        return $this->roomType;
     }
 
     public function setRoomType(string $roomType): void {
-        $this->attributes['type'] = RoomType::tryFrom($roomType);
+        $this->roomType = RoomType::tryFrom($roomType);
     }
 
     // Handicap facility
@@ -101,38 +105,48 @@ class Room extends Model
     }
 
     // Baby bed option
+
     public function hasBabyBed(): bool {
         return $this->attributes['baby_bed'];
     }
 
     public function setHasBabyBed(bool $hasBabyBedOption): void {
+
         $this->attributes['baby_bed'] = $hasBabyBedOption;
     }
 
     // Cleaning tasks
     public function getCleaningTasks(): array {
+        return $this->cleaningTasks;
     }
 
     public function setCleaningTasks(array $cleaningTasks): void {
+        $this->cleaningTasks = $cleaningTasks;
     }
 
     // Maintenance tasks
     public function getMaintenanceTasks(): array {
+        return $this->maintenanceTasks;
     }
 
     public function setMaintenanceTasks(array $maintenanceTasks): void {
+        $this->maintenanceTasks = $maintenanceTasks;
     }
 
     // Booking tasks
     public function getBookingTasks(): array {
+        return $this->bookingTasks;
     }
 
     public function setBookingTasks(array $bookingTasks): void {
+        $this->bookingTasks = $bookingTasks;
     }
 
     // Reservations
+
     public function getReservations(): HasMany {
         return $this->hasMany(ReservationTask::class);
+
     }
 
     // Price
@@ -142,6 +156,7 @@ class Room extends Model
 
     public function setPricePerNight(int $price): void {
         $this->attributes['price_per_night'] = $price;
+
     }
 
     public function getRoomCapacity(): int{
@@ -150,6 +165,8 @@ class Room extends Model
 
     public function setRoomCapacity(int $capacity): void{
         $this->attributes['capacity'] = $capacity;
+
     }
 }
+
 
