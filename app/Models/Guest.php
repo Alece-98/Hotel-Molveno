@@ -3,13 +3,11 @@
 namespace App\Models;
 
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Interfaces\IPerson;
 
 class Guest extends Model implements IPerson
-
 {
     private string $firstName;
     private string $lastName;
@@ -22,23 +20,19 @@ class Guest extends Model implements IPerson
     private string $zipcode;
     private string $country;
 
-
     //Table name for database
     protected $table = 'guest';
-
 
     public function __construct(){
         #UUID Method here
     }
 
     public function getFirstName(): string {
-
         return $this->attributes['first_name'];
     }
 
     public function getLastName(): string {
         return $this->attributes['last_name'];
-
     }
 
     public function getPhoneNumber(): string {
@@ -46,9 +40,7 @@ class Guest extends Model implements IPerson
     }
 
     public function getEmail(): string {
-
         return $this->attributes['email'];
-
     }
 
     public function getStreetName(): string {

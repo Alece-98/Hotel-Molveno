@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 08, 2024 at 11:30 AM
+-- Generation Time: Mar 11, 2024 at 11:13 AM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -195,6 +195,23 @@ INSERT INTO `rooms` (`room_nr`, `floor`, `room`, `adults`, `view`, `baby_bed`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `schedule`
+--
+
+CREATE TABLE `schedule` (
+  `scheduled_clean` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `scheduled_maintenence` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `small_clean` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `small_maintenece` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `big_maintenece` text NOT NULL,
+  `big_clean` text NOT NULL,
+  `timestamp` timestamp NOT NULL,
+  `id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -223,7 +240,27 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (20, 'Kennedi Kuphal', 'collins.cloyd@example.org', '2024-03-06 07:12:37', '$2y$12$nEn05mBXeRG1hJfPaaQJ0uHOdTa.CNdiSayaFUkQ9EzxXrIR8rj1m', '2W87YZPchQ', '2024-03-06 07:12:37', '2024-03-06 07:12:37'),
 (21, 'Jazmin Connelly MD', 'schoen.sierra@example.net', '2024-03-06 07:12:37', '$2y$12$nEn05mBXeRG1hJfPaaQJ0uHOdTa.CNdiSayaFUkQ9EzxXrIR8rj1m', 'kEzLmT0Am5', '2024-03-06 07:12:37', '2024-03-06 07:12:37'),
 (22, 'Dr. Horacio Streich II', 'bortiz@example.com', '2024-03-06 07:12:37', '$2y$12$nEn05mBXeRG1hJfPaaQJ0uHOdTa.CNdiSayaFUkQ9EzxXrIR8rj1m', 'J90VRVbfkY', '2024-03-06 07:12:37', '2024-03-06 07:12:37'),
-(23, 'Aiyana Schumm', 'okris@example.net', '2024-03-06 07:12:37', '$2y$12$nEn05mBXeRG1hJfPaaQJ0uHOdTa.CNdiSayaFUkQ9EzxXrIR8rj1m', '2dOQcslq6LHxDl7vbkiTFxVkOZGxSMCwTDXHtaK8R6oIqtOp0ykd8brTqJQ1', '2024-03-06 07:12:37', '2024-03-06 07:12:37');
+(23, 'Aiyana Schumm', 'okris@example.net', '2024-03-06 07:12:37', '$2y$12$nEn05mBXeRG1hJfPaaQJ0uHOdTa.CNdiSayaFUkQ9EzxXrIR8rj1m', '2dOQcslq6LHxDl7vbkiTFxVkOZGxSMCwTDXHtaK8R6oIqtOp0ykd8brTqJQ1', '2024-03-06 07:12:37', '2024-03-06 07:12:37'),
+(25, 'Julian Prosacco', 'xcarter@example.com', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'cu0ZP3szd4', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(26, 'Lincoln Emmerich', 'lamont83@example.com', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', '1MkJtfmG2u', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(27, 'Johnny Connelly', 'leonie08@example.com', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'nDo43SKk9Y', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(28, 'Markus Heller', 'payton.beahan@example.com', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'g8yBKAJ2Wx', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(29, 'Miss Patricia Mann IV', 'doug.bartoletti@example.net', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'pfBwC6DQgl', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(30, 'Prof. Deonte Ratke', 'adrian48@example.net', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'hndFO2axgj', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(31, 'Charity Bartoletti', 'durgan.kayden@example.com', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'XmNzj4qaX5', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(32, 'Elmira Cassin', 'jswift@example.net', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'nehlELq5xx', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(33, 'Mrs. Elenora Rowe', 'schamberger.jameson@example.org', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'CL57skxPJA', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(34, 'Gabriel Frami PhD', 'gutkowski.marianne@example.com', '2024-03-11 09:11:39', '$2y$12$lgg730vBQhHihArS2d8f0Owqr/C2ZzcSbpeDGSZkGPnvvOJ.Ykjo.', 'Kulggbd1rM', '2024-03-11 09:11:39', '2024-03-11 09:11:39'),
+(35, 'Bertrand Marvin', 'gerry57@example.org', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', '2WCEzm2I7d', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(36, 'Leta Collins', 'sarina95@example.net', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', '9gMFIdcIqa', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(37, 'Garnet Wiza DVM', 'bettye40@example.com', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'TaVbxD8on5', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(38, 'Zack Howe', 'pmertz@example.org', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'EesNqQD0lQ', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(39, 'Jensen Renner MD', 'maureen.crist@example.org', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'BbiKMZyhBk', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(40, 'Aliya Kulas', 'orn.unique@example.com', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'DNuAL5kFB6', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(41, 'Dr. Fred Nikolaus', 'lizzie.ritchie@example.net', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'KIpREPC8o3', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(42, 'Angelita Robel', 'gregg65@example.org', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'fwapAaBmLk', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(43, 'Damian Quitzon', 'adrian73@example.net', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'msRgGhafAW', '2024-03-11 09:12:22', '2024-03-11 09:12:22'),
+(44, 'Olga Kulas V', 'deshaun85@example.com', '2024-03-11 09:12:22', '$2y$12$IiP.Gx9jE.OImBv5ViemOeOK87zJx2bZfRozc4j/3jnTuIJJemIBi', 'g9IT8vvnLR', '2024-03-11 09:12:22', '2024-03-11 09:12:22');
 
 --
 -- Indexes for dumped tables
@@ -281,6 +318,12 @@ ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -334,10 +377,16 @@ ALTER TABLE `rooms`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `schedule`
+--
+ALTER TABLE `schedule`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
