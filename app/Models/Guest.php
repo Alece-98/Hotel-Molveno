@@ -14,10 +14,6 @@ class Guest extends Model implements IPerson
     protected $table = 'guests';
     private int $amountOfPeople = 0;
 
-    public function __construct(){
-        #UUID Method here
-    }
-
     public function getFirstName(): string {
         return $this->attributes['first_name'];
     }

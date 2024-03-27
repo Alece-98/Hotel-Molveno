@@ -23,7 +23,6 @@ Route::get('/', function () {
     return view('Dashboard');
 });
 
-
 Route::get('/MakeReservation', function () {
     return view('MakeReservation');
 });

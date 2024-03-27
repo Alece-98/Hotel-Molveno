@@ -60,13 +60,6 @@ class MakeReservationController extends Controller
          * 
          */
 
-        /*if(Room::find(1)) {
-            $reservation->save();
-        }else {
-            echo "ERROR";
-        }*/
-
-        
         $rooms = $this->findAppropriateRooms(
             $reservation->getAmountOfPeople(),
             new DateTime(),
@@ -76,6 +69,7 @@ class MakeReservationController extends Controller
             $reservation->hasBabyBed(),
             $reservation->getHandicap()
         );
+        dd($rooms);
         return view('roomreserved', ['rooms' => $rooms]);
         //return view('roomreserved', ['room' => $room]);
     }
@@ -115,12 +109,4 @@ class MakeReservationController extends Controller
         }
         return true;
     }
-
-    private function returnTruthyStatementIfFalse(array $array){
-        //Vraag Jeroen om betere oplossing? Is hacky, maar werkt wel
-        return $array[1] ? $array : ['capacity', ">=", 0];
-        //return $array[1] ? $array : [true];
-    }
-
-
 }

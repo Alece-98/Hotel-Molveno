@@ -17,10 +17,6 @@ class ReservationTask extends Task
 
     protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments', 'adults', 'children', 'arrival', 'departure'];
 
-    public function __construct(){
-        #UUID Method here
-    }
-
     public function getAdults(): int{
         return $this->attributes['adults'];
     }
