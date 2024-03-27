@@ -10,6 +10,7 @@ use App\Models\Room;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 use DateTime;
 
 class MakeReservationController extends Controller
@@ -85,13 +86,34 @@ class MakeReservationController extends Controller
     }
 
     private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
-        return Room::where([
+        $rooms = Room::where([
             ['capacity', '>=', $capacity],
             ['type', $roomType],
             ['view', $roomView],
-            $this->returnTruthyStatementIfFalse(['baby_bed', $babyBed]),
-            $this->returnTruthyStatementIfFalse(['handicap_accessible', $handicapAccessible]),
+        ])->when($babyBed, function (Builder $query, string $role){
+            $query->where('baby_bed', true);
+        })->when($handicapAccessible, function (Builder $query, string $role){
+            $query->where('handicap_accessible', true);
+        })->get();
+
+        return $rooms;
+        
+    }
+
+    private function isRoomAvailableInPeriod(Room $room, DateTime $arrivalDate, DateTime $departureDate): bool{
+        $reservations = Reservation::where([
+            ['room_id', $room->getRoomID()],
         ])->get();
+        foreach ($reservations as $reservation){
+            if (
+                $departureDate > $reservation->getArrival() || //Vertrek van A is later dan de aankomst van B - kamer is bezet
+                $arrivalDate < $reservation->getDeparture() || //Aankomst van A is eerder dan vertrek van B - kamer is bezet
+                $arrivalDate <= $reservation->getArrival() && $departureDate >= $reservation->getDeparture() //Reservering van A valt geheel in reservation van B
+            ){
+                return false;
+            }
+        }
+        return true;
     }
 
     private function returnTruthyStatementIfFalse(array $array){

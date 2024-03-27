@@ -15,7 +15,7 @@ class ReservationTask extends Task
     //Table name for database
     protected $table = 'reservations';
 
-    protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments'];
+    protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments', 'adults', 'children', 'arrival', 'departure'];
 
     public function __construct(){
         #UUID Method here
