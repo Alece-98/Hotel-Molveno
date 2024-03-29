@@ -9,17 +9,10 @@ class ReservationTask extends Task
 {
     use HasFactory;
 
-    private DateTime $dateStart;
-    private DateTime $dateEnd;
-    private Employee $creator; #Employee
-    private Guest $reservingGuest; #Guest
-    private array $guests = [];
-    private string $uuid = "";
-    private bool $hasBreakfast = false;
-    private array $comments = [];
-
     //Table name for database
     protected $table = 'reservations';
+
+    protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments'];
 
     public function __construct(){
         #UUID Method here
@@ -135,39 +128,15 @@ class ReservationTask extends Task
     }
 
     public function calculateNights(): int{
-        $dateInterval = $this->dateStart->diff($dateEnd);
-        return $dateInterval;
+
+        $this->attributes['date_end'] - $this->attributes['date_start'];
+
     }
 
     public function calculateDays(): int{
         return calculateNights() + 1;
     }
 
-    //Gekoppeld aan room_id in de database
-    public function room() : BelongsTo {
-        return $this->belongsTo(Room::class);
-    }
 
-    public function setRoomId($id) {
-        $this->attributes['room_id'] = $id;
-    }
 
-    public function guest(): BelongsToMany{
-        return $this->belongsToMany(Guest::class);
-    }
-
-    /*public function addReservation(ReservationTask $reservation, int $roomid): void{
-        $this->create([
-            'room_id' => $roomid,
-            'adults' => $reservation->getAdults(),
-            'children' => $reservation->getChildren(),
-            'room_type' => $reservation->getRoomType(),
-            'room_view' => $reservation->getRoomView(),
-            'baby_bed' => $reservation->getBabyBed(),
-            'handicap' => $reservation->getHandicap(),
-            'arrival' => $reservation->getArrival(),
-            'departure' => $reservation->getDeparture(),
-            'comment' => $reservation->getComment()
-        ]);
-    }*/
 }
