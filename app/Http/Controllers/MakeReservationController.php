@@ -9,8 +9,10 @@ use App\Models\Guest;
 use App\Models\Room;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Validator;
 use DateTime;
 
 class MakeReservationController extends Controller
@@ -21,18 +23,38 @@ class MakeReservationController extends Controller
 
     public function store(Request $request){
         $reservation = new ReservationTask();
-        $reservingGuest = new Guest();
         $room = new Room();
 
-        $reservingGuest->setFirstName(request('firstname'));
-        $reservingGuest->setLastName(request('lastname'));
-        $reservingGuest->setPhoneNumber(request('phone'));
-        $reservingGuest->setEmail(request('email'));
-        $reservingGuest->setStreetName(request('streetname'));
-        $reservingGuest->setHouseNumber(request('housenumber'));
-        $reservingGuest->setCity(request('city'));
-        $reservingGuest->setZipcode(request('zipcode'));
-        $reservingGuest->setCountry(request('country'));
+        $this->validate($request, [
+            'adults' => 'required|integer|gte:0',
+            'children' => 'required|integer|gte:0',
+            'arrival' => 'required|date|after_or_equal:today',
+            'departure' => 'required|date|after:arrival|after:today',
+            'comment' => 'string|max:2047',
+            'roomtype' => [new Enum(RoomType::class)],
+            'roomview' => [new Enum(RoomView::class)],
+            'handicap' => 'boolean',
+            'babybed' => 'boolean',
+        ], [
+            'adults.required' => 'The amount of adults must be specified!',
+            'adults.integer' => 'The amount of adults must be a number!',
+            'adults.gte:0' => 'The amount of adults must be at least 0!',
+            'children.required' => 'The amount of children must be specified!',
+            'children.integer' => 'The amount of children must be a number!',
+            'children.gte:0' => 'The amount of children must be at least 0!',
+            'arrival.required' => 'The arrival date must be specified!',
+            'arrival.date' => 'The arrival date must be a date!',
+            'arrival.after_or_equal:today' => 'The arrival date has already passed!',
+            'departure.required' => 'This departure date must be specified!',
+            'departure.date' => 'The departure date must be a date!',
+            'departure.after:arrival' => 'The departure date must be after the arrival date!',
+            'departure.after:today' => 'The departure date has already passed!',
+            'comment.string' => 'The comment must be a string!',
+            'comment.max:2047' => 'The comment can not be this long - must be below 2048 characters',
+            'handicap.boolean' => 'The handicap accessible value must be a boolean!',
+            'babybed.boolean' => 'The babybed option must be a boolean!',
+        ]);
+
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
         $reservation->setArrival(request('arrival'));
@@ -43,7 +65,6 @@ class MakeReservationController extends Controller
         $reservation->setHandicap($request->has('handicap'));
         $reservation->setHasBabyBed($request->has('babybed'));
         $reservation->setRoomId(1);
-        $reservingGuest->save();
 
         /**
          * Stap 1: Verwijder uit de tabel `reservations` alles van room (room_type, room_view, baby_bed, handicap)
@@ -54,10 +75,7 @@ class MakeReservationController extends Controller
          *              3: Geen tijd beschikbaar: error
          *              3: Wel tijd beschikbaar: kies de eerste room die aan alles voldoet, en haal het room_id op.
          *              3.1: OF!!! Geef een lijst terug aan de frontend, en laat de gebruiker er een selecteren.
-         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )
-         *               
-         * 
-         * 
+         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )      
          */
 
         $rooms = $this->findAppropriateRooms(
@@ -69,10 +87,14 @@ class MakeReservationController extends Controller
             $reservation->hasBabyBed(),
             $reservation->getHandicap()
         );
-        dd($rooms);
-        return view('roomreserved', ['rooms' => $rooms]);
-        //return view('roomreserved', ['room' => $room]);
+
+        session()->flash('reservation', $reservation);
+        session()->flash('rooms', $rooms);
+
+        return redirect()->route('SelectReservationRoom');
     }
+
+
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));

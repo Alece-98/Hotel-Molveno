@@ -32,6 +32,8 @@ Route::get('/RoomOverview', function () {
 
 });
 
+Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
+
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
 Route::post('/MakeReservation', [MakeReservationController::class, 'store']);

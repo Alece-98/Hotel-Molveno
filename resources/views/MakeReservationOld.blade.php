@@ -1,17 +1,74 @@
 @vite(['resources/css/makeReservation.css'])
 <x-MasterLayout>
-    <form class="flex reservationContainer justify-center" method="POST">
+    <form class="flex reservationContainer" method="POST">
         @csrf
-            @if ($errors->any())
-                <script>
-                    var errors = "";
-                    @foreach ($errors->all() as $error)
-                        var error = {!! json_encode($error) !!}; //Escaping is nodig hier!
-                        errors += error;
-                    @endforeach
-                    alert(errors);
-                </script>
-            @endif
+        <div class="column width45 flex flexVertical gap20">
+            <div class="flex widthFull">
+                <label class="width150" for="firstname">
+                    <p>First Name:</p>
+                </label>
+                <input class="flexGrow" name="firstname" id="firstname" type="text" placeholder="John">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="lastname">
+                    <p>Last Name:</p>
+                </label>
+                <input class="flexGrow" name="lastname" id="lastname" type="text" placeholder="Doe">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="phone">
+                    <p>Phone Number:</p>
+                </label>
+                <input class="flexGrow" name="phone" id="phone" type="number" placeholder="0612345678" maxlength="10">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="email">
+                    <p>E-Mail:</p>
+                </label>
+                <input class="flexGrow" name="email" id="email" type="text" placeholder="example@hotmail.com">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="streetname">
+                    <p>Adres:</p>
+                </label>
+                <input class="flexGrow" name="streetname" id="streetname" type="text" placeholder="Via Bettega">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="housenumber">
+                    <p>House Number:</p>
+                </label>
+                <input class="flexGrow" name="housenumber" id="housenumber" type="number" placeholder="12">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="city">
+                    <p>City:</p>
+                </label>
+                <input class="flexGrow" name="city" id="city" type="text" placeholder="Molveno">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="zipcode">
+                    <p>Zip Code:</p>
+                </label>
+                <input class="flexGrow" name="zipcode" id="zipcode" type="text" placeholder="38018">
+            </div>
+
+            <div class="flex widthFull">
+                <label class="width150" for="country">
+                    <p>Country:</p>
+                </label>
+                <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
+            </div>
+
+            <div class="flexGrow"></div>
+        </div>
+
         <div class="column width55 flex flexVertical gap20">
             <div class="gap20 flex widthFull">
                 <div class="column withHalf">
