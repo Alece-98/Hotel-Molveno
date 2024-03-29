@@ -54,9 +54,9 @@ class MakeReservationController extends Controller
          *              3: Wel tijd beschikbaar: kies de eerste room die aan alles voldoet, en haal het room_id op.
          *              3.1: OF!!! Geef een lijst terug aan de frontend, en laat de gebruiker er een selecteren.
          *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )
-         *               
-         * 
-         * 
+         *
+         *
+         *
          */
 
         /*if(Room::find(1)) {
@@ -65,7 +65,7 @@ class MakeReservationController extends Controller
             echo "ERROR";
         }*/
 
-        
+
         $rooms = $this->findAppropriateRooms(
             $reservation->getAmountOfPeople(),
             new DateTime(),
@@ -81,7 +81,7 @@ class MakeReservationController extends Controller
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
-       
+
     }
 
     private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
