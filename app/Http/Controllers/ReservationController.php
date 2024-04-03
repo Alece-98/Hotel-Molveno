@@ -3,9 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ReservationModel;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class ReservationController extends Controller
 {
+    public function show()
+    {
+        $reservations = $this->getAllReservations();
+        return view('Dashboard', compact(['reservations']));
+    }
+
+    public function getAllReservations(): Collection
+    {
+        return ReservationModel::all();
+    }
+
     public function calculateReservationCost(Request $request)
     {
         

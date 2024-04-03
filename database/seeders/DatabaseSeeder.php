@@ -13,17 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(3)->create();
+        // \App\Models\User::factory(3)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => Hash::make('password'),
-             // WORKS
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        //     'password' => Hash::make('password'),
+        //      // WORKS
 
 
-            'phone_number' => Hash::make ('0123456789')
+        //     'phone_number' => Hash::make ('0123456789')
 
-        ]);
+        // ]);
+
+        $this->call(ReservationsSeeder::class);
     }
 }

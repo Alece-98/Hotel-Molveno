@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('baby_bed');
             $table->integer('price_per_night');
             $table->integer('room_capacity');
+            $table->string('bed_description');
         });
     }
 

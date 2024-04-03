@@ -1,6 +1,7 @@
 @vite(['resources/css/roomOverview.css'])
 <x-MasterLayout>
     <div class="overviewContainer flex flexVertical">
+
         <div class="listHeader">
             <p class="fixedWidth">Room Number</p>
             <p class="fixedWidth">Room Class</p>
@@ -9,7 +10,17 @@
             <p class="fixedWidth">Beds</p>
         </div>
 
-        <div class="listRow blocked">
+        @foreach ($rooms as $room)
+            <div class="listRow available">
+                <p class="fixedWidth">{{$room->room_number}}</p>
+                <p class="fixedWidth">{{$room->room_type}}</p>
+                <p class="fixedWidth">{{$room->room_view}}</p>
+                <p class="fixedWidth">{{$room->room_capacity}}</p>
+                <p class="fixedWidth">{{$room->bed_description}}</p>
+            </div>
+        @endforeach
+
+        {{-- <div class="listRow blocked">
             <p class="fixedWidth">1.01</p>
             <p class="fixedWidth">Economy</p>
             <p class="fixedWidth">Standard</p>
@@ -31,7 +42,6 @@
             <p class="fixedWidth">Standard</p>
             <p class="fixedWidth">2</p>
             <p class="fixedWidth">1 Double</p>
-        </div>
+        </div> --}}
     </div>
-
 </x-MasterLayout>

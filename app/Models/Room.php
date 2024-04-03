@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use App\Models\ReservationTask;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model
 {
@@ -16,26 +16,30 @@ class Room extends Model
     //Table name for database
     protected $table = 'rooms';
 
-    
-    protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description'];
+
+    protected $fillable = ['room_id', 'room_number', 'floor', 'room_view', 'room_type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'room_capacity', 'bed_description'];
 
 
-    public function __construct(){
+    public function __construct()
+    {
         #UUID komt hier
     }
 
     // Room number
-    public function getRoomNumber(): int {
+    public function getRoomNumber(): int
+    {
         return $this->attributes['room_number'];
     }
 
-    public function setRoomNumber(int $roomNumber): void {
-       //$this->roomNumber = $roomNumber;
+    public function setRoomNumber(int $roomNumber): void
+    {
+        //$this->roomNumber = $roomNumber;
 
-       $this->attributes['number'] = $roomNumber;
+        $this->attributes['room_number'] = $roomNumber;
     }
 
-    public function reservation() : HasMany {
+    public function reservation(): HasMany
+    {
         $this->hasMany(ReservationTask::class);
     }
 
@@ -59,114 +63,132 @@ class Room extends Model
 
     */
 
-    public function getBeds(){
+    public function getBeds()
+    {
         return $this->attributes['bed_description'];
     }
 
-    public function setBeds(string $beds){
+    public function setBeds(string $beds)
+    {
         $this->attributes['bed_description'] = $beds;
     }
 
 
     // Floor
-    public function getFloor(): int {
+    public function getFloor(): int
+    {
         return $this->attributes['floor'];
     }
 
-    public function setFloor(int $floor): void {
+    public function setFloor(int $floor): void
+    {
         $this->attributes['floor'] = $floor;
     }
 
     // Room view
-    public function getRoomView(): RoomView {
+    public function getRoomView(): RoomView
+    {
         return $this->roomView;
     }
 
-    public function setRoomView(string $roomView): void {
+    public function setRoomView(string $roomView): void
+    {
         $this->roomView = RoomView::tryFrom($roomView);
     }
 
     // Room type
-    public function getRoomType(): RoomType {
+    public function getRoomType(): RoomType
+    {
         return $this->roomType;
     }
 
-    public function setRoomType(string $roomType): void {
+    public function setRoomType(string $roomType): void
+    {
         $this->roomType = RoomType::tryFrom($roomType);
     }
 
     // Handicap facility
-    public function isHandicapAccessible(): bool {
+    public function isHandicapAccessible(): bool
+    {
         return $this->attributes['handicap_accessible'];
     }
 
-    public function setHandicapAccessible(bool $isHandicapAccessible): void {
+    public function setHandicapAccessible(bool $isHandicapAccessible): void
+    {
         $this->attributes['handicap_accessible'] = $isHandicapAccessible;
     }
 
     // Baby bed option
 
-    public function hasBabyBed(): bool {
+    public function hasBabyBed(): bool
+    {
         return $this->attributes['baby_bed'];
     }
 
-    public function setHasBabyBed(bool $hasBabyBedOption): void {
+    public function setHasBabyBed(bool $hasBabyBedOption): void
+    {
 
         $this->attributes['baby_bed'] = $hasBabyBedOption;
     }
 
     // Cleaning tasks
-    public function getCleaningTasks(): array {
+    public function getCleaningTasks(): array
+    {
         return $this->cleaningTasks;
     }
 
-    public function setCleaningTasks(array $cleaningTasks): void {
+    public function setCleaningTasks(array $cleaningTasks): void
+    {
         $this->cleaningTasks = $cleaningTasks;
     }
 
     // Maintenance tasks
-    public function getMaintenanceTasks(): array {
+    public function getMaintenanceTasks(): array
+    {
         return $this->maintenanceTasks;
     }
 
-    public function setMaintenanceTasks(array $maintenanceTasks): void {
+    public function setMaintenanceTasks(array $maintenanceTasks): void
+    {
         $this->maintenanceTasks = $maintenanceTasks;
     }
 
     // Booking tasks
-    public function getBookingTasks(): array {
+    public function getBookingTasks(): array
+    {
         return $this->bookingTasks;
     }
 
-    public function setBookingTasks(array $bookingTasks): void {
+    public function setBookingTasks(array $bookingTasks): void
+    {
         $this->bookingTasks = $bookingTasks;
     }
 
     // Reservations
 
-    public function getReservations(): HasMany {
+    public function getReservations(): HasMany
+    {
         return $this->hasMany(ReservationTask::class);
-
     }
 
     // Price
-    public function getPricePerNight(): int {
+    public function getPricePerNight(): int
+    {
         return $this->attributes['price_per_night'];
     }
 
-    public function setPricePerNight(int $price): void {
+    public function setPricePerNight(int $price): void
+    {
         $this->attributes['price_per_night'] = $price;
-
     }
 
-    public function getRoomCapacity(): int{
-        return $this->attributes['capacity'];
+    public function getRoomCapacity(): int
+    {
+        return $this->attributes['room_capacity'];
     }
 
-    public function setRoomCapacity(int $capacity): void{
-        $this->attributes['capacity'] = $capacity;
-
+    public function setRoomCapacity(int $capacity): void
+    {
+        $this->attributes['room_capacity'] = $capacity;
     }
 }
-
-
