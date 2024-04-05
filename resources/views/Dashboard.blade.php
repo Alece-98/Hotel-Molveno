@@ -1,8 +1,17 @@
 <x-MasterLayout>
+    <p>{{ $dateToday }}</p><br><br>
+    
+    @foreach ($temp as $item)
+        <p>{{$item}}</p>
+    @endforeach
+
+    <br><br>
+
     @foreach ($reservations as $reservation)
-        <p>{{ $reservation->room_id }}</p>
-        <p>{{ $reservation->arrival }}</p>
-        <p>{{ $reservation->departure }}</p>
+        <p>reservationID: {{ $reservation->id }}</p>
+        <p>roomID: {{ $reservation->room_id }}</p>
+        <p>Arrival: {{ $reservation->arrival }}</p>
+        <p>Departure: {{ $reservation->departure }}</p>
         <br>
     @endforeach
 </x-MasterLayout>

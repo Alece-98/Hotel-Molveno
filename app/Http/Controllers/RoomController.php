@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoomModel;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class RoomController extends Controller
@@ -27,12 +26,5 @@ class RoomController extends Controller
     public function getAllRoomOrderByRoomNumber(): Collection
     {
         return RoomModel::orderBy('room_number', 'asc')->get();
-    }
-
-    public function todayDate()
-    {
-        $date = Carbon::now()->toDateString();
-        $parsedDate = Carbon::parse($date)->format('m-d-Y');
-        return $parsedDate;
     }
 }
