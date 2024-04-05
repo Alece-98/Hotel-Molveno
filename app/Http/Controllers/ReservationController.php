@@ -12,20 +12,14 @@ class ReservationController extends Controller
     public function show()
     {
         $reservations = $this->getAllReservations();
-        $temp = $this->getActiveReservations();
         $dateToday = $this->todayDate();
 
-        return view('Dashboard', compact(['reservations','dateToday', 'temp']));
+        return view('Dashboard', compact(['reservations','dateToday']));
     }
 
     public function getAllReservations(): Collection
     {
         return ReservationModel::all();
-    }
-
-    public function getReservationsByRoomID($roomID):Collection
-    {
-        return ReservationModel::where('room_id', $roomID)->get();
     }
 
     public function getReservationsByArrival():Collection

@@ -23,14 +23,7 @@ Route::get('/', function () {
     return view('Dashboard');
 });
 
-Route::get('/MakeReservation', function () {
-    return view('MakeReservation');
-});
-
-Route::get('/RoomOverview', function () {
-    return view('RoomOverview');
-
-});
+Route::get('/RoomOverview', [RoomController::class, 'show']);
 
 Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
