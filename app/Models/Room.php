@@ -14,7 +14,7 @@ class Room extends Model
     use HasFactory;
 
     //Table name for database
-    protected $table = 'rooms';
+    protected $table = 'room';
 
     public function __construct(){
         #UUID komt hier
@@ -120,6 +120,12 @@ class Room extends Model
     }
 
     // Reservations
+
+    public function reservations()
+    {
+        return $this->hasMany(ReservationTask::class);
+    }
+
     public function getReservations(): array {
         return [];
     }
