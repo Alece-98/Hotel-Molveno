@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations;
 use Illuminate\Database\Eloquent\Collection;
+use App\Models\DateTime;
 
 
 class ReservationTask extends Task
@@ -69,19 +70,19 @@ class ReservationTask extends Task
         $this->attributes['room_view'] = $roomView;
     }
 
-    public function getDateStart(): string{
+    public function getDateStart(): DateTime{
         return $this->attributes['date_start'];
     }
 
-    public function setDateStart(string $dateStart): void{
+    public function setDateStart(DateTime $dateStart): void{
         $this->attributes['date_start'];
     }
 
-    public function getDateEnd(): string{
+    public function getDateEnd(): DateTime{
         return $this->attributes['date_end'];
     }
 
-    public function setDateEnd(string $dateEnd): void{
+    public function setDateEnd(DateTime $dateEnd): void{
         $this->attributes['date_end'];
     }
 
