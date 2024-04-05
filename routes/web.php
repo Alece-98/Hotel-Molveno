@@ -34,6 +34,15 @@ Route::get('/RoomOverview', function () {
     return view('RoomOverview');
 
 });
+// Route::get('/extraGuest', function () {
+//     return view('extraGuest');
+// });
+// Route::post('/extraGuest', function () {
+//     return view('extraGuest');
+// });
+Route::get('/extraGuest', [extraGuestController::class, 'show']);
+
+Route::post('/extraGuest', [extraGuestController::class, 'store']);
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
