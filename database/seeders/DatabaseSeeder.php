@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        /* \App\Models\User::factory(3)->create();
         // \App\Models\User::factory(3)->create();
 
         // \App\Models\User::factory()->create([
@@ -24,8 +25,8 @@ class DatabaseSeeder extends Seeder
 
         //     'phone_number' => Hash::make ('0123456789')
 
-        // ]);
+        ]); */
+        $this->call(ReservationTaskSeeder::class);
 
-        $this->call(ReservationsSeeder::class);
     }
 }

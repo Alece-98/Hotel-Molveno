@@ -1,9 +1,6 @@
 <?php
 
-
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,25 +19,20 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// Route::get('/', function () {
-//     return view('Dashboard');
-// });
+Route::get('/', function () {
+    return view('Dashboard');
+});
 
+Route::get('/MakeReservation', function () {
+    return view('MakeReservation');
+});
 
-// Route::get('/MakeReservation', function () {
+Route::get('/RoomOverview', function () {
+    return view('RoomOverview');
 
-//     return view('MakeReservation');
-// });
+});
 
-
-// Route::get('/RoomOverview', function () {
-//     return view('RoomOverview');
-
-// });
-
-Route::get('/', [ReservationController::class, 'show']);
-
-Route::get('/RoomOverview', [RoomController::class, 'show']);
+Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
@@ -62,13 +54,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__ . '/auth.php';
-
-
-// Route voor het weergeven van het reserveringsformulier
-Route::get('/reservation', function () {
-    return view('reservation_form');
-});
-
-// Route voor het verwerken van de reserveringsaanvraag
-Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
+require __DIR__.'/auth.php';
