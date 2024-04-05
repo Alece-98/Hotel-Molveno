@@ -14,7 +14,6 @@ class SelectReservationRoomController extends Controller
         $this->middleware(function ($request, $next) {
             $this->rooms = session('rooms');
             $this->reservation = session('reservation');
-    
             return $next($request);
         });
     }

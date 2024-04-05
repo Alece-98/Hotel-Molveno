@@ -22,14 +22,12 @@ class Room extends Model
     
     protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description', 'id'];
 
-    public function __construct(){
-        #UUID komt hier
-    }
 
     // Room number
     public function getRoomID(): int{
-        $this->attributes['id'];
+       return  $this->attributes['id'];
     }
+
     public function getRoomNumber(): int {
         return $this->attributes['number'];
     }
@@ -37,6 +35,7 @@ class Room extends Model
     public function getFormattedRoomNumber(): string{
         $number = $this->attributes['number'];
         substr_replace($number, ".", 1);
+        return $number;
     }
 
     public function setRoomNumber(int $roomNumber): void {

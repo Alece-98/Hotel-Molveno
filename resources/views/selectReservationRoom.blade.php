@@ -12,7 +12,7 @@
         </div>
     <div>
     @foreach ($rooms as $room)
-    <form id="room{{room->getRoomID()}}">
+    <form id="room{{$room->getRoomID()}}">
         <div class="grid grid-cols-5 divide-x h-12 m-4">
             <div>{{$room->getRoomNumber()}}</div>
             <div>{{$room->getRoomType()}}</div>
@@ -21,6 +21,6 @@
             <div>{{$room->getBeds()}}</div>
         </div>
     </form>
-    @endforeach
+    @endforeach 
 </body>
 </x-MasterLayout>
