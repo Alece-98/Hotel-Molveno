@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('rooms', function(Blueprint $table) {
+        Schema::table('room', function(Blueprint $table) {
             $table->string('bed_description');
         });
     }

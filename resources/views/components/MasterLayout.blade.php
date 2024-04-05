@@ -34,14 +34,12 @@
             <li>
                 <h1><a href="/">Reception</a></h1>
             </li>
-            <li>
-
+            {{-- <li>
                 <h1><a href="">Housekeeping</a></h1>
-            </li>
-            <li>
+            </li> --}}
+            {{-- <li>
                 <h1><a href="">Maintenance</a></h1>
-
-            </li>
+            </li> --}}
         </ul>
 
         <div class="imgContainer width300 flex">
@@ -54,9 +52,9 @@
     <nav class="sideNav flex flexVertical">
         <h2><a href="/MakeReservation">Make Reservation</a></h2>
 
-        <h2><a href="">Search Reserevation</a></h2>
-        <h2><a href="">Room Overview</a></h2>
+        {{-- <h2><a href="">Search Reserevation</a></h2> --}}
 
+        <h2><a href="/RoomOverview">Room Overview</a></h2>
     </nav>
 
     <main class="content">

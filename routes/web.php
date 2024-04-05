@@ -22,18 +22,25 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('Dashboard');
-});
+// Route::get('/', function () {
+//     return view('Dashboard');
+// });
 
 
-Route::get('/MakeReservation', function () {
-    return view('MakeReservation'); });
+// Route::get('/MakeReservation', function () {
 
-Route::get('/RoomOverview', function () {
-    return view('RoomOverview');
+//     return view('MakeReservation');
+// });
 
-});
+
+// Route::get('/RoomOverview', function () {
+//     return view('RoomOverview');
+
+// });
+
+Route::get('/', [ReservationController::class, 'show']);
+
+Route::get('/RoomOverview', [RoomController::class, 'show']);
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
@@ -55,7 +62,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 // Route voor het weergeven van het reserveringsformulier
