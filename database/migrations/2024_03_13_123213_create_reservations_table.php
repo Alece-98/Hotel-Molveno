@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('arrival')->default("0");
             $table->string('departure')->default("0");
             $table->string('comment')->nullable();
+            $table->integer('room_id')->default(0);
+            $table->boolean('baby_bed')->default(false);
+            $table->boolean('handicap')->default(false);
         });
     }
 

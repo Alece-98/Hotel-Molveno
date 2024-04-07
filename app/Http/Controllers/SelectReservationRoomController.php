@@ -19,10 +19,10 @@ class SelectReservationRoomController extends Controller
     }
 
     public function show(){
-        return view('selectReservationRoom', ['rooms' => $this->rooms]);
+        return view('selectReservationRoom', ['rooms' => $this->rooms, 'reservation' => $this->reservation]);
     }
 
     public function store(){
-        
+        return redirect()->route('AddGuest');
     }
 }

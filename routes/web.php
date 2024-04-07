@@ -32,7 +32,11 @@ Route::get('/RoomOverview', function () {
 
 });
 
+Route::get('/addGuest', [AddGuestController::class, 'show'])->name('AddGuest');
+
 Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
+
+Route::post('/selectReservationRoom', [SelectReservationRoomController::class, 'store']);
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 

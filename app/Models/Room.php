@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
+use App\Classes\RoomPriceCalculator;
 use App\Models\ReservationTask;
 use App\Traits\DatabaseStringNormalization;
 use Illuminate\Database\Eloquent\Relations;
@@ -19,6 +20,7 @@ class Room extends Model
 
     //Table name for database
     protected $table = 'rooms';
+
     
     protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description', 'id'];
 
@@ -128,11 +130,11 @@ class Room extends Model
 
     // Price
     public function getPricePerNight(): int {
-        return $this->attributes['price_per_night'];
+        return $this->attributes['price_per_night'] * 100;
     }
 
     public function setPricePerNight(int $price): void {
-        $this->attributes['price_per_night'] = $price;
+        $this->attributes['price_per_night'] = $price / 100;
     }
 
     public function getRoomCapacity(): int{
@@ -141,6 +143,12 @@ class Room extends Model
 
     public function setRoomCapacity(int $capacity): void{
         $this->attributes['capacity'] = $capacity;
+    }
+
+    public function calculateTotalPrice(ReservationTask $reservation){
+        $totalPrice = RoomPriceCalculator::calculateReservationCostInCents($reservation, $this);
+        $reportedValue = RoomPriceCalculator::formatToEuro($totalPrice);
+        return $reportedValue;
     }
 }
 

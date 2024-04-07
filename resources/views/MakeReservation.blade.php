@@ -86,8 +86,8 @@
             </div>
 
             <div class="flex widthFull comment">
-                <label class="width100 paddin8" for="comments">Comments:</label>
-                <textarea class="flexGrow textArea" name="comments" id="comments" cols="30" rows="10" placeholder="Enter comment here."></textarea>
+                <label class="width100 paddin8" for="comment">Comment:</label>
+                <textarea class="flexGrow textArea" name="comment" id="comment" cols="30" rows="10" placeholder="Enter comment here."></textarea>
             </div>
 
             <div class="flexGrow"></div>

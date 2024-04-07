@@ -55,16 +55,21 @@ class MakeReservationController extends Controller
             'babybed.boolean' => 'The babybed option must be a boolean!',
         ]);
 
+        //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
         $reservation->setArrival(request('arrival'));
         $reservation->setDeparture(request('departure'));
         $reservation->setComment(request('comment'));
+        //Deze zijn alleen voor het invullen, en worden niet opgeslagen!
         $reservation->setRoomType(request('roomtype'));
         $reservation->setRoomView(request('roomview'));
         $reservation->setHandicap($request->has('handicap'));
         $reservation->setHasBabyBed($request->has('babybed'));
+        //Deze zijn tijdelijk
         $reservation->setRoomId(1);
+        $reservation->save();
+
 
         /**
          * Stap 1: Verwijder uit de tabel `reservations` alles van room (room_type, room_view, baby_bed, handicap)
