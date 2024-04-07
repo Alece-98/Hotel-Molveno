@@ -30,7 +30,7 @@ class MakeReservationController extends Controller
             'children' => 'required|integer|gte:0',
             'arrival' => 'required|date|after_or_equal:today',
             'departure' => 'required|date|after:arrival|after:today',
-            'comment' => 'string|max:2047',
+            'comment' => 'string|max:2047|nullable',
             'roomtype' => [new Enum(RoomType::class)],
             'roomview' => [new Enum(RoomView::class)],
             'handicap' => 'boolean',

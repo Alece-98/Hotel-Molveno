@@ -58,14 +58,14 @@
                     <label class="width100" for="babybed">
                         <p>Baby Bed:</p>
                     </label>
-                    <input name="babybed" id="babybed" type="checkbox">
+                    <input name="babybed" id="babybed" type="checkbox" value="1">
                 </div>
 
                 <div class="column withHalf checkBox">
                     <label class="width100" for="handicap">
                         <p>Handicap:</p>
                     </label>
-                    <input name="handicap" id="handicap" type="checkbox">
+                    <input name="handicap" id="handicap" type="checkbox" value="1">
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
 
             <div class="flex widthFull comment">
                 <label class="width100 paddin8" for="comment">Comment:</label>
-                <textarea class="flexGrow textArea" name="comment" id="comment" cols="30" rows="10" placeholder="Enter comment here."></textarea>
+                <textarea class="flexGrow textArea" name="comment" id="comment" cols="30" rows="10" placeholder="Enter comment here."> </textarea>
             </div>
 
             <div class="flexGrow"></div>
