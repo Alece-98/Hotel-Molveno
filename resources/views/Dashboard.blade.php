@@ -1,3 +1,3 @@
 <x-MasterLayout>
-    
+
 </x-MasterLayout>

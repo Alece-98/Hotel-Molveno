@@ -103,9 +103,9 @@ class MakeReservationController extends Controller
 
     private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
         $rooms = Room::where([
-            ['capacity', '>=', $capacity],
-            ['type', $roomType],
-            ['view', $roomView],
+            ['room_capacity', '>=', $capacity],
+            ['room_type', $roomType],
+            ['room_view', $roomView],
         ])->when($babyBed, function (Builder $query, string $role){
             $query->where('baby_bed', true);
         })->when($handicapAccessible, function (Builder $query, string $role){

@@ -9,8 +9,7 @@ use App\Enums\RoomView;
 use App\Models\ReservationTask;
 use App\Traits\DatabaseStringNormalization;
 use Illuminate\Database\Eloquent\Relations;
-
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model
 {
@@ -18,9 +17,9 @@ class Room extends Model
     use DatabaseStringNormalization;
 
     //Table name for database
-    protected $table = 'rooms';
+    protected $table = 'room';
     
-    protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description', 'id'];
+    protected $fillable = ['room_id', 'room_number', 'floor', 'room_view', 'room_type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'room_capacity', 'bed_description', 'id'];
 
 
     // Room number
@@ -29,18 +28,18 @@ class Room extends Model
     }
 
     public function getRoomNumber(): int {
-        return $this->attributes['number'];
+        return $this->attributes['room_number'];
     }
 
     public function getFormattedRoomNumber(): string{
-        $number = $this->attributes['number'];
+        $number = $this->attributes['room_number'];
         substr_replace($number, ".", 1);
         return $number;
     }
 
     public function setRoomNumber(int $roomNumber): void {
        //$this->roomNumber = $roomNumber;
-       $this->attributes['number'] = $roomNumber;
+       $this->attributes['room_number'] = $roomNumber;
     }
 
     public function reservation() : HasMany {
@@ -66,20 +65,20 @@ class Room extends Model
 
     // Room view
     public function getRoomView(): RoomView {
-        return RoomView::tryFrom($this->normalizeStringFromDatabase($this->attributes['view']));
+        return RoomView::tryFrom($this->normalizeStringFromDatabase($this->attributes['room_view']));
     }
 
     public function setRoomView(string $roomView): void {
-        $this->attributes['view'] = RoomView::tryFrom($roomView);
+        $this->attributes['room_view'] = RoomView::tryFrom($roomView);
     }
 
     // Room type
     public function getRoomType(): RoomType {
-        return RoomType::tryFrom($this->normalizeStringFromDatabase($this->attributes['type']));
+        return RoomType::tryFrom($this->normalizeStringFromDatabase($this->attributes['room_type']));
     }
 
     public function setRoomType(string $roomType): void {
-        $this->attributes['type'] = RoomType::tryFrom($roomType);
+        $this->attributes['room_type'] = RoomType::tryFrom($roomType);
     }
 
     // Handicap facility
@@ -136,11 +135,11 @@ class Room extends Model
     }
 
     public function getRoomCapacity(): int{
-        return $this->attributes['capacity'];
+        return $this->attributes['room_capacity'];
     }
 
     public function setRoomCapacity(int $capacity): void{
-        $this->attributes['capacity'] = $capacity;
+        $this->attributes['room_capacity'] = $capacity;
     }
 }
 

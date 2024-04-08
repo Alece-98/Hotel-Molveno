@@ -25,7 +25,7 @@
                     <label class="width100" for="children">
                         <p>Children: *</p>
                     </label>
-                    <input class="smallInput" name="children" id="children" type="number" placeholder="0">
+                    <input class="smallInput" name="children" id="children" type="number" placeholder="0" value="0">
                 </div>
             </div>
 
