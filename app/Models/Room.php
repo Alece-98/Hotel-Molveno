@@ -9,8 +9,7 @@ use App\Enums\RoomView;
 use App\Models\ReservationTask;
 use App\Traits\DatabaseStringNormalization;
 use Illuminate\Database\Eloquent\Relations;
-
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model
 {
