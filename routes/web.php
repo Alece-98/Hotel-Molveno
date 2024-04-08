@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SeeReservationController;
+use App\Http\Controllers\RoomInfoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +51,21 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
+
+
+// Route voor het weergeven van het reserveringsformulier
+Route::get('/reservation', function () {
+    return view('reservation_form');
+});
+
+// Route voor het verwerken van de reserveringsaanvraag
+Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
+
+
+
+
+Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
+
+
+Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
+
