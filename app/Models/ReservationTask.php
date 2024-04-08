@@ -16,10 +16,18 @@ class ReservationTask extends Task
     //Table name for database
     protected $table = 'reservations';
 
+<<<<<<< HEAD
     protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments', 'adults', 'children', 'arrival', 'departure'];
 
     public function getAdults(): int{
         return $this->attributes['adults'];
+=======
+    protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments'];
+
+    public function __construct(){
+        #UUID Method here
+        $guests = [];
+>>>>>>> Felbe
     }
 
     public function setAdults(int $adults){
@@ -150,7 +158,13 @@ class ReservationTask extends Task
     }
 
     public function calculateNights(): int{
+<<<<<<< HEAD
         $this->attributes['date_end'] - $this->attributes['date_start'];
+=======
+
+        $this->attributes['date_end'] - $this->attributes['date_start'];
+
+>>>>>>> Felbe
     }
 
     public function calculateDays(): int{
