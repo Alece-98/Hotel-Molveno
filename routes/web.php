@@ -40,9 +40,9 @@ Route::get('/RoomOverview', function () {
 // Route::post('/extraGuest', function () {
 //     return view('extraGuest');
 // });
-Route::get('/extraGuest', [extraGuestController::class, 'show']);
+Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGuest.show');
 
-Route::post('/extraGuest', [extraGuestController::class, 'store']);
+Route::post('/extraGuest', [extraGuestController::class, 'store'])->name('extraGuest.store');
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 

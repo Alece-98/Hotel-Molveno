@@ -10,8 +10,8 @@ class extraGuestController extends Controller
     public function show(){
         return view('extraGuest', );
     }
-    // public function store(Request $request)
-    private function store (request $request) {
+    public function store(Request $request){
+    // private function store (request $request) {
         // return view('extraGuest');
         $request->validate([
             'extraGuestName' => 'required|max:32',
