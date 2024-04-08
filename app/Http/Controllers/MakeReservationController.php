@@ -32,17 +32,52 @@ class MakeReservationController extends Controller
         $reservingGuest->setCity(request('city'));
         $reservingGuest->setZipcode(request('zipcode'));
         $reservingGuest->setCountry(request('country'));
+        $this->validate($request, [
+            'adults' => 'required|integer|gte:0',
+            'children' => 'required|integer|gte:0',
+            'arrival' => 'required|date|after_or_equal:today',
+            'departure' => 'required|date|after:arrival|after:today',
+            'comment' => 'string|max:2047|nullable',
+            'roomtype' => [new Enum(RoomType::class)],
+            'roomview' => [new Enum(RoomView::class)],
+            'handicap' => 'boolean',
+            'babybed' => 'boolean',
+        ], [
+            'adults.required' => 'The amount of adults must be specified!',
+            'adults.integer' => 'The amount of adults must be a number!',
+            'adults.gte:0' => 'The amount of adults must be at least 0!',
+            'children.required' => 'The amount of children must be specified!',
+            'children.integer' => 'The amount of children must be a number!',
+            'children.gte:0' => 'The amount of children must be at least 0!',
+            'arrival.required' => 'The arrival date must be specified!',
+            'arrival.date' => 'The arrival date must be a date!',
+            'arrival.after_or_equal:today' => 'The arrival date has already passed!',
+            'departure.required' => 'This departure date must be specified!',
+            'departure.date' => 'The departure date must be a date!',
+            'departure.after:arrival' => 'The departure date must be after the arrival date!',
+            'departure.after:today' => 'The departure date has already passed!',
+            'comment.string' => 'The comment must be a string!',
+            'comment.max:2047' => 'The comment can not be this long - must be below 2048 characters',
+            'handicap.boolean' => 'The handicap accessible value must be a boolean!',
+            'babybed.boolean' => 'The babybed option must be a boolean!',
+        ]);
+
+        //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
         $reservation->setArrival(request('arrival'));
         $reservation->setDeparture(request('departure'));
         $reservation->setComment(request('comment'));
+        //Deze zijn alleen voor het invullen, en worden niet opgeslagen!
         $reservation->setRoomType(request('roomtype'));
         $reservation->setRoomView(request('roomview'));
         $reservation->setHandicap($request->has('handicap'));
         $reservation->setHasBabyBed($request->has('babybed'));
+        //Deze zijn tijdelijk
         $reservation->setRoomId(1);
         $reservingGuest->save();
+        $reservation->save();
+
 
         /**
          * Stap 1: Verwijder uit de tabel `reservations` alles van room (room_type, room_view, baby_bed, handicap)

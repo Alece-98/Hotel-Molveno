@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,5 +15,5 @@ abstract class Task extends Model
     abstract public function getDateEnd(): DateTime;
     abstract public function setDateStart(DateTime $dateStart): bool;
     abstract public function setDateEnd(DateTime $dateEnd): bool;
-    
+
 }

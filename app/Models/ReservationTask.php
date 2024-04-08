@@ -4,12 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations;
+use Illuminate\Database\Eloquent\Collection;
+use DateTime;
+
 
 class ReservationTask extends Task
 {
     use HasFactory;
 
     //Table name for database
+    private $roomType;
+    private $roomView;
+    private $isHandicapAccessible;
+    private $hasBabyBed;
+
     protected $table = 'reservations';
 
     protected $fillable = ['room_id','date_start', 'date_end', 'creator', 'reserving_guest', 'guests', 'uuid', 'has_breakfast', 'comments'];
@@ -43,6 +52,69 @@ class ReservationTask extends Task
 
     public function setDateEnd(DateTime $dateEnd): bool{
         $this->dateEnd = $dateEnd;
+    public function setAdults(int $adults){
+        $this->attributes['adults'] = $adults;
+    }
+
+    public function getChildren(): int{
+        return $this->attributes['children'];
+    }
+
+    public function setChildren(int $children){
+        $this->attributes['children'] = $children;
+    }
+
+    public function getAmountOfPeople(): int{
+        return $this->getAdults() + $this->getChildren();
+    }
+
+    public function hasBabyBed(): bool{
+        return $this->attributes['baby_bed'];
+    }
+
+    public function setHasBabyBed(bool $hasBabyBed){
+        $this->attributes['baby_bed'] = $hasBabyBed;
+    }
+
+    public function getHandicap(): bool{
+        return $this->attributes['handicap'];
+    }
+
+    public function setHandicap(bool $isHandicapAccessible){
+        $this->attributes['handicap'] = $isHandicapAccessible;
+    }
+
+    public function getRoomType(): string{
+
+        return $this->roomType;
+    }
+
+    public function setRoomType(string $roomType){
+        $this->roomType = $roomType;
+    }
+
+    public function getRoomView(): string{
+        return $this->roomView;
+    }
+
+    public function setRoomView(string $roomView){
+        $this->roomView = $roomView;
+    }
+
+    public function getDateStart(): DateTime{
+        $this->attributes['arrival'];
+    }
+
+    public function setDateStart(DateTime $dateStart): void{
+        $this->attributes['arrival'];
+    }
+
+    public function getDateEnd(): DateTime{
+        return $this->attributes['departure'];
+    }
+
+    public function setDateEnd(DateTime $dateEnd): void{
+        $this->attributes['departure'];
     }
 
     public function getDateInterval(): array{
@@ -128,9 +200,9 @@ class ReservationTask extends Task
     }
 
     public function calculateNights(): int{
-
-        $this->attributes['date_end'] - $this->attributes['date_start'];
-
+        return (int)date_diff(
+            DateTime::createFromFormat('Y-m-d', $this->attributes['departure']),
+            DateTime::createFromFormat('Y-m-d', $this->attributes['arrival']))->format('%d');
     }
 
     public function calculateDays(): int{

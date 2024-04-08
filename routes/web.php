@@ -45,6 +45,11 @@ Route::get('/RoomOverview', function () {
 Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGuest.show');
 
 Route::post('/extraGuest', [extraGuestController::class, 'store'])->name('extraGuest.store');
+Route::get('/addGuest', [AddGuestController::class, 'show'])->name('AddGuest');
+
+Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
+
+Route::post('/selectReservationRoom', [SelectReservationRoomController::class, 'store']);
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
