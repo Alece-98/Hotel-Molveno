@@ -2,6 +2,19 @@
 <x-MasterLayout>
     <form class="flex reservationContainer" method="POST" action="{{ route('extraGuest.store') }}">
         @csrf
+        @if(session()->has('success'))
+    <p>
+        {{ session()->get('success') }}
+    </p>
+@endif
+
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
         <div class="column width45 flex flexVertical gap20">
             <div class="flex widthFull">
                 <label class="width150" for="extraGuestName">
@@ -32,10 +45,10 @@
             </div>
 
             <div class="flex widthFull">
-                <label class="width150" for="extraGuestStreetname">
-                    <p>Adres:</p>
+                <label class="width150" for="extraGuestAdress>">
+                    <p>Adress:</p>
                 </label>
-                <input class="flexGrow" id="extraGuestStreetname" name="extraGuestStreetname" type="text" placeholder="Via Bettega">
+                <input class="flexGrow" id="extraGuestAdress" name="extraGuestAdress" type="text" placeholder="Via Bettega">
             </div>
 
             <div class="flex widthFull">
@@ -70,7 +83,7 @@
         </div>
 
         <div class="flex widthFull spaceBetween">
-            <button type="submit">Check Availability</button>
+            <button type="submit">Add Guest</button>
         </div>
     </form>
 </x-MasterLayout>
