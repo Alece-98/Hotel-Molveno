@@ -32,6 +32,10 @@ Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 's
 Route::get('/MakeReservation', function () {
     return view('MakeReservation'); });
 
+Route::get('/RoomOverview', function () {
+    return view('RoomOverview');
+
+});
 // Route::get('/extraGuest', function () {
 //     return view('extraGuest');
 // });
@@ -41,7 +45,10 @@ Route::get('/MakeReservation', function () {
 Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGuest.show');
 
 Route::post('/extraGuest', [extraGuestController::class, 'store'])->name('extraGuest.store');
+
 Route::get('/addGuest', [AddGuestController::class, 'show'])->name('AddGuest');
+
+Route::post('/addGuest', [AddGuestController::class, 'store']);
 
 Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
