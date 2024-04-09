@@ -9,7 +9,10 @@ use App\Models\Guest;
 use App\Models\Room;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Validator;
 use DateTime;
 
 class MakeReservationController extends Controller
@@ -20,18 +23,8 @@ class MakeReservationController extends Controller
 
     public function store(Request $request){
         $reservation = new ReservationTask();
-        $reservingGuest = new Guest();
         $room = new Room();
 
-        $reservingGuest->setFirstName(request('firstname'));
-        $reservingGuest->setLastName(request('lastname'));
-        $reservingGuest->setPhoneNumber(request('phone'));
-        $reservingGuest->setEmail(request('email'));
-        $reservingGuest->setStreetName(request('streetname'));
-        $reservingGuest->setHouseNumber(request('housenumber'));
-        $reservingGuest->setCity(request('city'));
-        $reservingGuest->setZipcode(request('zipcode'));
-        $reservingGuest->setCountry(request('country'));
         $this->validate($request, [
             'adults' => 'required|integer|gte:0',
             'children' => 'required|integer|gte:0',
@@ -69,13 +62,11 @@ class MakeReservationController extends Controller
         $reservation->setDeparture(request('departure'));
         $reservation->setComment(request('comment'));
         //Deze zijn alleen voor het invullen, en worden niet opgeslagen!
-        $reservation->setRoomType(request('roomtype'));
-        $reservation->setRoomView(request('roomview'));
+        $reservation->setRoomType(RoomType::tryFrom(request('roomtype')));
+        $reservation->setRoomView(RoomView::tryFrom(request('roomview')));
         $reservation->setHandicap($request->has('handicap'));
         $reservation->setHasBabyBed($request->has('babybed'));
         //Deze zijn tijdelijk
-        $reservation->setRoomId(1);
-        $reservingGuest->save();
         $reservation->save();
 
 
@@ -88,52 +79,60 @@ class MakeReservationController extends Controller
          *              3: Geen tijd beschikbaar: error
          *              3: Wel tijd beschikbaar: kies de eerste room die aan alles voldoet, en haal het room_id op.
          *              3.1: OF!!! Geef een lijst terug aan de frontend, en laat de gebruiker er een selecteren.
-         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )
-         *
-         *
-         *
+         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )      
          */
-
-        /*if(Room::find(1)) {
-            $reservation->save();
-        }else {
-            echo "ERROR";
-        }*/
-
 
         $rooms = $this->findAppropriateRooms(
             $reservation->getAmountOfPeople(),
             new DateTime(),
             new DateTime(),
-            RoomType::tryFrom($reservation->getRoomType()),
-            RoomView::tryFrom($reservation->getRoomView()),
+            $reservation->getRoomType(),
+            $reservation->getRoomView(),
             $reservation->hasBabyBed(),
             $reservation->getHandicap()
         );
-        return view('roomreserved', ['rooms' => $rooms]);
-        //return view('roomreserved', ['room' => $room]);
+
+        session()->put('reservation', $reservation);
+        session()->put('rooms', $rooms);
+
+        return redirect()->route('SelectReservationRoom');
     }
+
+
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
-
+       
     }
 
     private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
-        return Room::where([
+        $rooms = Room::where([
             ['capacity', '>=', $capacity],
             ['type', $roomType],
             ['view', $roomView],
-            $this->returnTruthyStatementIfFalse(['baby_bed', $babyBed]),
-            $this->returnTruthyStatementIfFalse(['handicap_accessible', $handicapAccessible]),
+        ])->when($babyBed, function (Builder $query, string $role){
+            $query->where('baby_bed', true);
+        })->when($handicapAccessible, function (Builder $query, string $role){
+            $query->where('handicap_accessible', true);
+        })->get();
+
+        return $rooms;
+        
+    }
+
+    private function isRoomAvailableInPeriod(Room $room, DateTime $arrivalDate, DateTime $departureDate): bool{
+        $reservations = Reservation::where([
+            ['room_id', $room->getRoomID()],
         ])->get();
+        foreach ($reservations as $reservation){
+            if (
+                $departureDate > $reservation->getArrival() || //Vertrek van A is later dan de aankomst van B - kamer is bezet
+                $arrivalDate < $reservation->getDeparture() || //Aankomst van A is eerder dan vertrek van B - kamer is bezet
+                $arrivalDate <= $reservation->getArrival() && $departureDate >= $reservation->getDeparture() //Reservering van A valt geheel in reservation van B
+            ){
+                return false;
+            }
+        }
+        return true;
     }
-
-    private function returnTruthyStatementIfFalse(array $array){
-        //Vraag Jeroen om betere oplossing? Is hacky, maar werkt wel
-        return $array[1] ? $array : ['capacity', ">=", 0];
-        //return $array[1] ? $array : [true];
-    }
-
-
 }
