@@ -10,10 +10,10 @@ abstract class Task extends Model
 {
     use HasFactory;
 
-    abstract public function getComments(): array;
+    abstract public function getComment(): ?string;
     abstract public function getDateStart(): DateTime;
     abstract public function getDateEnd(): DateTime;
-    abstract public function setDateStart(DateTime $dateStart): bool;
-    abstract public function setDateEnd(DateTime $dateEnd): bool;
-
+    abstract public function setDateStart(DateTime $dateStart): void;
+    abstract public function setDateEnd(DateTime $dateEnd): void;
+    
 }
