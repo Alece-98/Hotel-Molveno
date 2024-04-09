@@ -32,10 +32,6 @@ Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 's
 Route::get('/MakeReservation', function () {
     return view('MakeReservation'); });
 
-Route::get('/RoomOverview', function () {
-    return view('RoomOverview');
-
-});
 // Route::get('/extraGuest', function () {
 //     return view('extraGuest');
 // });

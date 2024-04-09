@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoomModel;
+use App\Models\Room;
 use Illuminate\Database\Eloquent\Collection;
 
 class RoomController extends Controller
@@ -10,7 +11,7 @@ class RoomController extends Controller
     public function show()
     {
         $rooms = $this->getAllRoomOrderByRoomNumber();
-        return view('RoomOverview', compact(['rooms']));
+        return view('RoomOverview', compact('rooms'));
     }
 
     // public function getAllRooms(): Collection
@@ -20,11 +21,11 @@ class RoomController extends Controller
 
     public function getAllRoomsOrderedById(): Collection
     {
-        return RoomModel::orderBy('id', 'asc')->get();
+        return Room::orderBy('id', 'asc')->get();
     }
 
     public function getAllRoomOrderByRoomNumber(): Collection
     {
-        return RoomModel::orderBy('room_number', 'asc')->get();
+        return Room::orderBy('number', 'asc')->get();
     }
 }
