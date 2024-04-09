@@ -65,6 +65,7 @@
             </label>
             <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
+        <button type="submit">Gast toevoegen</button>
     </div>
 </form>
 </x-MasterLayout>
