@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('street_name');
-            $table->integer('house_number');
-            $table->string('city');
-            $table->string('zipcode');
-            $table->string('country');
+            $table->string('first_name')->default(null);
+            $table->string('last_name')->default(null);
+            $table->string('phone')->default(null);
+            $table->string('email')->default(null);
+            $table->string('street_name')->default(null);
+            $table->integer('house_number')->default(0);
+            $table->string('city')->default(null);
+            $table->string('zipcode')->default(null);
+            $table->string('country')->default(null);
         });
     }
 
