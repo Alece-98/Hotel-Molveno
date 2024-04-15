@@ -10,17 +10,17 @@
             <p class="fixedWidth">Beds</p>
         </div>
 
-        <p>{{$availability}}</p>
+        {{-- <p>{{$availability}}</p>
         <p>{{$reservation}}</p>
-        <p>{{$roomByID}}</p>
+        <p>{{$roomByID}}</p> --}}
 
         @foreach ($rooms as $room)
-            <div class="listRow {{$availability}}">
+            <div class="listRow available">
                 <a href="" class="listRow">
-                    <p class="fixedWidth">{{ $room->room_number }}</p>
-                    <p class="fixedWidth">{{ $room->room_type }}</p>
-                    <p class="fixedWidth">{{ $room->room_view }}</p>
-                    <p class="fixedWidth">{{ $room->room_capacity }}</p>
+                    <p class="fixedWidth">{{ $room->number }}</p>
+                    <p class="fixedWidth">{{ $room->type }}</p>
+                    <p class="fixedWidth">{{ $room->view }}</p>
+                    <p class="fixedWidth">{{ $room->capacity }}</p>
                     <p class="fixedWidth">{{ $room->bed_description }}</p>
                 </a>
             </div>

@@ -14,13 +14,14 @@ class RoomController extends Controller
     {
         $rooms = $this->getAllRoomsOrderByRoomNumber();
 
-        $roomID = 18;
+        // $roomID = 18;
 
-        $reservation = $this->getReservationIDWithRoomID($roomID);
-        $roomByID = $this->getRoomByID($roomID);
-        $availability = $this->checkAvailabilityByRoomByID($roomID);
+        // $reservation = $this->getReservationIDWithRoomID($roomID);
+        // $roomByID = $this->getRoomByID($roomID);
+        // $availability = $this->checkAvailabilityByRoomByID($roomID);
 
-        return view('RoomOverview', compact(['rooms', 'availability', 'reservation', 'roomByID']));
+        // return view('RoomOverview', compact(['rooms', 'availability', 'reservation', 'roomByID']));
+        return view('RoomOverview', compact(['rooms']));
     }
 
     // use room id to get reservation id using rooms_reservations
@@ -51,7 +52,7 @@ class RoomController extends Controller
             $singleReservationID = $this->getSingleReservationWithID($seperateReservation->reservation_id);
         }
 
-        $available =  collect($this->isDateBetweenArrivalDeparture($singleReservationID[0]->arrival, $singleReservationID[0]->departure, Carbon::now()));
+        $available = collect($this->isDateBetweenArrivalDeparture($singleReservationID[0]->arrival, $singleReservationID[0]->departure, Carbon::now()));
 
         // return $available;
 
@@ -71,7 +72,7 @@ class RoomController extends Controller
 
     public function getAllRoomsOrderByRoomNumber(): Collection
     {
-        return RoomModel::orderBy('room_number', 'asc')->get();
+        return RoomModel::orderBy('number', 'asc')->get();
     }
 
     public function getRoomByID($id)
