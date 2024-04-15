@@ -15,7 +15,7 @@
     <form method="POST">
     @csrf
     @foreach ($rooms as $room)
-        <button type="submit" class="!w-full h-12 m-4" id="room{{$room->getRoomID()}}" name="room" value="{{$room->getRoomID()}}">
+        <button type="submit" class="!w-full h-12 m-4" id="{{$room->getRoomID()}}" name="{{$room->getRoomID()}}">
             <div class="grid grid-cols-6 divide-x h-12 m-4">
                 <div>{{$room->getRoomNumber()}}</div>
                 <div>{{$room->getRoomType()}}</div>

@@ -31,10 +31,10 @@
 <body>
 <div class="container">
         <div class="info-group left">
-            <div class="info-item"><span class="info-label">Room Number:</span><span class="info-value">{{ $room->room_number }}</span></div>
-            <div class="info-item"><span class="info-label">Room Class:</span><span class="info-value">{{ $room->room_type }}</span></div>
-            <div class="info-item"><span class="info-label">Room View:</span><span class="info-value">{{ $room->room_view }}</span></div>
-            <div class="info-item"><span class="info-label">Max Guests:</span><span class="info-value">{{ $room->room_capacity }}</span></div>
+            <div class="info-item"><span class="info-label">Room Number:</span><span class="info-value">{{ $room->number }}</span></div>
+            <div class="info-item"><span class="info-label">Room Class:</span><span class="info-value">{{ $room->type }}</span></div>
+            <div class="info-item"><span class="info-label">Room View:</span><span class="info-value">{{ $room->view }}</span></div>
+            <div class="info-item"><span class="info-label">Max Guests:</span><span class="info-value">{{ $room->capacity }}</span></div>
             <div class="info-item"><span class="info-label">Type of Beds:</span><span class="info-value">{{ $room->bed_description }}</span></div>
         </div>
         <div class="info-group right">

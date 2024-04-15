@@ -130,6 +130,11 @@ class Room extends Model
         return $this->hasMany(ReservationTask::class);
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(ReservationTask::class);
+    }
+
     // Price
     public function getPricePerNight(): int {
         return $this->attributes['price_per_night'] * 100;

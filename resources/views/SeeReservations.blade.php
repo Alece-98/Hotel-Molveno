@@ -29,7 +29,7 @@
     
 @foreach ($roomsWithReservations as $room)
         @if (!$room->reservations->isEmpty()) 
-            <p>Kamer: {{ $room->room_number }} - Type: {{ $room->room_type ?? 'Niet gespecificeerd' }}</p>
+            <p>Kamer: {{ $room->number }} - Type: {{ $room->type ?? 'Niet gespecificeerd' }}</p>
             <table>
                 <thead>
                     <tr>
@@ -42,7 +42,6 @@
                     @foreach ($room->reservations as $reservation)
                         <tr>
 
-                            <td>{{ $reservation->guest }}</td> 
                             <td> arrival: <span class="date">{{ $reservation->arrival }} </span></td> 
                             <td> departure: <span class="date">{{ $reservation->departure }} </span></td> 
                             

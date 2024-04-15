@@ -22,7 +22,10 @@ class SelectReservationRoomController extends Controller
         return view('selectReservationRoom', ['rooms' => $this->rooms, 'reservation' => $this->reservation]);
     }
 
-    public function store(){
+    public function store(Request $request){
+        $room = $request->input('room');
+        $this->reservation->setRoomID((int)$room);
+        session()->put('reservation', $this->reservation);
         return redirect()->route('AddGuest');
     }
 }

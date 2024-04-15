@@ -63,7 +63,7 @@
 
     <footer class="footer backgroundColor"></footer>
     <footer class="footer flex">
-        <div class="imgContainer">
+        <div class="imgContainer flex">
             <img class="cap-abelLogo" src="images/Cap-AbelLogo.png" alt="">
         </div>
 
