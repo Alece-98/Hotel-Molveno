@@ -34,14 +34,12 @@
             <li>
                 <h1><a href="/">Reception</a></h1>
             </li>
-            <li>
-
+            {{-- <li>
                 <h1><a href="">Housekeeping</a></h1>
-            </li>
-            <li>
+            </li> --}}
+            {{-- <li>
                 <h1><a href="">Maintenance</a></h1>
-
-            </li>
+            </li> --}}
         </ul>
 
         <div class="imgContainer width300 flex">
@@ -55,8 +53,8 @@
         <h2><a href="/MakeReservation">Make Reservation</a></h2>
 
         {{-- <h2><a href="">Search Reserevation</a></h2> --}}
-        <h2><a href="/RoomOverview">Room Overview</a></h2>
 
+        <h2><a href="/RoomOverview">Room Overview</a></h2>
     </nav>
 
     <main class="content">
@@ -65,7 +63,7 @@
 
     <footer class="footer backgroundColor"></footer>
     <footer class="footer flex">
-        <div class="imgContainer">
+        <div class="imgContainer flex">
             <img class="cap-abelLogo" src="images/Cap-AbelLogo.png" alt="">
         </div>
 

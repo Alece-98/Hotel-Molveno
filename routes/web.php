@@ -1,11 +1,11 @@
 <?php
 
-
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SeeReservationController;
+use App\Http\Controllers\RoomInfoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +26,30 @@ Route::get('/', function () {
     return view('Dashboard');
 });
 
+Route::get('/RoomOverview', [RoomController::class, 'show']);
+
+Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
 Route::get('/MakeReservation', function () {
     return view('MakeReservation'); });
 
-Route::get('/RoomOverview', function () {
-    return view('RoomOverview');
+// Route::get('/extraGuest', function () {
+//     return view('extraGuest');
+// });
+// Route::post('/extraGuest', function () {
+//     return view('extraGuest');
+// });
+Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGuest.show');
 
-});
+Route::post('/extraGuest', [extraGuestController::class, 'store'])->name('extraGuest.store');
+
+Route::get('/addGuest', [AddGuestController::class, 'show'])->name('AddGuest');
+
+Route::post('/addGuest', [AddGuestController::class, 'store']);
+
+Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
+
+Route::post('/selectReservationRoom', [SelectReservationRoomController::class, 'store']);
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
@@ -65,3 +81,12 @@ Route::get('/reservation', function () {
 
 // Route voor het verwerken van de reserveringsaanvraag
 Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
+
+
+
+
+Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
+
+
+Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
+
