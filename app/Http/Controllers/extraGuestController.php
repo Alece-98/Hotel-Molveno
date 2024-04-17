@@ -41,7 +41,7 @@ class extraGuestController extends Controller
         $extraGuest->extraGuestPhone = $request->input('extraGuestPhone');
         $extraGuest->extraGuestEmail = $request->input('extraGuestEmail');
         $extraGuest->extraguestAdress = $request->input('extraGuestAdress');
-        // $extraGuest->extraguestAdress = $request->input('extraGuestAdress');
+        $extraGuest->extraguestAdress = $request->input('extraGuestAdress');
         $extraGuest->extraGuestHouseNumber = $request->input('extraGuestHouseNumber');
         $extraGuest->extraGuestCity = $request->input('extraGuestCity');
         $extraGuest->extraGuestZipcode = $request->input('extraGuestZipcode');
@@ -49,6 +49,6 @@ class extraGuestController extends Controller
 
 
 
-        return redirect()->back()->with('success', 'Guest stored successfully!');
+        return redirect()->back()->with('Guest stored successfully!');
     }
 }

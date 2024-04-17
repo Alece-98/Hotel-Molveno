@@ -1,6 +1,6 @@
 @vite(['resources/css/makeReservation.css'])
 <x-MasterLayout>
-    <form class="flex reservationContainer" method="POST" action="{{ route('extraGuest.store') }}">
+    <form class="flex reservationContainer" method="POST" action="{{ route('extraGuest.store') }}" >
         @csrf
         @if(session()->has('success'))
     <p>
