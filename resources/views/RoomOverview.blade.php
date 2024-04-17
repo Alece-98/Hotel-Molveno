@@ -10,12 +10,8 @@
             <p class="fixedWidth">Beds</p>
         </div>
 
-        {{-- <p>{{$availability}}</p>
-        <p>{{$reservation}}</p>
-        <p>{{$roomByID}}</p> --}}
-
         @foreach ($rooms as $room)
-            <div class="listRow available">
+            <div class="listRow {{$availability[$loop->index]}}">
                 <a href="" class="listRow">
                     <p class="fixedWidth">{{ $room->number }}</p>
                     <p class="fixedWidth">{{ $room->type }}</p>
