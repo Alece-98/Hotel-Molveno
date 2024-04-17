@@ -53,7 +53,7 @@ class RoomController extends Controller
 
     public function isDateBetweenArrivalDeparture($arrival, $departure, $date): string
     {
-        if ($arrival < $date && $departure > $date) {
+        if ($arrival <= $date && $departure >= $date) {
             return "occupied";
         } else {
             return "available";
