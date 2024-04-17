@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoomsSeeder extends Seeder
 {
@@ -12,8 +13,8 @@ class RoomsSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('rooms')->insert(
-            ["INSERT INTO `rooms` (`id`, `created_at`, `updated_at`, `number`, `floor`, `view`, `type`, `handicap_accessible`, `baby_bed`, `price_per_night`, `capacity`, `bed_description`) VALUES
+        DB::statement(
+            "INSERT INTO `rooms` (`id`, `created_at`, `updated_at`, `number`, `floor`, `view`, `type`, `handicap_accessible`, `baby_bed`, `price_per_night`, `capacity`, `bed_description`) VALUES
             (1, NULL, NULL, 207, 2, 'Mountain', 'Standard', 0, 1, 150, 2, 'Double bed'),
             (2, NULL, NULL, 208, 2, 'Mountain', 'Standard', 0, 1, 150, 2, 'Double bed'),
             (3, NULL, NULL, 209, 2, 'Mountain', 'Standard', 0, 1, 150, 2, 'Double bed'),
@@ -38,7 +39,7 @@ class RoomsSeeder extends Seeder
             (22, NULL, NULL, 105, 1, 'Standard', 'Economy', 0, 1, 125, 2, 'Double bed'),
             (23, NULL, NULL, 106, 1, 'Standard', 'Economy', 0, 1, 125, 2, 'Double bed'),
             (24, NULL, NULL, 107, 1, 'Standard', 'Economy', 0, 1, 125, 4, 'Double Bed'),
-            (25, NULL, NULL, 108, 1, 'Standard', 'Economy', 0, 0, 125, 4, 'Double bed');"]
+            (25, NULL, NULL, 108, 1, 'Standard', 'Economy', 0, 0, 125, 4, 'Double bed');"
         );
 
     }

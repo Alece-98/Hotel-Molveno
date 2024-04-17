@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Rooms;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(
+            [RoomsSeeder::class,
+            ReservationsSeeder::class]
+        );
         \App\Models\User::factory(3)->create();
 
         \App\Models\User::factory()->create([
@@ -21,9 +26,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
              // WORKS
 
-
-            'phone_number' => Hash::make ('0123456789')
-
         ]);
+
+        
+        
     }
 }
