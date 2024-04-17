@@ -26,8 +26,7 @@ class AddGuestController extends Controller
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
         $guest->save();
         $this->reservation->save();
-        $guest->reservationTask()->attach($this->reservation, ['guest_id' => $guest['id']]);
-        // $room = Room::where("id", $this->reservation->getRoomID())->get();
+        $guest->reservationTask()->attach($this->reservation);
 
         // dd(ReservationTask::whereBelongsTo($room)->get());
     }
