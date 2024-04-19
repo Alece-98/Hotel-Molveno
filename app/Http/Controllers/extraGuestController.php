@@ -47,6 +47,8 @@ class extraGuestController extends Controller
         $extraGuest->extraGuestZipcode = $request->input('extraGuestZipcode');
         $extraGuest->extraGuestCountry = $request->input('extraGuestCountry');
 
+        $extraGuest->save();
+
 
 
         return redirect()->back()->with('Guest stored successfully!');

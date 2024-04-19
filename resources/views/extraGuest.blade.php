@@ -83,7 +83,7 @@
         </div>
 
         <div class="flex widthFull spaceBetween">
-            <button type="submit">Add Guest</button>
+            <button type="submit" value="submit">Add Guest</button>
         </div>
     </form>
 </x-MasterLayout>
