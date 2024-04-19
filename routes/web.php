@@ -22,9 +22,8 @@ use App\Http\Controllers\RoomInfoController;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('Dashboard');
-});
+Route::get('/', [SeeReservationController::class, 'showAllReservations']);
+
 
 Route::get('/RoomOverview', [RoomController::class, 'show']);
 

@@ -183,9 +183,10 @@ class ReservationTask extends Task
         return $this->attributes['room_id'];
     }
 
-    public function guest(): BelongsToMany{
-        return $this->belongsToMany(Guest::class, "rooms_reservations");
+    public function guests(): BelongsToMany{
+        return $this->belongsToMany(Guest::class, "guests_reservations");
     }
+    
 
     /*public function addReservation(ReservationTask $reservation, int $roomid): void{
         $this->create([
