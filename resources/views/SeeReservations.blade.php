@@ -21,7 +21,12 @@
                             <td class="guest-name" > {{ $guest->getFirstName () }}  {{ $guest->getLastName() }} </td> 
                             <td class="arrival">{{ $reservation->arrival }} </td> 
                             <td class="departure">{{ $reservation->departure }} </td> 
-                            
+                            <td class="departure"> 
+                            <form action="{{ route('VerwijderReservering.destroy', $reservation->id) }}" method="POST">
+                                @csrf    
+                                @method('DELETE')
+                                <button  type="submit">Verwijder {{ $reservation->id }}</button></td> 
+                            </form>
                         </tr>
                     @endforeach
                     @endforeach

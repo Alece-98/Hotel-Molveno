@@ -22,7 +22,7 @@
 
 <body class="gridLayoutContainer">
     <div class="backgroundImgContainer">
-        <img class="backgroundImg" src="images/MolvenoLogo.png" alt="">
+        <img class="backgroundImg" src="/images/MolvenoLogo.png" alt="">
     </div>
 
     <header class="header backgroundColor"></header>
@@ -43,7 +43,7 @@
         </ul>
 
         <div class="imgContainer width300 flex">
-            <img class="molvenoLogo" src="images/MolvenoLogo.png" alt="MolvenoLogo">
+            <img class="molvenoLogo" src="/images/MolvenoLogo.png" alt="MolvenoLogo">
         </div>
 
     </header>
@@ -64,7 +64,7 @@
     <footer class="footer backgroundColor"></footer>
     <footer class="footer flex">
         <div class="imgContainer flex">
-            <img class="cap-abelLogo" src="images/Cap-AbelLogo.png" alt="">
+            <img class="cap-abelLogo" src="/images/Cap-AbelLogo.png" alt="">
         </div>
 
     </footer>

@@ -22,7 +22,11 @@ use App\Http\Controllers\RoomInfoController;
 //     return view('welcome');
 // });
 
+
+
 Route::get('/', [SeeReservationController::class, 'showAllReservations']);
+Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
+
 
 
 Route::get('/RoomOverview', [RoomController::class, 'show']);
@@ -78,7 +82,8 @@ Route::get('/reservation', function () {
 // Route voor het verwerken van de reserveringsaanvraag
 Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
 
-Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
 
 Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
+
+Route::delete('/verwijderReservering/{id}', [VerwijderReserveringController::class, 'destroy'])->name('VerwijderReservering.destroy');
 
