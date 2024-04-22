@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeeReservationController;
 use App\Http\Controllers\RoomInfoController;
+use Illuminate\Http\Request;
 
 
 /*
@@ -29,8 +30,7 @@ Route::get('/RoomOverview', [RoomController::class, 'show']);
 
 Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
-Route::get('/MakeReservation', function () {
-    return view('MakeReservation'); });
+Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
 // Route::get('/extraGuest', function () {
 //     return view('extraGuest');
@@ -48,9 +48,12 @@ Route::post('/addGuest', [AddGuestController::class, 'store']);
 
 Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
-Route::post('/selectReservationRoom', [SelectReservationRoomController::class, 'store']);
+Route::post('/selectReservationRoom', [SelectReservationRoomController::class, function (Request $request) {
+    $controller = new SelectReservationRoomController(); 
+    $controller->handleNavigationButtons("room-form", $request);
+}]);
 
-Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
+Route::get('/MakeReservation', [MakeReservationController::class, 'show'])->name('MakeReservation');
 
 Route::post('/MakeReservation', [MakeReservationController::class, 'store']);
 
