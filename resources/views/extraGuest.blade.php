@@ -17,10 +17,10 @@
 @endif
         <div class="column width45 flex flexVertical gap20">
             <div class="flex widthFull">
-                <label class="width150" for="extraGuestName">
+                <label class="width150" for="extraGuestFirstName">
                     <p>First Name:</p>
                 </label>
-                <input class="flexGrow" id="extraGuestName" name="extraGuestName" type="text" placeholder="John">
+                <input class="flexGrow" id="extraGuestFirstName" name="extraGuestFirstName" type="text" placeholder="John">
             </div>
 
             <div class="flex widthFull">

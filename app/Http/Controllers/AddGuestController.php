@@ -45,4 +45,5 @@ class AddGuestController extends Controller
         return $guest;
     }
 
+
 }

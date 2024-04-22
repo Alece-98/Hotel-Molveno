@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class extraGuest extends Model
 {
     // use HasFactory;
-    // protected $table = 'extra_Guest';
+    protected $table = 'guests';
 
     public function getExtraGuestName(): string {
         return $this->attributes['extra_First_Name'];

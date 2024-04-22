@@ -66,7 +66,12 @@
             <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
         <button type="submit">Gast toevoegen</button>
+
+
+
+        <a href="{{"/extraGuest/"}}" >
+            <button type="button" class="label label-default pull-xs-right">Add Extra Guest</button
+            ></a>
     </div>
 </form>
 </x-MasterLayout>
-    

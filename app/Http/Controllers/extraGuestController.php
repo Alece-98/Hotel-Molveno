@@ -15,7 +15,7 @@ class extraGuestController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'extraGuestName' => 'required|max:32',
+            'extraGuestFirstName' => 'required|max:32',
             'extraGuestLastName'=> 'required|max:32',
             'extraGuestPhone' => 'required|max:10',
             'extraGuestEmail' => 'required|email',
@@ -36,16 +36,16 @@ class extraGuestController extends Controller
 
         ]);
         $extraGuest = new extraGuest();
-        $extraGuest->extraGuestName = $request->input('extraGuestName');
-        $extraGuest->extraGuestLastName = $request->input('extraGuestLastName');
-        $extraGuest->extraGuestPhone = $request->input('extraGuestPhone');
-        $extraGuest->extraGuestEmail = $request->input('extraGuestEmail');
-        $extraGuest->extraguestAdress = $request->input('extraGuestAdress');
-        $extraGuest->extraguestAdress = $request->input('extraGuestAdress');
-        $extraGuest->extraGuestHouseNumber = $request->input('extraGuestHouseNumber');
-        $extraGuest->extraGuestCity = $request->input('extraGuestCity');
-        $extraGuest->extraGuestZipcode = $request->input('extraGuestZipcode');
-        $extraGuest->extraGuestCountry = $request->input('extraGuestCountry');
+        $extraGuest->extra_First_Name = $request->input('extraGuestFirstName');
+        $extraGuest->extra_Last_Name = $request->input('extraGuestLastName');
+        $extraGuest->extra_Phone = $request->input('extraGuestPhone');
+        $extraGuest->extra_Email = $request->input('extraGuestEmail');
+        // $extraGuest->extra_Adress = $request->input('extraGuestAdress');
+        $extraGuest->extra_Adress = $request->input('extraGuestAdress');
+        $extraGuest->extra_House_Number = $request->input('extraGuestHouseNumber');
+        $extraGuest->extra_City = $request->input('extraGuestCity');
+        $extraGuest->extra_Zipcode = $request->input('extraGuestZipcode');
+        $extraGuest->extra_Country = $request->input('extraGuestCountry');
 
         $extraGuest->save();
 
