@@ -5,9 +5,14 @@
     gap: 10px;
 }
 
-.fixedWidth
+.fixedWidth15
 {
-    width: 100%;
+    width: 15%;
+}
+
+.fixedWidth20
+{
+    width: 20%;
 }
 
 .listHeader, .listRow
