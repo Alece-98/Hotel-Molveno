@@ -9,11 +9,10 @@
             <p class="fixedWidth15">Guest Capacity</p>
             <p class="fixedWidth20">Beds</p>
             <p class="fixedWidth15">Price per Night</p>
-
         </div>
 
         @foreach ($rooms as $room)
-            <div class="listRow available">
+            <div class="listRow {{$availability[$loop->index]}}">
                 <p class="fixedWidth15">{{$room->number}}</p>
                 <p class="fixedWidth15">{{$room->type}}</p>
                 <p class="fixedWidth15">{{$room->view}}</p>
