@@ -11,37 +11,15 @@
         </div>
 
         @foreach ($rooms as $room)
-            <div class="listRow available">
-                <p class="fixedWidth">{{$room->number}}</p>
-                <p class="fixedWidth">{{$room->type}}</p>
-                <p class="fixedWidth">{{$room->view}}</p>
-                <p class="fixedWidth">{{$room->capacity}}</p>
-                <p class="fixedWidth">{{$room->bed_description}}</p>
+            <div class="listRow {{$availability[$loop->index]}}">
+                <a href="" class="listRow">
+                    <p class="fixedWidth">{{ $room->number }}</p>
+                    <p class="fixedWidth">{{ $room->type }}</p>
+                    <p class="fixedWidth">{{ $room->view }}</p>
+                    <p class="fixedWidth">{{ $room->capacity }}</p>
+                    <p class="fixedWidth">{{ $room->bed_description }}</p>
+                </a>
             </div>
         @endforeach
-
-        {{-- <div class="listRow blocked">
-            <p class="fixedWidth">1.01</p>
-            <p class="fixedWidth">Economy</p>
-            <p class="fixedWidth">Standard</p>
-            <p class="fixedWidth">2</p>
-            <p class="fixedWidth">2 Single</p>
-        </div>
-
-        <div class="listRow occupied">
-            <p class="fixedWidth">1.02</p>
-            <p class="fixedWidth">Economy</p>
-            <p class="fixedWidth">Standard</p>
-            <p class="fixedWidth">2</p>
-            <p class="fixedWidth">2 Single</p>
-        </div>
-
-        <div class="listRow available">
-            <p class="fixedWidth">1.03</p>
-            <p class="fixedWidth">Economy</p>
-            <p class="fixedWidth">Standard</p>
-            <p class="fixedWidth">2</p>
-            <p class="fixedWidth">1 Double</p>
-        </div> --}}
     </div>
 </x-MasterLayout>
