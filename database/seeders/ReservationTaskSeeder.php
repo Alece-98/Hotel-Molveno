@@ -13,6 +13,6 @@ class ReservationTaskSeeder extends Seeder
      */
     public function run(): void
     {
-        $models = ReservationTask::factory()->times(10)->create();
+        ReservationTask::factory()->times(10)->create();
     }
 }
