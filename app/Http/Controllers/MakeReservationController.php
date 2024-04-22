@@ -79,7 +79,7 @@ class MakeReservationController extends Controller
          *              3: Geen tijd beschikbaar: error
          *              3: Wel tijd beschikbaar: kies de eerste room die aan alles voldoet, en haal het room_id op.
          *              3.1: OF!!! Geef een lijst terug aan de frontend, en laat de gebruiker er een selecteren.
-         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )      
+         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )
          */
 
         $rooms = $this->findAppropriateRooms(
@@ -95,14 +95,25 @@ class MakeReservationController extends Controller
         session()->put('reservation', $reservation);
         session()->put('rooms', $rooms);
 
+            if($reservation->getAdults() > 1) {
+                // dd($reservation->getAdults());
+
+
+            }
+
+
+
+
         return redirect()->route('SelectReservationRoom');
+
+
     }
 
 
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
-       
+
     }
 
     private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
@@ -117,7 +128,7 @@ class MakeReservationController extends Controller
         })->get();
 
         return $rooms;
-        
+
     }
 
     private function isRoomAvailableInPeriod(Room $room, DateTime $arrivalDate, DateTime $departureDate): bool{

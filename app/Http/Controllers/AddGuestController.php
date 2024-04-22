@@ -18,8 +18,20 @@ class AddGuestController extends Controller
             return $next($request);
         });
     }
+
+    private function hiddenButton() {
+        if($this->reservation->getAdults() > 1 && $this->reservation->getAdults() < 5) {
+            return "notHidden";
+        }
+        else
+        {
+            return "hidden";
+        }
+    }
+
     public function show(){
-        return view('addGuest', );
+        $hidden=$this->hiddenButton();
+        return view('addGuest', compact(["hidden"]));
     }
 
     public function store(Request $request){
@@ -43,6 +55,9 @@ class AddGuestController extends Controller
         $guest->setCountry($request->input("country"));
 
         return $guest;
+
+
+
     }
 
 
