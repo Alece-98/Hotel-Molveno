@@ -19,6 +19,7 @@
         </div>
     <div>
     <form method="POST">
+    <input type="hidden" name="room-form" value="room-form">
     @csrf
     @foreach ($rooms as $room)
         <button type="submit" class="!w-full h-12 m-4" id="room{{$room->getRoomID()}}" name="room" value="{{$room->getRoomID()}}">
@@ -34,5 +35,11 @@
     @endforeach 
     @endif
     </form>
+    <div class="flex justify-center">
+    <form method="POST">
+        @csrf
+        <button type="submit">Go back</button>
+    </form>
+    <div>
 </body>
 </x-MasterLayout>

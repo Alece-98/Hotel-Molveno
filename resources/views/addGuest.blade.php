@@ -65,7 +65,10 @@
             </label>
             <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
-        <button type="submit">Gast toevoegen</button>
+        <div class="flex widthFull !justify-around">
+            <button onclick="window.location.href='/selectReservationRoom'" type="button">Go back</button>
+            <button type="submit">Add guest</button>
+        </div>
     </div>
 </form>
 </x-MasterLayout>

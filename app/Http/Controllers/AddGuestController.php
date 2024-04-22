@@ -7,9 +7,12 @@ use App\Models\Guest;
 use App\Models\Room;
 use App\Models\ReservationTask;
 use Illuminate\Database\Eloquent\Relations;
+use App\Traits\PageButtonNavigationHandler;
 
 class AddGuestController extends Controller
 {
+    use PageButtonNavigationHandler;
+
     private $reservation;
 
     public function __construct(){
@@ -19,7 +22,8 @@ class AddGuestController extends Controller
         });
     }
     public function show(){
-        return view('addGuest', );
+        session()->put('reservation', $this->reservation);
+        return view('addGuest', [$reservation = $this->reservation]);
     }
 
     public function store(Request $request){
@@ -43,6 +47,12 @@ class AddGuestController extends Controller
         $guest->setCountry($request->input("country"));
 
         return $guest;
+    }
+
+    public function goBack(){
+        $data = session()->pull('inputData');
+        $data = session()->put('inputData', $data);
+        return redirect()->route('SelectReservation')->withInput($data)->send();
     }
 
 }
