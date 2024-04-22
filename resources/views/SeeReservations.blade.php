@@ -2,7 +2,6 @@
 
 <x-MasterLayout>
 
-    <link rel="stylesheet" href="{{ asset('css/SeeReservations.css') }}">
     <title>Alle Reserveringen</title>
 
 </head>
