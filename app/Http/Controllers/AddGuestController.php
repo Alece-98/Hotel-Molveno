@@ -27,7 +27,6 @@ class AddGuestController extends Controller
         $guest->save();
         $this->reservation->save();
         $guest->reservationTask()->attach($this->reservation);
-        // $room = Room::where("id", $this->reservation->getRoomID())->get();
 
         // dd(ReservationTask::whereBelongsTo($room)->get());
     }
