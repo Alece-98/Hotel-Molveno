@@ -17,8 +17,18 @@ use DateTime;
 
 class MakeReservationController extends Controller
 {
+    private $reservation;
+
+    public function construct(){
+        $this->middleware(function ($request, $next) {
+            $this->reservation = session('reservation');
+            return $next($request);
+        });
+    }
+    
     public function show(){
-        return view('MakeReservation', );
+        //dd($this->reservation);
+        return view('MakeReservation', [$reservation = $this->reservation]);
     }
 
     public function store(Request $request){
@@ -54,7 +64,6 @@ class MakeReservationController extends Controller
             'handicap.boolean' => 'The handicap accessible value must be a boolean!',
             'babybed.boolean' => 'The babybed option must be a boolean!',
         ]);
-
         //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
@@ -69,19 +78,6 @@ class MakeReservationController extends Controller
         //Deze zijn tijdelijk
         $reservation->save();
 
-
-        /**
-         * Stap 1: Verwijder uit de tabel `reservations` alles van room (room_type, room_view, baby_bed, handicap)
-         * Stap 2: Om een room te selecteren, die voldoet aan de criteria:
-         *              1: Haal alle rooms op die voldoen aan Adults, Children, type, view, bed/handicap
-         *              2: Als de lijst leeg is (geen rooms voldoen hieraan), dan geef een error terug aan de gebruiker (melding geen room beschikbaar)
-         *              2: Lijst niet leeg is: Van de rooms die je dan terugkrijgt (voldoen aan 1), kijk of deze (via reservations tabel) beschikbaar zijn (controleer de opgegeven tijd in formulier, met wat er in de database al staat!)
-         *              3: Geen tijd beschikbaar: error
-         *              3: Wel tijd beschikbaar: kies de eerste room die aan alles voldoet, en haal het room_id op.
-         *              3.1: OF!!! Geef een lijst terug aan de frontend, en laat de gebruiker er een selecteren.
-         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )      
-         */
-
         $rooms = $this->findAppropriateRooms(
             $reservation->getAmountOfPeople(),
             new DateTime(),
@@ -94,11 +90,10 @@ class MakeReservationController extends Controller
 
         session()->put('reservation', $reservation);
         session()->put('rooms', $rooms);
+        session()->put('inputData', $request->all());
 
-        return redirect()->route('SelectReservationRoom');
+        return redirect()->route('SelectReservationRoom')->send();
     }
-
-
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
