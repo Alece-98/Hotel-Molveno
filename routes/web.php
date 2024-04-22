@@ -23,9 +23,8 @@ use Illuminate\Http\Request;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('Dashboard');
-});
+Route::get('/', [SeeReservationController::class, 'showAllReservations']);
+
 
 Route::get('/RoomOverview', [RoomController::class, 'show']);
 
@@ -72,10 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 require __DIR__.'/auth.php';
-
 
 // Route voor het weergeven van het reserveringsformulier
 Route::get('/reservation', function () {
@@ -85,11 +81,7 @@ Route::get('/reservation', function () {
 // Route voor het verwerken van de reserveringsaanvraag
 Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
 
-
-
-
 Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
-
 
 Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
 

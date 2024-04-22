@@ -1,0 +1,21 @@
+
+table {
+    width: 60%;
+    
+}
+th, td {
+    text-align: left;
+    padding: 10px;
+    
+}
+
+.guest-name {
+    width: 30%; 
+}
+
+.arrival, .departure {
+    width: 15%
+} 
+
+
+

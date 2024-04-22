@@ -2,30 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReservationModel;
 use App\Models\RoomModel;
-use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class RoomController extends Controller
 {
     public function show()
     {
-        $rooms = $this->getAllRoomOrderByRoomNumber();
-        return view('RoomOverview', compact('rooms'));
+        $rooms = $this->getAllRoomsOrderByRoomNumber();
+        $availability = $this->checkAvailability($rooms);
+
+        return view('RoomOverview', compact(['rooms', 'availability']));
     }
 
-    // public function getAllRooms(): Collection
-    // {
-    //     return RoomModel::all();
-    // }
-
-    public function getAllRoomsOrderedById(): Collection
+    public function getAllRoomsOrderByRoomNumber(): Collection
     {
-        return Room::orderBy('id', 'asc')->get();
+        return RoomModel::orderBy('number', 'asc')->get();
     }
 
-    public function getAllRoomOrderByRoomNumber(): Collection
+    public function getAllReservationsWithRoomID($roomId): Collection
     {
-        return Room::orderBy('number', 'asc')->get();
+        return ReservationModel::where('room_id', $roomId)->get();
+    }
+
+    public function checkAvailability($roomCollection)
+    {
+        $availabilityCollection = collect();
+        foreach ($roomCollection as $room) {
+            $availability = $this->checkAvailabilityByRoomByID($room->id);
+            if ($availability != null) {
+                $availabilityCollection->push($availability);
+            }
+            else{
+                $availabilityCollection->push("available");
+            }
+        }
+        return $availabilityCollection;
+    }
+
+    public function checkAvailabilityByRoomByID($roomId)
+    {
+        $reservations = $this->getAllReservationsWithRoomID($roomId);
+
+        foreach ($reservations as $reservation) {
+            return $this->isDateBetweenArrivalDeparture(Carbon::parse($reservation->arrival)->format("m-d-Y"), Carbon::parse($reservation->departure)->format("m-d-Y"), Carbon::now()->format("m-d-Y"));
+        }
+    }
+
+    public function isDateBetweenArrivalDeparture($arrival, $departure, $date): string
+    {
+        if ($arrival <= $date && $departure >= $date) {
+            return "occupied";
+        } else {
+            return "available";
+        }
     }
 }

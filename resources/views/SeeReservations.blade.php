@@ -1,57 +1,41 @@
+@vite(['resources/css/SeeReservations.css'])
+
 <x-MasterLayout>
 
     <title>Alle Reserveringen</title>
-    <style>
-        table {
-            width: 100%;
-            
-        }
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-        
-        .guest-name {
-            width: 30%; 
-        }
 
-        .arrival, .departure {
-            width: 20%
-        }
-
-        .date {
-            margin-left: 20px;
-        }
-        
-    </style>
 </head>
 <body>
-    
+
 @foreach ($roomsWithReservations as $room)
         @if (!$room->reservations->isEmpty()) 
             <p>Kamer: {{ $room->number }} - Type: {{ $room->type ?? 'Niet gespecificeerd' }}</p>
             <table>
-                <thead>
-                    <tr>
-                         <th class="guest-name">Gast Naam</th>
-                         <th class="arrival"></th>
-                        
-                    </tr>
-                </thead>
+                
                 <tbody>
                     @foreach ($room->reservations as $reservation)
+                        @foreach ($reservation->guests as $guest)
+                    
                         <tr>
-
-                            <td> arrival: <span class="date">{{ $reservation->arrival }} </span></td> 
-                            <td> departure: <span class="date">{{ $reservation->departure }} </span></td> 
+                            
+                            <td class="guest-name" > {{ $guest->getFirstName () }}  {{ $guest->getLastName() }} </td> 
+                            <td class="arrival">{{ $reservation->arrival }} </td> 
+                            <td class="departure">{{ $reservation->departure }} </td> 
                             
                         </tr>
+                    @endforeach
                     @endforeach
                 </tbody>
             </table>
         @endif
     @endforeach
+ 
+
+
+    
+
+    
 </body>
 </html>
 
-</x-MasterLayout>
+</x-MasterLayout> 

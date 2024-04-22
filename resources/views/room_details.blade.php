@@ -1,32 +1,9 @@
+@vite(['resources/css/roomDetails.css'])
+
 <x-MasterLayout>
+
     <title>Kamer Info</title>
-    <style>
-        .container {
-            display: flex;
-            padding-top: 20px;
-            
-        }
-        .info-group {
-            display: flex;
-            flex-direction: column;
-            margin-left: 20px;
-        }
-        .info-group.right {
-            align-items: left; 
-            margin-left: 100px;
-            
-        }
 
-        .info-item {
-            display: flex;
-            align-items: center; 
-        }
-
-        .info-label {
-            width: 200px; 
-        }
-        
-    </style>
 </head>
 <body>
 <div class="container">
