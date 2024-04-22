@@ -19,7 +19,7 @@
                     <p class="fixedWidth15">{{ $room->view }}</p>
                     <p class="fixedWidth15">{{ $room->capacity }}</p>
                     <p class="fixedWidth20">{{ $room->bed_description }}</p>
-                    <p class="fixedWidth15">{{ $room->price_per_night }}</p>
+                    <p class="fixedWidth15">&euro; {{ $room->price_per_night }} p/n</p>
                 </a>
             </div>
         @endforeach
