@@ -31,7 +31,7 @@ class AddGuestController extends Controller
         $guest->save();
         $this->reservation->save();
         $guest->reservationTask()->attach($this->reservation);
-
+        return redirect("SeeReservations")->send();
         // dd(ReservationTask::whereBelongsTo($room)->get());
     }
 

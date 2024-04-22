@@ -21,6 +21,7 @@ class ReservationTaskFactory extends Factory
         $children = fake()->numberBetween(0, $capacity - $adults);
         $arrivalDate = fake()->dateTimeInInterval('-4 weeks', '+6 months');
         $departureDate = fake()->dateTimeInInterval($arrivalDate, '+3 weeks');
+        $roomID = fake()->numberBetween(1, 25);
 
         /*print($adults);
         print($children);
@@ -32,6 +33,7 @@ class ReservationTaskFactory extends Factory
             'children' => fake()->numberBetween(0, $children),
             'arrival' => $arrivalDate,
             'departure' => $departureDate,
+            'room_id' => $roomID,
         ];
     }
 
