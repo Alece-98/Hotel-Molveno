@@ -13,12 +13,13 @@
 
         @foreach ($rooms as $room)
             <div class="listRow {{$availability[$loop->index]}}">
-                <p class="fixedWidth15">{{$room->number}}</p>
-                <p class="fixedWidth15">{{$room->type}}</p>
-                <p class="fixedWidth15">{{$room->view}}</p>
-                <p class="fixedWidth15">{{$room->capacity}}</p>
-                <p class="fixedWidth20">{{$room->bed_description}}</p>
-                <p class="fixedWidth15">&euro; {{$room->price_per_night}} p/n</p>
+                <a href="/rooms/{{$room->id}}" class="listRow">
+                    <p class="fixedWidth">{{ $room->number }}</p>
+                    <p class="fixedWidth">{{ $room->type }}</p>
+                    <p class="fixedWidth">{{ $room->view }}</p>
+                    <p class="fixedWidth">{{ $room->capacity }}</p>
+                    <p class="fixedWidth">{{ $room->bed_description }}</p>
+                </a>
             </div>
         @endforeach
     </div>
