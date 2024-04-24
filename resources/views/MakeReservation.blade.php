@@ -53,6 +53,15 @@
                 </div>
             </div>
 
+            <div class="gap20 flex widthFull">
+                <div class="column withFull">
+                    <label class="width100" for="breakfast">
+                        <p>Breakfast: </p>
+                    </label>
+                    <input name="breakfast" id="breakfast" type="checkbox" value="1" @if(old('breakfast') == 1) checked @endif>
+                </div>
+            </div>
+
             <div class="gap20 flex widthFull normalHeight">
                 <div class="column withHalf checkBox">
                     <label class="width100" for="babybed">

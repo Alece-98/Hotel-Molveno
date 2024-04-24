@@ -129,11 +129,11 @@ class ReservationTask extends Task
     public function addGuest(Guest $guest): void{
     }
 
-    public function getHasBreakfast(): bool{
+    public function hasBreakfast(): bool{
         return $this->attributes['has_breakfast'];
     }
 
-    public function setHasBreakfast(bool $hasBreakfast): bool{
+    public function setHasBreakfast(bool $hasBreakfast){
         $this->attributes['has_breakfast'] = $hasBreakfast;
     }
 

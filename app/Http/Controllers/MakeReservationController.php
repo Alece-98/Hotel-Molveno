@@ -47,6 +47,7 @@ class MakeReservationController extends Controller
             'roomview' => [new Enum(RoomView::class)],
             'handicap' => 'boolean',
             'babybed' => 'boolean',
+            'breakfast' => 'boolean', 
         ], [
             'adults.required' => 'The amount of adults must be specified!',
             'adults.integer' => 'The amount of adults must be a number!',
@@ -77,6 +78,7 @@ class MakeReservationController extends Controller
         $reservation->setRoomView(RoomView::tryFrom(request('roomview')));
         $reservation->setHandicap($request->has('handicap'));
         $reservation->setHasBabyBed($request->has('babybed'));
+        $reservation->setHasBreakfast($request->has('breakfast'));
         //Deze zijn tijdelijk
         $reservation->save();
 
