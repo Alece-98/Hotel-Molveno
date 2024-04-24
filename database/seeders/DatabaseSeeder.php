@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Guest_Reservations;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Rooms;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [RoomsSeeder::class,
-            ReservationsSeeder::class]
+            ReservationsSeeder::class,
+            GuestSeeder::class,
+            Guest_ReservationsSeeder::class]
         );
         \App\Models\User::factory(3)->create();
 
