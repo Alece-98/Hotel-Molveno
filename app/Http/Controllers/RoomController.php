@@ -45,9 +45,26 @@ class RoomController extends Controller
     public function checkAvailabilityByRoomByID($roomId)
     {
         $reservations = $this->getAllReservationsWithRoomID($roomId);
+        $availabilityArr = array();
 
         foreach ($reservations as $reservation) {
-            return $this->isDateBetweenArrivalDeparture(Carbon::parse($reservation->arrival)->format("m-d-Y"), Carbon::parse($reservation->departure)->format("m-d-Y"), Carbon::now()->format("m-d-Y"));
+
+            if ($this->isDateBetweenArrivalDeparture(Carbon::parse($reservation->arrival)->format("m-d-Y"), Carbon::parse($reservation->departure)->format("m-d-Y"), Carbon::now()->format("m-d-Y")) == "occupied") {
+                array_push($availabilityArr, "occupied");
+            }
+            else
+            {
+                array_push($availabilityArr, "available");
+            }
+        }
+
+        if (in_array("occupied", $availabilityArr)) 
+        {
+            return "occupied";
+        }
+        else
+        {
+            return "available";
         }
     }
 
