@@ -27,6 +27,17 @@ class AddGuestController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request, [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email:rfc,dns',
+            'streetname' => 'required|string|max:63',
+            'housenumber' => 'required|string|max:7',
+            'city' => 'required|string|max:63',
+            'zipcode' => 'required|string|max:7',
+            'country' => 'required|string|max:63',
+        ]);
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
         $guest->save();
         $this->reservation->save();

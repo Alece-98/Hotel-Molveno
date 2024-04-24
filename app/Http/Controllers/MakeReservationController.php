@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use App\Models\ReservationTask;
 use App\Models\Guest;
@@ -67,8 +69,8 @@ class MakeReservationController extends Controller
         //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
-        $reservation->setArrival(request('arrival'));
-        $reservation->setDeparture(request('departure'));
+        $reservation->setArrival(Carbon::parse(request('arrival')));
+        $reservation->setDeparture(Carbon::parse(request('departure')));
         $reservation->setComment(request('comment'));
         //Deze zijn alleen voor het invullen, en worden niet opgeslagen!
         $reservation->setRoomType(RoomType::tryFrom(request('roomtype')));
@@ -80,8 +82,8 @@ class MakeReservationController extends Controller
 
         $rooms = $this->findAppropriateRooms(
             $reservation->getAmountOfPeople(),
-            new DateTime(),
-            new DateTime(),
+            $reservation->getArrival(),
+            $reservation->getDeparture(),
             $reservation->getRoomType(),
             $reservation->getRoomView(),
             $reservation->hasBabyBed(),
@@ -100,7 +102,7 @@ class MakeReservationController extends Controller
        
     }
 
-    private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
+    private function findAppropriateRooms(int $capacity, Carbon $arrivalDate, Carbon $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
         $rooms = Room::where([
             ['capacity', '>=', $capacity],
             ['type', $roomType],
@@ -111,23 +113,39 @@ class MakeReservationController extends Controller
             $query->where('handicap_accessible', true);
         })->get();
 
-        return $rooms;
+        $appropriateRooms = $rooms->reject(function ($room) use ($arrivalDate, $departureDate){
+            return !($this->isRoomAvailableWithinDates($room->getRoomID(), $arrivalDate, $departureDate));
+        });
+
+        return $appropriateRooms;
         
     }
 
-    private function isRoomAvailableInPeriod(Room $room, DateTime $arrivalDate, DateTime $departureDate): bool{
-        $reservations = Reservation::where([
-            ['room_id', $room->getRoomID()],
-        ])->get();
-        foreach ($reservations as $reservation){
-            if (
-                $departureDate > $reservation->getArrival() || //Vertrek van A is later dan de aankomst van B - kamer is bezet
-                $arrivalDate < $reservation->getDeparture() || //Aankomst van A is eerder dan vertrek van B - kamer is bezet
-                $arrivalDate <= $reservation->getArrival() && $departureDate >= $reservation->getDeparture() //Reservering van A valt geheel in reservation van B
-            ){
+    public function getAllReservationsWithRoomID($roomID){
+        return ReservationTask::where('room_id', $roomID)->get();
+    }
+    
+    public function isRoomAvailableWithinDates($roomId, $arrival, $departure){
+        $reservations = $this->getAllReservationsWithRoomID($roomId);
+        $arrival = Carbon::parse($arrival);
+        $departure = Carbon::parse($departure);
+
+        foreach ($reservations as $reservation) {
+           if ($this->doDatesOverlap($arrival, $departure, $reservation->getArrival(), $reservation->getDeparture())){
                 return false;
-            }
+           }
         }
         return true;
+    }
+
+    private function doDatesOverlap($reservationArrival, $reservationDeparture, $checkedDateArrival, $checkedDateDeparture): bool{
+        if ($reservationArrival->lessThanOrEqualTo($checkedDateDeparture) && $reservationArrival->greaterThanOrEqualTo($checkedDateArrival) ||
+        $reservationDeparture->lessThanOrEqualTo($checkedDateDeparture) && $reservationDeparture->greaterThanOrEqualTo($checkedDateArrival) ||
+        $reservationArrival->lessThanOrEqualTo($checkedDateArrival) && $reservationDeparture->greaterThanOrEqualTo($checkedDateDeparture)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

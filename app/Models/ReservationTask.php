@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations;
@@ -136,19 +137,19 @@ class ReservationTask extends Task
         $this->attributes['has_breakfast'] = $hasBreakfast;
     }
 
-    public function getArrival(): string{
-        return $this->attributes['arrival'];
+    public function getArrival(): Carbon{
+        return Carbon::parse($this->attributes['arrival']);
     }
 
-    public function setArrival(string $arrival){
+    public function setArrival(Carbon $arrival){
         $this->attributes['arrival'] = $arrival;
     }
 
-    public function getDeparture(): string{
-        return $this->attributes['departure'];
+    public function getDeparture(): Carbon{
+        return Carbon::parse($this->attributes['departure']);
     }
 
-    public function setDeparture(string $departure){
+    public function setDeparture(Carbon $departure){
         $this->attributes['departure'] = $departure;
     }
 
@@ -161,9 +162,15 @@ class ReservationTask extends Task
     }
 
     public function calculateNights(): int{
-        return (int)date_diff(
+        /*return (int)date_diff(
             DateTime::createFromFormat('Y-m-d', $this->attributes['departure']),
             DateTime::createFromFormat('Y-m-d', $this->attributes['arrival']))->format('%d');
+        */
+
+        $arrival = Carbon::parse($this->attributes['arrival']);
+        $departure = Carbon::parse($this->attributes['departure']);
+        return $arrival->diffInDays($departure);
+
     }
 
     public function calculateDays(): int{
