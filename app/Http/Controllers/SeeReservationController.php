@@ -10,7 +10,7 @@ class SeeReservationController extends Controller
 {
     public function showAllReservations()
     {
-        $roomsWithReservations = Room::with('reservations')->get();
+        $roomsWithReservations = Room::with('reservations')-> orderby('number')->get();
         
         return view('SeeReservations', compact('roomsWithReservations'));
     }
