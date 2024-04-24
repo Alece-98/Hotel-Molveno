@@ -21,12 +21,14 @@ class AddGuestController extends Controller
             return $next($request);
         });
     }
+
     public function show(){
         session()->put('reservation', $this->reservation);
         return view('addGuest', [$reservation = $this->reservation]);
     }
 
     public function store(Request $request){
+        $reservation = session('reservation');
         $this->validate($request, [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -40,7 +42,7 @@ class AddGuestController extends Controller
         ]);
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
         $guest->save();
-        $this->reservation->save();
+        $reservation->save();
         $guest->reservationTask()->attach($this->reservation);
         return redirect("SeeReservations")->send();
         // dd(ReservationTask::whereBelongsTo($room)->get());

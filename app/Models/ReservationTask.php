@@ -142,7 +142,7 @@ class ReservationTask extends Task
     }
 
     public function setArrival(Carbon $arrival){
-        $this->attributes['arrival'] = $arrival;
+        $this->attributes['arrival'] = $arrival->toDateString();
     }
 
     public function getDeparture(): Carbon{
@@ -150,7 +150,7 @@ class ReservationTask extends Task
     }
 
     public function setDeparture(Carbon $departure){
-        $this->attributes['departure'] = $departure;
+        $this->attributes['departure'] = $departure->toDateString();
     }
 
     public function getComment(): ?string{
