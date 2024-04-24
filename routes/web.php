@@ -24,8 +24,10 @@ use App\Http\Controllers\RoomInfoController;
 
 
 
-Route::get('/', [SeeReservationController::class, 'showAllReservations']);
-Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
+
+
+
+
 
 
 
@@ -70,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/', [SeeReservationController::class, 'showAllReservations']);
+Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReservations']);
 });
 
 require __DIR__.'/auth.php';
@@ -86,4 +91,6 @@ Route::get('/calculate-reservation-cost', [ReservationController::class, 'calcul
 Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
 
 Route::delete('/verwijderReservering/{id}', [VerwijderReserveringController::class, 'destroy'])->name('VerwijderReservering.destroy');
+
+Route::post('/CheckIn/{id}', [CheckInController::class, 'checkIn'])->name('CheckIn.post');
 

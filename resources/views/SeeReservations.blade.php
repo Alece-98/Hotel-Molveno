@@ -25,8 +25,19 @@
                             <form action="{{ route('VerwijderReservering.destroy', $reservation->id) }}" method="POST">
                                 @csrf    
                                 @method('DELETE')
-                                <button  type="submit">Verwijder {{ $reservation->id }}</button></td> 
+                                <button class="reservationButtons" type="submit">Verwijder {{ $reservation->id }}</button>
                             </form>
+                            </td> 
+                            <td class="departure"> 
+                            <form action="{{ route('CheckIn.post', $reservation->id) }}" method="POST">
+                                @csrf    
+                                @method('POST')
+                                <button class="reservationButtons" type="submit">Check in {{ $reservation->id }}</button>
+                            </form>
+                            </td> 
+                            <td class="departure">{{ $reservation->comment }} </td> 
+
+
                         </tr>
                     @endforeach
                     @endforeach
