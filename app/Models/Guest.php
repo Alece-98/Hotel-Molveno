@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Guest extends Model implements IPerson
 {
+    use HasFactory;
     //Table name for database
     protected $table = 'guests';
     private int $amountOfPeople = 0;
