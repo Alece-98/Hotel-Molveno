@@ -47,6 +47,11 @@ class RoomController extends Controller
         $reservations = $this->getAllReservationsWithRoomID($roomId);
         $availabilityArr = array();
 
+        // soms zijn er meerdere reserveringen met hetzelfde room id
+        // met die reden heb ik een foreach gebruikt zodat het programma
+        // langs elke reservering gaat en vervolgens in een tijdelijke array in zet of die
+        // desbetreffende reservering op dit momment bezet is
+
         foreach ($reservations as $reservation) {
 
             if ($this->isDateBetweenArrivalDeparture(Carbon::parse($reservation->arrival)->format("m-d-Y"), Carbon::parse($reservation->departure)->format("m-d-Y"), Carbon::now()->format("m-d-Y")) == "occupied") {
@@ -57,6 +62,10 @@ class RoomController extends Controller
                 array_push($availabilityArr, "available");
             }
         }
+
+        // als er een reservering is die wel bezet is,
+        // wordt er vervolgens gekeken of dat occupied bestaat in de array en is de kamer bezet
+        // als er geen occupied in de array staat, is de kamer beschikbaar
 
         if (in_array("occupied", $availabilityArr)) 
         {
