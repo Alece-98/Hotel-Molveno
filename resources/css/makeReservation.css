@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+.keepLeft {
+    justify-content: start !important;
+}
+
 .column {
     display: flex;
     justify-content: space-between !important;
