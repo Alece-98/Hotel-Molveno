@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="gap20 flex widthFull">
+            <div class="gap20 flex widthFull keepLeft normalHeight">
                 <div class="column withFull">
                     <label class="width100" for="breakfast">
                         <p>Breakfast: </p>
