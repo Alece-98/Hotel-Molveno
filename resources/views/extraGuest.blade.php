@@ -1,6 +1,6 @@
 @vite(['resources/css/makeReservation.css'])
 <x-MasterLayout>
-    {{-- <form class="flex reservationContainer" method="POST" action="{{ route('extraGuest.store') }}" >
+    {{-- <form class="flex reservationContainer" method="POST" action="{{ route('extraGuest.store') }}" > --}}
         @csrf
         @if(session()->has('success'))
     <p>
@@ -15,79 +15,87 @@
         @endforeach
     </ul>
 @endif
-        <div class="column width45 flex flexVertical gap20">
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestFirstName">
-                    <p>First Name:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestFirstName" name="extraGuestFirstName" type="text" placeholder="John">
-            </div>
+<form class="flex reservationContainer" method="POST">
+    @csrf
+    <div class="column width45 flex flexVertical gap20">
+        <div class="flex widthFull">
+            <label class="width150" for="firstname">
+                <p>First Name:</p>
+            </label>
+            <input class="flexGrow" name="firstname" id="firstname" type="text" placeholder="John">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestLastName">
-                    <p>Last Name:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestLastName" name="extraGuestLastName" type="text" placeholder="Doe">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="lastname">
+                <p>Last Name:</p>
+            </label>
+            <input class="flexGrow" name="lastname" id="lastname" type="text" placeholder="Doe">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestPhone">
-                    <p>Phone Number:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestPhone" name="extraGuestPhone" type="number" placeholder="0612345678" maxlength="10">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="phone">
+                <p>Phone Number:</p>
+            </label>
+            <input class="flexGrow" name="phone" id="phone" type="number" placeholder="0612345678" maxlength="10">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestEmail">
-                    <p>E-Mail:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestEmail" name="extraGuestEmail" type="text" placeholder="example@hotmail.com">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="email">
+                <p>E-Mail:</p>
+            </label>
+            <input class="flexGrow" name="email" id="email" type="text" placeholder="example@hotmail.com">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestAdress>">
-                    <p>Adress:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestAdress" name="extraGuestAdress" type="text" placeholder="Via Bettega">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="streetname">
+                <p>Adres:</p>
+            </label>
+            <input class="flexGrow" name="streetname" id="streetname" type="text" placeholder="Via Bettega">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestHouseNumber">
-                    <p>House Number:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestHouseNumber" name="extraGuestHouseNumber" type="number" placeholder="12">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="housenumber">
+                <p>House Number:</p>
+            </label>
+            <input class="flexGrow" name="housenumber" id="housenumber" type="number" placeholder="12">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestCity">
-                    <p>City:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestCity" name="extraGuestCity" type="text" placeholder="Molveno">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="city">
+                <p>City:</p>
+            </label>
+            <input class="flexGrow" name="city" id="city" type="text" placeholder="Molveno">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestZipcode">
-                    <p>Zip Code:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestZipcode" name="extraGuestZipcode" type="text" placeholder="38018">
-            </div>
+        <div class="flex widthFull">
+            <label class="width150" for="zipcode">
+                <p>Zip Code:</p>
+            </label>
+            <input class="flexGrow" name="zipcode" id="zipcode" type="text" placeholder="38018">
+        </div>
 
-            <div class="flex widthFull">
-                <label class="width150" for="extraGuestCountry">
-                    <p>Country:</p>
-                </label>
-                <input class="flexGrow" id="extraGuestCountry" name="extraGuestCountry" type="text" placeholder="Italy">
-            </div>
-
-            <div class="flexGrow"></div>
+        <div class="flex widthFull">
+            <label class="width150" for="country">
+                <p>Country:</p>
+            </label>
+            <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
 
         <div class="flex widthFull spaceBetween">
             <button type="submit" value="submit">Add Guest</button>
         </div>
-    </form> --}}
-
-
+        <div >
+            <a href="{{"/extraGuest/"}}" >
+                <button type="submit" class="submit">Add Extra Guest</button></a>
+                </div>
+        {{-- <div class="
+        {{ $hidden }}"
+        >
+        <a href="{{"/extraGuest/"}}" >
+        <button type="button" class="label label-default pull-xs-right">Add Extra Guest</button></a>
+        </div> --}}
+    </div>
+    </form>
 </x-MasterLayout>
 
 

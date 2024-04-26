@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Guest;
 use App\Models\Room;
 use App\Models\ReservationTask;
 use Illuminate\Database\Eloquent\Relations;
+
 
 class AddGuestController extends Controller
 {
@@ -28,6 +30,10 @@ class AddGuestController extends Controller
             return "hidden";
         }
     }
+
+
+
+
 
     public function show(){
         $hidden=$this->hiddenButton();

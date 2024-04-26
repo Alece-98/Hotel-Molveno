@@ -95,11 +95,7 @@ class MakeReservationController extends Controller
         session()->put('reservation', $reservation);
         session()->put('rooms', $rooms);
 
-            if($reservation->getAdults() > 1) {
-                // dd($reservation->getAdults());
 
-
-            }
 
 
 

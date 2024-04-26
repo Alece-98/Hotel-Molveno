@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeeReservationController;
 use App\Http\Controllers\RoomInfoController;
+use App\Http\Controllers\AddGuestController;
 
 
 /*
@@ -43,7 +44,7 @@ Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGue
 
 Route::post('/extraGuest', [extraGuestController::class, 'store'])->name('extraGuest.store');
 
-Route::get('/addGuest', [AddGuestController::class, 'show'])->name('AddGuest');
+Route::get('/addGuest',[AddGuestController::class, 'show',])->name('AddGuest');
 
 Route::post('/addGuest', [AddGuestController::class, 'store']);
 
@@ -89,4 +90,5 @@ Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReserva
 
 
 Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
+
 

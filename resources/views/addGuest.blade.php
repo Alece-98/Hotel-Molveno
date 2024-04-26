@@ -1,5 +1,6 @@
 @vite(['resources/css/makeReservation.css'])
 <x-MasterLayout>
+
 <form class="flex reservationContainer" method="POST">
     @csrf
     <div class="column width45 flex flexVertical gap20">
@@ -66,25 +67,11 @@
             <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
         <button type="submit">Gast toevoegen</button>
-{{--
-
-        @switch($i)
-        SELECT Adults
-        @case(1)
-        CASE reservations.adults
-            WHEN Quantity > 1 THEN 'ShowButton()'
-            ELSE "AddGuest"
-        FROM reservations
-       @break
-       @endswitch --}}
-
 
 
         <div class=" {{ $hidden }}">
-
-        <a href="{{"/extraGuest/"}}" >
-            <button type="button" class="label label-default pull-xs-right">Add Extra Guest</button
-            ></a>
+            <a href="{{"/extraGuest/"}}" >
+            <button type="button" class="label label-default pull-xs-right">Add Extra Guest</button></a>
         </div>
     </div>
 </form>
