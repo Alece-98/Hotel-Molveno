@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+.keepLeft {
+    justify-content: start !important;
+}
+
 .column {
     display: flex;
     justify-content: space-between !important;
@@ -85,6 +89,21 @@
     padding: 8px 12px;
 }
 
+.blocked
+{
+    background-color: #df7d51;
+}
+
+.available
+{
+    background-color: #77a368;
+}
+
+.occupied
+{
+    background-color: #d8d0c5;
+}
+
 
 /* hide arrows from numerical inputs /
 / https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp /
@@ -98,7 +117,3 @@ input::-webkit-inner-spin-button {
 
 
 / Firefox */
-
-input[type=number] {
-  -moz-appearance: textfield;
-}

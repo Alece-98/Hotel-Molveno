@@ -3,29 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Traits\PageButtonNavigationHandler;
 
 class SelectReservationRoomController extends Controller
 {
-
-    private $rooms;
-    private $reservation;
+    use PageButtonNavigationHandler;
 
     public function __construct(){
         $this->middleware(function ($request, $next) {
-            $this->rooms = session('rooms');
-            $this->reservation = session('reservation');
             return $next($request);
         });
     }
 
-    public function show(){
-        return view('selectReservationRoom', ['rooms' => $this->rooms, 'reservation' => $this->reservation]);
+    public function show(Request $request){
+        return view('selectReservationRoom', ['rooms' => session('rooms'), 'reservation' => session('reservation')]);
     }
 
     public function store(Request $request){
         $room = $request->input('room');
-        $this->reservation->setRoomID((int)$room);
-        session()->put('reservation', $this->reservation);
-        return redirect()->route('AddGuest');
+        $reservation = session('reservation');
+        $reservation->setRoomID((int)$room);
+        session()->put('reservation', $reservation);
+        session()->put('inputData', $request->all());
+        return redirect()->route('AddGuest')->send(); //This ->send() is needed, unsure why
+    }
+
+    public function goBack(){
+        $data = session()->pull('inputData');
+        return redirect()->route('MakeReservation')->withInput($data)->send();
     }
 }

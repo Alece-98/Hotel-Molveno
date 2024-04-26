@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\ReservationTask;
+use App\Models\Guest;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ReservationsSeeder extends Seeder
+class GuestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        ReservationTask::factory()->times(50)->create();
+        Guest::factory()->times(50)->create();
     }
 }

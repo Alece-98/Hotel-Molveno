@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use App\Models\ReservationTask;
 use App\Models\Guest;
@@ -17,8 +19,18 @@ use DateTime;
 
 class MakeReservationController extends Controller
 {
+    private $reservation;
+
+    public function construct(){
+        $this->middleware(function ($request, $next) {
+            $this->reservation = session('reservation');
+            return $next($request);
+        });
+    }
+    
     public function show(){
-        return view('MakeReservation', );
+        //dd($this->reservation);
+        return view('MakeReservation', [$reservation = $this->reservation]);
     }
 
     public function store(Request $request){
@@ -35,6 +47,7 @@ class MakeReservationController extends Controller
             'roomview' => [new Enum(RoomView::class)],
             'handicap' => 'boolean',
             'babybed' => 'boolean',
+            'breakfast' => 'boolean', 
         ], [
             'adults.required' => 'The amount of adults must be specified!',
             'adults.integer' => 'The amount of adults must be a number!',
@@ -54,38 +67,25 @@ class MakeReservationController extends Controller
             'handicap.boolean' => 'The handicap accessible value must be a boolean!',
             'babybed.boolean' => 'The babybed option must be a boolean!',
         ]);
-
         //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
-        $reservation->setArrival(request('arrival'));
-        $reservation->setDeparture(request('departure'));
+        $reservation->setArrival(Carbon::parse(request('arrival')));
+        $reservation->setDeparture(Carbon::parse(request('departure')));
         $reservation->setComment(request('comment'));
         //Deze zijn alleen voor het invullen, en worden niet opgeslagen!
         $reservation->setRoomType(RoomType::tryFrom(request('roomtype')));
         $reservation->setRoomView(RoomView::tryFrom(request('roomview')));
         $reservation->setHandicap($request->has('handicap'));
         $reservation->setHasBabyBed($request->has('babybed'));
+        $reservation->setHasBreakfast($request->has('breakfast'));
         //Deze zijn tijdelijk
         $reservation->save();
 
-
-        /**
-         * Stap 1: Verwijder uit de tabel `reservations` alles van room (room_type, room_view, baby_bed, handicap)
-         * Stap 2: Om een room te selecteren, die voldoet aan de criteria:
-         *              1: Haal alle rooms op die voldoen aan Adults, Children, type, view, bed/handicap
-         *              2: Als de lijst leeg is (geen rooms voldoen hieraan), dan geef een error terug aan de gebruiker (melding geen room beschikbaar)
-         *              2: Lijst niet leeg is: Van de rooms die je dan terugkrijgt (voldoen aan 1), kijk of deze (via reservations tabel) beschikbaar zijn (controleer de opgegeven tijd in formulier, met wat er in de database al staat!)
-         *              3: Geen tijd beschikbaar: error
-         *              3: Wel tijd beschikbaar: kies de eerste room die aan alles voldoet, en haal het room_id op.
-         *              3.1: OF!!! Geef een lijst terug aan de frontend, en laat de gebruiker er een selecteren.
-         *              4: Save vervolgens alle informatie (persoonlijke gegevens + room_id + datum + comments )      
-         */
-
         $rooms = $this->findAppropriateRooms(
             $reservation->getAmountOfPeople(),
-            new DateTime(),
-            new DateTime(),
+            $reservation->getArrival(),
+            $reservation->getDeparture(),
             $reservation->getRoomType(),
             $reservation->getRoomView(),
             $reservation->hasBabyBed(),
@@ -94,18 +94,17 @@ class MakeReservationController extends Controller
 
         session()->put('reservation', $reservation);
         session()->put('rooms', $rooms);
+        session()->put('inputData', $request->all());
 
-        return redirect()->route('SelectReservationRoom');
+        return redirect()->route('SelectReservationRoom')->send();
     }
-
-
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
        
     }
 
-    private function findAppropriateRooms(int $capacity, DateTime $arrivalDate, DateTime $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
+    private function findAppropriateRooms(int $capacity, Carbon $arrivalDate, Carbon $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
         $rooms = Room::where([
             ['capacity', '>=', $capacity],
             ['type', $roomType],
@@ -116,23 +115,39 @@ class MakeReservationController extends Controller
             $query->where('handicap_accessible', true);
         })->get();
 
-        return $rooms;
+        $appropriateRooms = $rooms->reject(function ($room) use ($arrivalDate, $departureDate){
+            return !($this->isRoomAvailableWithinDates($room->getRoomID(), $arrivalDate, $departureDate));
+        });
+
+        return $appropriateRooms;
         
     }
 
-    private function isRoomAvailableInPeriod(Room $room, DateTime $arrivalDate, DateTime $departureDate): bool{
-        $reservations = Reservation::where([
-            ['room_id', $room->getRoomID()],
-        ])->get();
-        foreach ($reservations as $reservation){
-            if (
-                $departureDate > $reservation->getArrival() || //Vertrek van A is later dan de aankomst van B - kamer is bezet
-                $arrivalDate < $reservation->getDeparture() || //Aankomst van A is eerder dan vertrek van B - kamer is bezet
-                $arrivalDate <= $reservation->getArrival() && $departureDate >= $reservation->getDeparture() //Reservering van A valt geheel in reservation van B
-            ){
+    public function getAllReservationsWithRoomID($roomID){
+        return ReservationTask::where('room_id', $roomID)->get();
+    }
+    
+    public function isRoomAvailableWithinDates($roomId, $arrival, $departure){
+        $reservations = $this->getAllReservationsWithRoomID($roomId);
+        $arrival = Carbon::parse($arrival);
+        $departure = Carbon::parse($departure);
+
+        foreach ($reservations as $reservation) {
+           if ($this->doDatesOverlap($arrival, $departure, $reservation->getArrival(), $reservation->getDeparture())){
                 return false;
-            }
+           }
         }
         return true;
+    }
+
+    private function doDatesOverlap($reservationArrival, $reservationDeparture, $checkedDateArrival, $checkedDateDeparture): bool{
+        if ($reservationArrival->lessThanOrEqualTo($checkedDateDeparture) && $reservationArrival->greaterThanOrEqualTo($checkedDateArrival) ||
+        $reservationDeparture->lessThanOrEqualTo($checkedDateDeparture) && $reservationDeparture->greaterThanOrEqualTo($checkedDateArrival) ||
+        $reservationArrival->lessThanOrEqualTo($checkedDateArrival) && $reservationDeparture->greaterThanOrEqualTo($checkedDateDeparture)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
