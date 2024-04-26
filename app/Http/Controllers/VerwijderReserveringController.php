@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\ReservationModel;
+
+use App\Models\ReservationTask;
 class VerwijderReserveringController extends Controller
 {
-    
-
-    public function destroy ($id)
+    public function old($id)
     {
-        $reservationToDestroy = ReservationModel::find($id);
-        $reservationToDestroy->delete();
+        $reservation = ReservationTask::find($id);
+        $reservation->old = 'old';
+        $reservation->save();
 
-
+        return redirect()->back();
     }
 }
 

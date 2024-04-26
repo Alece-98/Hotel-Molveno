@@ -10,10 +10,10 @@ class CheckInController extends Controller
     {
         $reservation = ReservationTask::find($id);
         
-        if ($reservation->comment === 'Checked in') { 
-            $reservation->comment = null;
+        if ($reservation->check_in === 'Checked in') { 
+            $reservation->check_in = null;
         } else {
-            $reservation->comment = 'Checked in';
+            $reservation->check_in = 'Checked in';
         }
 
         $reservation->save();

@@ -7,6 +7,7 @@
 </head>
 <body>
 
+
 @foreach ($roomsWithReservations as $room)
         @if (!$room->reservations->isEmpty()) 
             <p>Kamer: {{ $room->number }} - Type: {{ $room->type ?? 'Niet gespecificeerd' }}</p>
@@ -22,9 +23,9 @@
                             <td class="arrival">{{ $reservation->arrival }} </td> 
                             <td class="departure">{{ $reservation->departure }} </td> 
                             <td class="departure"> 
-                            <form action="{{ route('VerwijderReservering.destroy', $reservation->id) }}" method="POST">
+                            <form action="{{ route('VerwijderReservering.post', $reservation->id) }}" method="POST">
                                 @csrf    
-                                @method('DELETE')
+                                @method('POST')
                                 <button class="reservationButtons" type="submit">Verwijder {{ $reservation->id }}</button>
                             </form>
                             </td> 
@@ -35,7 +36,7 @@
                                 <button class="reservationButtons" type="submit">Check in {{ $reservation->id }}</button>
                             </form>
                             </td> 
-                            <td class="departure">{{ $reservation->comment }} </td> 
+                            <td class="departure">{{ $reservation->check_in }} </td> 
 
 
                         </tr>

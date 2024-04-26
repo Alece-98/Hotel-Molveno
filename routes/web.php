@@ -90,7 +90,7 @@ Route::get('/calculate-reservation-cost', [ReservationController::class, 'calcul
 
 Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
 
-Route::delete('/verwijderReservering/{id}', [VerwijderReserveringController::class, 'destroy'])->name('VerwijderReservering.destroy');
+Route::post('/verwijderReservering/{id}', [VerwijderReserveringController::class, 'old'])->name('VerwijderReservering.post');
 
 Route::post('/CheckIn/{id}', [CheckInController::class, 'checkIn'])->name('CheckIn.post');
 
