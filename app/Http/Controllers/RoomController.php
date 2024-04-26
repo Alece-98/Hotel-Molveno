@@ -45,9 +45,58 @@ class RoomController extends Controller
     public function checkAvailabilityByRoomByID($roomId)
     {
         $reservations = $this->getAllReservationsWithRoomID($roomId);
+        $availabilityArr = array();
+
+        // soms zijn er meerdere reserveringen met hetzelfde room id
+        // met die reden heb ik een foreach gebruikt zodat het programma
+        // langs elke reservering gaat en vervolgens in een tijdelijke array in zet of die
+        // desbetreffende reservering op dit momment bezet is
 
         foreach ($reservations as $reservation) {
-            return $this->isDateBetweenArrivalDeparture(Carbon::parse($reservation->arrival)->format("m-d-Y"), Carbon::parse($reservation->departure)->format("m-d-Y"), Carbon::now()->format("m-d-Y"));
+
+            if ($this->isDateBetweenArrivalDeparture(Carbon::parse($reservation->arrival)->format("m-d-Y"), Carbon::parse($reservation->departure)->format("m-d-Y"), Carbon::now()->format("m-d-Y")) == "occupied") {
+                array_push($availabilityArr, "occupied");
+            }
+            else
+            {
+                array_push($availabilityArr, "available");
+            }
+        }
+
+        // als er een reservering is die wel bezet is,
+        // wordt er vervolgens gekeken of dat occupied bestaat in de array en is de kamer bezet
+        // als er geen occupied in de array staat, is de kamer beschikbaar
+
+        if (in_array("occupied", $availabilityArr)) 
+        {
+            return "occupied";
+        }
+        else
+        {
+            return "available";
+        }
+    }
+
+    public function isRoomAvailableWithinDates($roomId, $arrival, $departure){
+        $reservations = $this->getAllReservationsWithRoomID($roomId);
+        $arrival = Carbon::parse($arrival);
+        $departure = Carbon::parse($departure);
+
+        foreach ($reservations as $reservation) {
+           if ($this->doDatesOverlap($arrival, $departure, $reservation->getArrival(), $reservation->getDeparture())){
+                return false;
+           }
+        }
+        return true;
+    }
+
+    private function doDatesOverlap($reservationArrival, $reservationDeparture, $checkedDateArrival, $checkedDateDeparture): bool{
+        if ($reservationArrival->lessThanOrEqualTo($checkedDateDeparture) && $reservationArrival->greaterThanOrEqualTo($checkedDateArrival) ||
+        $reservationDeparture->lessThanOrEqualTo($checkedDateDeparture) && $reservationDeparture->greaterThanOrEqualTo($checkedDateArrival)){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 

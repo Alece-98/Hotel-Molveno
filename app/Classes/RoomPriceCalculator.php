@@ -17,12 +17,13 @@
             $children = $reservation->getChildren();
             $adults = $reservation->getAdults();
             $hasBabyBed = $reservation->hasBabyBed();
+            $hasBreakfast = $reservation->hasBreakfast();
 
     
             $totalPrice = 
             (self::calculateRoomPriceMultiplier($roomPrice) +
             self::calculateBabyBedMultiplier($hasBabyBed) +
-            self::calculateBreakfastMultiplier($adults, $children)) *
+            self::calculateBreakfastMultiplier($adults, $children, $hasBreakfast)) *
             $nights; 
            
             return $totalPrice;
@@ -37,8 +38,8 @@
             return (int)$hasBabyBed * self::BABY_BED_PRICE;
         }
     
-        private static function calculateBreakfastMultiplier(int $adults, int $children): int{
-            return $adults * self::ADULT_BREAKFAST_PRICE + $children * self::CHILD_BREAKFAST_PRICE;
+        private static function calculateBreakfastMultiplier(int $adults, int $children, bool $hasBreakfast): int{
+            return (int)$hasBreakfast * $adults * self::ADULT_BREAKFAST_PRICE + $children * self::CHILD_BREAKFAST_PRICE;
         }
 
         public static function formatToEuro(int $cents){

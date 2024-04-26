@@ -9,7 +9,7 @@
         </div>
     @else
     <div class="m-8">
-        <div class="grid grid-cols-6 divide-x h-12 m-4">
+        <div class="grid grid-cols-6 divide-x h-12 m-4 !w-full">
             <div>Room Number</div>
             <div>Room Class</div>
             <div>Room View</div>
@@ -23,7 +23,7 @@
     @csrf
     @foreach ($rooms as $room)
         <button type="submit" class="!w-full h-12 m-4" id="room{{$room->getRoomID()}}" name="room" value="{{$room->getRoomID()}}">
-            <div class="grid grid-cols-6 divide-x h-12 m-4">
+            <div class="grid grid-cols-6 divide-x">
                 <div>{{$room->getRoomNumber()}}</div>
                 <div>{{$room->getRoomType()}}</div>
                 <div>{{$room->getRoomView()}}</div>
