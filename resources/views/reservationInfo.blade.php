@@ -84,7 +84,7 @@
                     <label class="width100" for="adults">
                         <p>Adults:</p>
                     </label>
-                    <input class="smallInput" name="adults" id="adults" type="number" placeholder="2"
+                    <input disabled class="smallInput" name="adults" id="adults" type="number" placeholder="2"
                         value="{{ $guestRoomInfo->adults }}">
                 </div>
 
@@ -92,8 +92,8 @@
                     <label class="width100" for="children">
                         <p>Children: *</p>
                     </label>
-                    <input class="smallInput" name="children" id="children" type="number" placeholder="0"
-                        value="{{ $guestRoomInfo->children }}">
+                    <input disabled class="smallInput" name="children" id="children" type="number"
+                        placeholder="0" value="{{ $guestRoomInfo->children }}">
                 </div>
             </div>
 
@@ -102,7 +102,7 @@
                     <label class="width100" for="roomtype">
                         <p>Room Type:</p>
                     </label>
-                    <select class="smallInput normalizeStyle" name="roomtype" id="roomtype">
+                    <select disabled class="smallInput normalizeStyle" name="roomtype" id="roomtype">
                         @if ($roomInfo->type === 'Economy')
                             <option value="Economy" selected>Economy</option>
                             <option value="Standard">Standard</option>
@@ -123,7 +123,7 @@
                     <label class="width100" for="roomview">
                         <p>View:</p>
                     </label>
-                    <select class="smallInput normalizeStyle" name="roomview" id="roomview">
+                    <select disabled class="smallInput normalizeStyle" name="roomview" id="roomview">
                         @if ($roomInfo->view === 'Standard')
                             <option value="Standard" selected>Standard</option>
                             <option value="Lake">Lake</option>
@@ -146,15 +146,15 @@
                     <label class="width100" for="babybed">
                         <p>Baby Bed:</p>
                     </label>
-                    <input name="babybed" id="babybed" type="checkbox"
-                        {{ $guestRoomInfo->baby_bed === 1 ? 'checked' : null }}>
+                    <input {{ $guestRoomInfo->baby_bed === 0 ? 'disabled' : null }} name="babybed" id="babybed"
+                        type="checkbox" {{ $guestRoomInfo->baby_bed === 1 ? 'checked' : null }}>
                 </div>
 
                 <div class="column withHalf checkBox">
                     <label class="width100" for="handicap">
                         <p>Handicap:</p>
                     </label>
-                    <input name="handicap" id="handicap" type="checkbox"
+                    <input disabled name="handicap" id="handicap" type="checkbox"
                         {{ $guestRoomInfo->handicap === 1 ? 'checked' : null }}>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                         <p>Arrival:</p>
                     </label>
                     <input disabled class="smallInput" name="arrival" id="arrival" type="date"
-                        value="{{$arrivalDate}}">
+                        value="{{ $arrivalDate }}">
                 </div>
 
                 <div class="column withHalf">
@@ -173,7 +173,7 @@
                         <p>Departure:</p>
                     </label>
                     <input disabled class="smallInput" name="departure" id="departure" type="date"
-                        value="{{$departureDate}}">
+                        value="{{ $departureDate }}">
                 </div>
             </div>
 

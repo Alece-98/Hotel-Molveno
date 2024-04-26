@@ -22,12 +22,20 @@ class ReservationInfoController extends Controller
         return view('reservationInfo', compact(['guestRoomInfo', 'roomInfo', 'guestInfo', 'arrivalDate', 'departureDate']));
     }
 
+    public function post($reservationId)
+    {
+        $reservation = $this->getReservationById($reservationId);
+        $guestId = $this->getGuestIdWithReservationId($reservation[0]->id)[0];
+        $guestInfo = $this->getGuestInfoWithId($guestId->guest_id)[0];
+        echo $guestInfo;
+
+
+    }
+
     private function getReservationById($id) : Collection
     {
         return ReservationModel::where('id', $id)->get();
     }
-
-
 
     private function getGuestIdWithReservationId($reservationId)
     {
@@ -38,5 +46,4 @@ class ReservationInfoController extends Controller
     {
         return Guest::where('id', $guestId)->get();
     }
-
 }
