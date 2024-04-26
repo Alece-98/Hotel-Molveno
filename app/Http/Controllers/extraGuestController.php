@@ -7,14 +7,29 @@ use App\Models\extraGuest;
 use Illuminate\Http\Request;
 
 
+
+
+
+
 class extraGuestController extends Controller
 {
 
+    private $reservation;
 
     public function show(){
         return view('extraGuest' );
     }
+    // public function __construct(){
+    //     $this->middleware(function ($request, $next) {
+    //         $this->reservation = session('reservation');
+    //         return $next($request);
+    //     });
+    // }
     public function store(Request $request){
+
+        $this->reservation = session('reservation');
+
+
 
         $request->validate([
             'firstname' => 'required|max:32',
@@ -28,6 +43,7 @@ class extraGuestController extends Controller
             'country' => 'required|max:32'
 
         ]);
+
         $extraGuest = new extraGuest();
         $extraGuest->first_name = $request->input('firstname');
         $extraGuest->last_name = $request->input('lastname');
@@ -43,7 +59,14 @@ class extraGuestController extends Controller
 
 
 
-        return redirect()->back()->with('Guest stored successfully!');
+            // $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
+            $extraGuest->save();
+            $this->reservation->save();
+            $extraGuest->reservationTask()->attach($this->reservation);
+
+            // dd(ReservationTask::whereBelongsTo($room)->get());
+        // return redirect()->back()->with('Guest stored successfully!');
+
     }
 
 

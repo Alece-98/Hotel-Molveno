@@ -42,7 +42,7 @@ Route::get('/MakeReservation', function () {
 // });
 Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGuest.show');
 
-Route::post('/extraGuest', [extraGuestController::class, 'store'])->name('extraGuest.store');
+Route::post('/extraGuest',[extraGuestController::class, 'store'])->name('extraGuest.store');
 
 Route::get('/addGuest',[AddGuestController::class, 'show',])->name('AddGuest');
 
