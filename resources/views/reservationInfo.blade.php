@@ -103,15 +103,15 @@
                         <p>Room Type:</p>
                     </label>
                     <select class="smallInput normalizeStyle" name="roomtype" id="roomtype">
-                        @if ($roomInfo->type == 'Economy')
+                        @if ($roomInfo->type === 'Economy')
                             <option value="Economy" selected>Economy</option>
                             <option value="Standard">Standard</option>
                             <option value="Luxurious">Luxurious</option>
-                        @elseif ($roomInfo->type == 'Standard')
+                        @elseif ($roomInfo->type === 'Standard')
                             <option value="Economy">Economy</option>
                             <option value="Standard" selected>Standard</option>
                             <option value="Luxurious">Luxurious</option>
-                        @else
+                        @elseif ($roomInfo->type === 'Luxurious')
                             <option value="Economy">Economy</option>
                             <option value="Standard">Standard</option>
                             <option value="Luxurious" selected>Luxurious</option>
@@ -124,15 +124,15 @@
                         <p>View:</p>
                     </label>
                     <select class="smallInput normalizeStyle" name="roomview" id="roomview">
-                        @if ($roomInfo->type == 'Standard')
+                        @if ($roomInfo->view === 'Standard')
                             <option value="Standard" selected>Standard</option>
                             <option value="Lake">Lake</option>
                             <option value="Mountain">Mountain</option>
-                        @elseif ($roomInfo->type == 'Lake')
+                        @elseif ($roomInfo->view === 'Lake')
                             <option value="Standard">Standard</option>
                             <option value="Lake" selected>Lake</option>
                             <option value="Mountain">Mountain</option>
-                        @else
+                        @elseif ($roomInfo->view === 'Mountain')
                             <option value="Standard">Standard</option>
                             <option value="Lake">Lake</option>
                             <option value="Mountain" selected>Mountain</option>
@@ -147,7 +147,7 @@
                         <p>Baby Bed:</p>
                     </label>
                     <input name="babybed" id="babybed" type="checkbox"
-                        {{ $guestRoomInfo->babybed === 1 ? 'checked' : '' }}>
+                        {{ $guestRoomInfo->baby_bed === 1 ? 'checked' : null }}>
                 </div>
 
                 <div class="column withHalf checkBox">
@@ -155,7 +155,7 @@
                         <p>Handicap:</p>
                     </label>
                     <input name="handicap" id="handicap" type="checkbox"
-                        {{ $guestRoomInfo->handicap === 1 ? 'checked' : '' }}>
+                        {{ $guestRoomInfo->handicap === 1 ? 'checked' : null }}>
                 </div>
             </div>
 
@@ -180,7 +180,7 @@
             <div class="flex widthFull comment">
                 <label class="width100 paddin8" for="comments">Comments:</label>
                 <textarea class="flexGrow textArea" name="comments" id="comments" cols="30" rows="10"
-                    placeholder="Enter comment here." value="{{ $guestRoomInfo->comment }}"></textarea>
+                    placeholder="Enter comment here.">{{ $guestRoomInfo->comment }}</textarea>
             </div>
 
             <div class="gap20 flex widthFull">
