@@ -18,13 +18,12 @@
                             @foreach ($room->reservations as $reservation)
                                 @foreach ($reservation->guests as $guest)
                                     <tr>
-
-                                        <td>{{ $room->number }}</td>
-                                        <td class="guest-name"> {{ $guest->getFirstName() }} {{ $guest->getLastName() }}
+                                        <td> <a href="SingleReservation/{{$reservation->id}}">{{ $room->number }}</a></td>
+                                        <td class="guest-name"><a href="SingleReservation/{{$reservation->id}}"> {{ $guest->getFirstName() }}
+                                                {{ $guest->getLastName() }}</a>
                                         </td>
-                                        <td class="arrival">{{ $reservation->arrival }} </td>
-                                        <td class="departure">{{ $reservation->departure }} </td>
-
+                                        <td class="arrival"> <a href="SingleReservation/{{$reservation->id}}">{{ $reservation->arrival }} </a></td>
+                                        <td class="departure"> <a href="SingleReservation/{{$reservation->id}}">{{ $reservation->departure }} </a></td>
                                     </tr>
                                 @endforeach
                             @endforeach

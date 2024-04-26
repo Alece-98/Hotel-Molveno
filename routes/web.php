@@ -85,3 +85,4 @@ Route::get('/SeeReservations', [SeeReservationController::class, 'showAllReserva
 
 Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
 
+Route::get('/SingleReservation/{id}', [ReservationInfoController::class, 'show']);
