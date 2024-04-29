@@ -80,4 +80,15 @@ class AddGuestController extends Controller
         return redirect()->route('SelectReservation')->withInput($data)->send();
     }
 
+
+
+private function hiddenButton() {
+    if($this->reservation->getAdults() > 1 && $this->reservation->getAdults() < 5) {
+        return "notHidden";
+    }
+    else
+    {
+        return "hidden";
+    }
+}
 }

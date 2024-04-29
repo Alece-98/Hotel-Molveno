@@ -7,35 +7,52 @@
 </head>
 <body>
 
-@foreach ($roomsWithReservations as $room)
+ @foreach ($roomsWithReservations as $room)
         @if (!$room->reservations->isEmpty()) 
             <p>Kamer: {{ $room->number }} - Type: {{ $room->type ?? 'Niet gespecificeerd' }}</p>
             <table>
                 
                 <tbody>
                     @foreach ($room->reservations as $reservation)
-                        @foreach ($reservation->guests as $guest)
-                    
-                        <tr>
-                            
-                            <td class="guest-name" > {{ $guest->getFirstName () }}  {{ $guest->getLastName() }} </td> 
+                    @if (is_null($reservation->old))
+                        <tr>  
+
+                            <td class="guest-name" > 
+                            @foreach ($reservation->guests as $guest)
+                            {{ $guest->getFirstName () }}  {{ $guest->getLastName() }} 
+                            @endforeach
+                            </td> 
                             <td class="arrival">{{ $reservation->arrival }} </td> 
                             <td class="departure">{{ $reservation->departure }} </td> 
-                            
+                            <td class="departure"> 
+                            <form action="{{ route('VerwijderReservering.post', $reservation->id) }}" method="POST">
+                                @csrf    
+                                @method('POST')
+                                <button class="reservationButtons" type="submit">Verwijder {{ $reservation->id }}</button>
+                            </form>
+                            </td> 
+                            <td class="departure"> 
+                            <form action="{{ route('CheckIn.post', $reservation->id) }}" method="POST">
+                                @csrf    
+                                @method('POST')
+                                <button class="reservationButtons" type="submit">Check in {{ $reservation->id }}</button>
+                            </form>
+                            </td> 
+                            <td class="departure">{{ $reservation->check_in }} </td> 
+
+
                         </tr>
+                        @endif
                     @endforeach
-                    @endforeach
+                   
                 </tbody>
             </table>
         @endif
-    @endforeach
- 
-
-
-    
+    @endforeach 
 
     
 </body>
 </html>
 
 </x-MasterLayout> 
+

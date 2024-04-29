@@ -1,6 +1,6 @@
 
 table {
-    width: 60%;
+    width: 85%;
     
 }
 th, td {
@@ -10,12 +10,16 @@ th, td {
 }
 
 .guest-name {
-    width: 30%; 
+    width: 20%; 
 }
 
 .arrival, .departure {
     width: 15%
 } 
+
+.reservationButtons{
+    width: 100px;
+}
 
 
 

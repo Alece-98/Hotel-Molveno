@@ -10,11 +10,13 @@ class SeeReservationController extends Controller
 {
     public function showAllReservations()
     {
-        $roomsWithReservations = Room::with('reservations')->get();
+        $roomsWithReservations = Room::with('reservations')
+        ->whereHas('reservations', function ($query) {
+        $query->whereNull('old');
+        })
+        ->get();
+
         
         return view('SeeReservations', compact('roomsWithReservations'));
     }
 }
-
-
-
