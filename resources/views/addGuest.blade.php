@@ -79,8 +79,13 @@
             <button onclick="window.location.href='/selectReservationRoom'" type="button">Go back</button>
             <button type="submit">Add guest</button>
         </div>
-        
+        <button type="submit">Gast toevoegen</button>
+
+
+        <div class=" {{ $hidden }}">
+            <a href="{{"/extraGuest/"}}" >
+            <button type="button" class="label label-default pull-xs-right">Add Extra Guest</button></a>
+        </div>
     </div>
 </form>
 </x-MasterLayout>
-    

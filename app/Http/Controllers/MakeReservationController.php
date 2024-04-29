@@ -27,7 +27,7 @@ class MakeReservationController extends Controller
             return $next($request);
         });
     }
-    
+
     public function show(){
         //dd($this->reservation);
         return view('MakeReservation', [$reservation = $this->reservation]);
@@ -47,7 +47,7 @@ class MakeReservationController extends Controller
             'roomview' => [new Enum(RoomView::class)],
             'handicap' => 'boolean',
             'babybed' => 'boolean',
-            'breakfast' => 'boolean', 
+            'breakfast' => 'boolean',
         ], [
             'adults.required' => 'The amount of adults must be specified!',
             'adults.integer' => 'The amount of adults must be a number!',
@@ -101,7 +101,7 @@ class MakeReservationController extends Controller
 
     private function convertToDate(string $date){
         return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
-       
+
     }
 
     private function findAppropriateRooms(int $capacity, Carbon $arrivalDate, Carbon $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
@@ -120,13 +120,13 @@ class MakeReservationController extends Controller
         });
 
         return $appropriateRooms;
-        
+
     }
 
     public function getAllReservationsWithRoomID($roomID){
         return ReservationTask::where('room_id', $roomID)->get();
     }
-    
+
     public function isRoomAvailableWithinDates($roomId, $arrival, $departure){
         $reservations = $this->getAllReservationsWithRoomID($roomId);
         $arrival = Carbon::parse($arrival);

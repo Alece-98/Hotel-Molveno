@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Guest;
 use App\Models\Room;
@@ -21,10 +22,10 @@ class AddGuestController extends Controller
             return $next($request);
         });
     }
-
     public function show(){
+        $hidden=$this->hiddenButton();
         session()->put('reservation', $this->reservation);
-        return view('addGuest', [$reservation = $this->reservation]);
+        return view('addGuest', compact(["hidden"])[$reservation = $this->reservation]);
     }
 
     public function store(Request $request){
@@ -60,6 +61,9 @@ class AddGuestController extends Controller
         $guest->setCountry($request->input("country"));
 
         return $guest;
+
+
+
     }
 
     public function goBack(){
