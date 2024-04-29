@@ -23,6 +23,16 @@ return new class extends Migration
             $table->string('city')->default(null);
             $table->string('zipcode')->default(null);
             $table->string('country')->default(null);
+// -----------------------------------------------------
+//             $table->string('extra_first_name');
+//             $table->string('extra_last_name');
+//             $table->string('extra_phone');
+//             $table->string('extra_email');
+//             $table->string('extra_adress');
+//             $table->integer('extra_house_number');
+//             $table->string('extra_city');
+//             $table->string('extra_zipcode');
+//             $table->string('extra_country');
         });
     }
 
