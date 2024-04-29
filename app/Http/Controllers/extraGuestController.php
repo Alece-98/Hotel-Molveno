@@ -56,16 +56,9 @@ class extraGuestController extends Controller
         $extraGuest->country = $request->input('country');
 
         $extraGuest->save();
+        $extraGuest->reservationTask()->attach($this->reservation);
 
-
-
-            // $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
-            $extraGuest->save();
-            $this->reservation->save();
-            $extraGuest->reservationTask()->attach($this->reservation);
-
-            // dd(ReservationTask::whereBelongsTo($room)->get());
-        // return redirect()->back()->with('Guest stored successfully!');
+        return redirect('extraGuest')->send();
 
     }
 

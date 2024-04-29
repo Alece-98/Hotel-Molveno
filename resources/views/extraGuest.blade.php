@@ -85,9 +85,9 @@
             <a href="{{"/addGuest/"}}">
             <button type="button" class="submit"> Back to add guest</button></a></div>
         <div >
-            <a href="{{"/addGuest/"}}" >
+            {{-- <a href="{{"/extraGuest/"}}" >
                 <button type="submit" class="submit">Add Extra Guest</button></a>
-                </div>
+                </div> --}}
 
     </div>
     </form>
