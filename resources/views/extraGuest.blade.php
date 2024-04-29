@@ -81,9 +81,6 @@
             <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
 
-        {{-- <div class="flex widthFull spaceBetween">
-            <button type="submit" value="submit">Add Guest</button>
-        </div> --}}
         <duv>
             <a href="{{"/addGuest/"}}">
             <button type="button" class="submit"> add Guest</button></a></div>
@@ -91,12 +88,7 @@
             <a href="{{"/extraGuest/"}}" >
                 <button type="submit" class="submit">Add Extra Guest</button></a>
                 </div>
-        {{-- <div class="
-        {{ $hidden }}"
-        >
-        <a href="{{"/extraGuest/"}}" >
-        <button type="button" class="label label-default pull-xs-right">Add Extra Guest</button></a>
-        </div> --}}
+                {{-- Fix redirect to extraguest --}}
     </div>
     </form>
 </x-MasterLayout>
