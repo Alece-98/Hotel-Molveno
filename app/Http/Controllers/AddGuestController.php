@@ -25,9 +25,17 @@ class AddGuestController extends Controller
     public function show(){
         $hidden=$this->hiddenButton();
         session()->put('reservation', $this->reservation);
-        return view('addGuest', compact(["hidden"]),[$reservation = $this->reservation]);
+        return view('addGuest', compact(["hidden"]), [$reservation = $this->reservation]);
     }
-    
+    private function hiddenButton() {
+        if($this->reservation->getAdults() > 1 && $this->reservation->getAdults() < 5) {
+            return "notHidden";
+        }
+        else
+        {
+            return "hidden";
+        }
+    }
     public function store(Request $request){
         $reservation = session('reservation');
         $this->validate($request, [

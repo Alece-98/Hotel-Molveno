@@ -83,12 +83,12 @@
 
         <duv>
             <a href="{{"/addGuest/"}}">
-            <button type="button" class="submit"> add Guest</button></a></div>
+            <button type="button" class="submit"> Back to add guest</button></a></div>
         <div >
-            <a href="{{"/extraGuest/"}}" >
+            {{-- <a href="{{"/extraGuest/"}}" >
                 <button type="submit" class="submit">Add Extra Guest</button></a>
-                </div>
-                {{-- Fix redirect to extraguest --}}
+                </div> --}}
+
     </div>
     </form>
 </x-MasterLayout>
