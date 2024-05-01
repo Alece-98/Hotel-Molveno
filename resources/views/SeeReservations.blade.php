@@ -19,8 +19,13 @@
 
                             <td class="guest-name" > 
                             @foreach ($reservation->guests as $guest)
-                            {{ $guest->getFirstName () }}  {{ $guest->getLastName() }} 
+                            @if($loop->index == count($reservation->guests) - 1)
+                            {{ $guest->getFirstName () }}  {{ $guest->getLastName() }}
+                            @else
+                            {{ $guest->getFirstName () }}  {{ $guest->getLastName() }},
+                            @endif
                             @endforeach
+
                             </td> 
                             <td class="arrival">{{ $reservation->arrival }} </td> 
                             <td class="departure">{{ $reservation->departure }} </td> 
@@ -28,14 +33,14 @@
                             <form action="{{ route('VerwijderReservering.post', $reservation->id) }}" method="POST">
                                 @csrf    
                                 @method('POST')
-                                <button class="reservationButtons" type="submit">Verwijder {{ $reservation->id }}</button>
+                                <button class="reservationButtons" type="submit">Verwijder</button>
                             </form>
                             </td> 
                             <td class="departure"> 
                             <form action="{{ route('CheckIn.post', $reservation->id) }}" method="POST">
                                 @csrf    
                                 @method('POST')
-                                <button class="reservationButtons" type="submit">Check in {{ $reservation->id }}</button>
+                                <button class="reservationButtons" type="submit">Check in</button>
                             </form>
                             </td> 
                             <td class="departure">{{ $reservation->check_in }} </td> 
