@@ -27,6 +27,7 @@
                             @endforeach
 
                             </td> 
+                            <td class="arrival">{{ $guest->phone }} </td> 
                             <td class="arrival">{{ $reservation->arrival }} </td> 
                             <td class="departure">{{ $reservation->departure }} </td> 
                             <td class="departure"> 
