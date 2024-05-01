@@ -81,13 +81,12 @@
             <input class="flexGrow" name="country" id="country" type="text" placeholder="Italy">
         </div>
 
-        <duv>
+        <div>
             <a href="{{"/addGuest/"}}">
-            <button type="button" class="submit"> Back to add guest</button></a></div>
-        <div >
-            {{-- <a href="{{"/extraGuest/"}}" >
-                <button type="submit" class="submit">Add Extra Guest</button></a>
-                </div> --}}
+            <button type="button" class="submit"> Back to add guest</button></a>
+            <a href="{{"/extraGuest/"}}" >
+            <button type="submit" class="submit">Add Extra Guest</button></a>
+        </div>
 
     </div>
     </form>
