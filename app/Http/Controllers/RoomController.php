@@ -17,6 +17,11 @@ class RoomController extends Controller
         return view('RoomOverview', compact(['rooms', 'availability']));
     }
 
+    public function getRoomByRoomID($id)
+    {
+        return RoomModel::where('id', $id)->get();
+    }
+
     public function getAllRoomsOrderByRoomNumber(): Collection
     {
         return RoomModel::orderBy('number', 'asc')->get();
