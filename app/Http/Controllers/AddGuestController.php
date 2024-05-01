@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Guest;
 use App\Models\Room;
@@ -22,14 +23,35 @@ class AddGuestController extends Controller
         });
     }
     public function show(){
+        $hidden=$this->hiddenButton();
         session()->put('reservation', $this->reservation);
-        return view('addGuest', [$reservation = $this->reservation]);
+        return view('addGuest', compact(["hidden"]), [$reservation = $this->reservation]);
     }
-
+    private function hiddenButton() {
+        if($this->reservation->getAdults() > 1 && $this->reservation->getAdults() < 5) {
+            return "notHidden";
+        }
+        else
+        {
+            return "hidden";
+        }
+    }
     public function store(Request $request){
+        $reservation = session('reservation');
+        $this->validate($request, [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email:rfc,dns',
+            'streetname' => 'required|string|max:63',
+            'housenumber' => 'required|string|max:7',
+            'city' => 'required|string|max:63',
+            'zipcode' => 'required|string|max:7',
+            'country' => 'required|string|max:63',
+        ]);
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
         $guest->save();
-        $this->reservation->save();
+        $reservation->save();
         $guest->reservationTask()->attach($this->reservation);
         return redirect("SeeReservations")->send();
         // dd(ReservationTask::whereBelongsTo($room)->get());
@@ -47,6 +69,9 @@ class AddGuestController extends Controller
         $guest->setCountry($request->input("country"));
 
         return $guest;
+
+
+
     }
 
     public function goBack(){
@@ -54,5 +79,4 @@ class AddGuestController extends Controller
         $data = session()->put('inputData', $data);
         return redirect()->route('SelectReservation')->withInput($data)->send();
     }
-
 }

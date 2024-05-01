@@ -82,6 +82,29 @@ class RoomController extends Controller
         }
     }
 
+    public function isRoomAvailableWithinDates($roomId, $arrival, $departure){
+        $reservations = $this->getAllReservationsWithRoomID($roomId);
+        $arrival = Carbon::parse($arrival);
+        $departure = Carbon::parse($departure);
+
+        foreach ($reservations as $reservation) {
+           if ($this->doDatesOverlap($arrival, $departure, $reservation->getArrival(), $reservation->getDeparture())){
+                return false;
+           }
+        }
+        return true;
+    }
+
+    private function doDatesOverlap($reservationArrival, $reservationDeparture, $checkedDateArrival, $checkedDateDeparture): bool{
+        if ($reservationArrival->lessThanOrEqualTo($checkedDateDeparture) && $reservationArrival->greaterThanOrEqualTo($checkedDateArrival) ||
+        $reservationDeparture->lessThanOrEqualTo($checkedDateDeparture) && $reservationDeparture->greaterThanOrEqualTo($checkedDateArrival)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function isDateBetweenArrivalDeparture($arrival, $departure, $date): string
     {
         if ($arrival <= $date && $departure >= $date) {

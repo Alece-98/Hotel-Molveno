@@ -52,9 +52,23 @@
     <nav class="sideNav flex flexVertical">
         <h2><a href="/MakeReservation">Make Reservation</a></h2>
 
-        <h2><a href="/SeeReservations">See Reserevations</a></h2>
+        <h2><a href="/SeeReservations">See Reservations</a></h2>
 
         <h2><a href="/RoomOverview">Room Overview</a></h2>
+
+        <form action="{{ route('login') }}" method="GET">
+                                @csrf    
+                                @method('POST')
+                                <button class="loginbutton" type="submit">Login </button>
+                            </form>
+
+        <form action="{{ route('logout') }}" method="GET">
+                                @csrf    
+                                @method('POST')
+                                <button class="logoutbutton" type="submit">Logout </button>
+                            </form>
+
+
     </nav>
 
     <main class="content">

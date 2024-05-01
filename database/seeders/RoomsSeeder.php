@@ -41,6 +41,5 @@ class RoomsSeeder extends Seeder
             (24, NULL, NULL, 107, 1, 'Standard', 'Economy', 0, 1, 125, 4, 'Double Bed'),
             (25, NULL, NULL, 108, 1, 'Standard', 'Economy', 0, 0, 125, 4, 'Double bed');"
         );
-
     }
 }

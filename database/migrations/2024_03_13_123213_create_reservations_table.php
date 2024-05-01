@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('children')->default(0);
             $table->boolean('baby_bed')->default(false);
             $table->boolean('handicap')->default(false);
+            $table->boolean('has_breakfast')->default(false);
             $table->string('arrival')->default("0");
             $table->string('departure')->default("0");
             $table->string('comment')->nullable();
