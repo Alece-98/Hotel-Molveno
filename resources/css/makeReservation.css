@@ -44,7 +44,7 @@
     width: 55%;
 }
 
-.width75{
+.width75 {
     width: 75%;
 }
 
@@ -64,9 +64,13 @@
     gap: 20px;
 }
 
-.textboxinput {
+.smallInput {
     width: 10px;
     flex-grow: 1;
+}
+
+.textboxinput {
+
     background-color: transparent !important;
     border: none;
 }
@@ -80,12 +84,11 @@
     align-items: flex-start !important;
 }
 
-.paddin8
-{
+.paddin8 {
     padding-top: 8px;
 }
-.textArea
-{
+
+.textArea {
     height: 240px;
     resize: none !important;
     padding: 8px 12px;
@@ -93,23 +96,19 @@
     border: none;
 }
 
-.blocked
-{
+.blocked {
     background-color: #df7d51;
 }
 
-.available
-{
+.available {
     background-color: #77a368;
 }
 
-.occupied
-{
+.occupied {
     background-color: #d8d0c5;
 }
 
-.left
-{
+.left {
     justify-content: flex-start !important;
 }
 
@@ -128,9 +127,9 @@ input::-webkit-inner-spin-button {
 / Firefox */
 
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 .hidden {
-    display:none;
+    display: none;
 }
