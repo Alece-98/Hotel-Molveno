@@ -124,7 +124,7 @@
                     <label class="width100" for="arrival">
                         <p>Arrival:</p>
                     </label>
-                    <input disabled class="smallInput" name="arrival" id="arrival" type="date"
+                    <input disabled class="smallInput textboxinput" name="arrival" id="arrival" type="date"
                         value="{{ $arrivalDate }}">
                 </div>
 
@@ -132,7 +132,7 @@
                     <label class="width100" for="departure">
                         <p>Departure:</p>
                     </label>
-                    <input disabled class="smallInput" name="departure" id="departure" type="date"
+                    <input disabled class="smallInput textboxinput" name="departure" id="departure" type="date"
                         value="{{ $departureDate }}">
                 </div>
             </div>
