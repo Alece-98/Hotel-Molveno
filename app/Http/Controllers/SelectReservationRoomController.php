@@ -25,7 +25,7 @@ class SelectReservationRoomController extends Controller
         $reservation->setRoomID((int)$room);
         session()->put('reservation', $reservation);
         session()->put('inputData', $request->all());
-        return redirect()->route('AddGuest')->send(); //This ->send() is needed, unsure why
+        return redirect()->route('AddGuest')->send();
     }
 
     public function goBack(){

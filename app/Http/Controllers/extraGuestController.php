@@ -5,12 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\extraGuest;
 use Illuminate\Http\Request;
-
-
-
-
-
-
 class extraGuestController extends Controller
 {
 
@@ -19,18 +13,10 @@ class extraGuestController extends Controller
     public function show(){
         return view('extraGuest' );
     }
-    // public function __construct(){
-    //     $this->middleware(function ($request, $next) {
-    //         $this->reservation = session('reservation');
-    //         return $next($request);
-    //     });
-    // }
+
     public function store(Request $request){
 
         $this->reservation = session('reservation');
-
-
-
         $request->validate([
             'firstname' => 'required|max:32',
             'lastname'=> 'required|max:32',
@@ -59,10 +45,7 @@ class extraGuestController extends Controller
         $extraGuest->reservationTask()->attach($this->reservation);
 
         return redirect('extraGuest')->send();
-
     }
-
-
 }
 
 

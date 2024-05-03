@@ -68,6 +68,12 @@
                                 <button class="logoutbutton" type="submit">Logout </button>
                             </form>
 
+                            <form action="{{ route('register') }}" method="GET">
+                                @csrf    
+                                @method('POST')
+                                <button class="loginbutton" type="submit">Register staff</button>
+                            </form>
+
 
     </nav>
 

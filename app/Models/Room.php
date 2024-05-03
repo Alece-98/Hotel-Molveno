@@ -22,10 +22,7 @@ class Room extends Model
 
     //Table name for database
     protected $table = 'rooms';
-
-    
     protected $fillable = ['room_id', 'number', 'floor', 'view', 'type', 'handicap_accessible', 'baby_bed', 'price_per_night', 'capacity', 'bed_description', 'id'];
-
 
     // Room number
     public function getRoomID(): int{
@@ -45,10 +42,6 @@ class Room extends Model
     public function setRoomNumber(int $roomNumber): void {
        //$this->roomNumber = $roomNumber;
        $this->attributes['number'] = $roomNumber;
-    }
-
-    public function reservation() : HasMany {
-        $this->hasMany(ReservationTask::class);
     }
 
     public function getBeds(){
@@ -102,32 +95,6 @@ class Room extends Model
 
     public function setHasBabyBed(bool $hasBabyBedOption): void {
         $this->attributes['baby_bed'] = $hasBabyBedOption;
-    }
-
-    // Cleaning tasks
-    public function getCleaningTasks(): array {
-    }
-
-    public function setCleaningTasks(array $cleaningTasks): void {
-    }
-
-    // Maintenance tasks
-    public function getMaintenanceTasks(): array {
-    }
-
-    public function setMaintenanceTasks(array $maintenanceTasks): void {
-    }
-
-    // Booking tasks
-    public function getBookingTasks(): array {
-    }
-
-    public function setBookingTasks(array $bookingTasks): void {
-    }
-
-    // Reservations
-    public function getReservations(): HasMany {
-        return $this->hasMany(ReservationTask::class);
     }
 
     public function reservations()

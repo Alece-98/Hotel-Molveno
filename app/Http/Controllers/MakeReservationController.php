@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use App\Models\ReservationTask;
-use App\Models\Guest;
 use App\Models\Room;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Validation\Validator;
-use DateTime;
 
 class MakeReservationController extends Controller
 {
@@ -29,7 +25,6 @@ class MakeReservationController extends Controller
     }
 
     public function show(){
-        //dd($this->reservation);
         return view('MakeReservation', [$reservation = $this->reservation]);
     }
 
@@ -97,11 +92,6 @@ class MakeReservationController extends Controller
         session()->put('inputData', $request->all());
 
         return redirect()->route('SelectReservationRoom')->send();
-    }
-
-    private function convertToDate(string $date){
-        return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
-
     }
 
     private function findAppropriateRooms(int $capacity, Carbon $arrivalDate, Carbon $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{

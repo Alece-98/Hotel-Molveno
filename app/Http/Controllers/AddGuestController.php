@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Guest;
-use App\Models\Room;
-use App\Models\ReservationTask;
-use Illuminate\Database\Eloquent\Relations;
 use App\Traits\PageButtonNavigationHandler;
 
 class AddGuestController extends Controller
@@ -22,11 +19,13 @@ class AddGuestController extends Controller
             return $next($request);
         });
     }
+
     public function show(){
         $hidden=$this->hiddenButton();
         session()->put('reservation', $this->reservation);
         return view('addGuest', compact(["hidden"]), [$reservation = $this->reservation]);
     }
+
     private function hiddenButton() {
         if($this->reservation->getAdults() > 1 && $this->reservation->getAdults() < 5) {
             return "notHidden";
@@ -36,6 +35,7 @@ class AddGuestController extends Controller
             return "hidden";
         }
     }
+
     public function store(Request $request){
         $reservation = session('reservation');
         $this->validate($request, [
@@ -54,7 +54,6 @@ class AddGuestController extends Controller
         $reservation->save();
         $guest->reservationTask()->attach($this->reservation);
         return redirect("SeeReservations")->send();
-        // dd(ReservationTask::whereBelongsTo($room)->get());
     }
 
     private function retrieveFillAndReturnGuest(Guest $guest, Request $request): Guest{
@@ -69,14 +68,9 @@ class AddGuestController extends Controller
         $guest->setCountry($request->input("country"));
 
         return $guest;
-
-
-
     }
 
     public function goBack(){
-        $data = session()->pull('inputData');
-        $data = session()->put('inputData', $data);
-        return redirect()->route('SelectReservation')->withInput($data)->send();
+        return redirect()->route('SelectReservation')->send();
     }
 }

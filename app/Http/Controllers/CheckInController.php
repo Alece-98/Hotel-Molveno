@@ -12,7 +12,8 @@ class CheckInController extends Controller
         
         if ($reservation->check_in === 'Checked in') { 
             $reservation->check_in = null;
-        } else {
+        } 
+        else {
             $reservation->check_in = 'Checked in';
         }
 

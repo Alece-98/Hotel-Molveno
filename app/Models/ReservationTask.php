@@ -83,7 +83,7 @@ class ReservationTask extends Task
     }
 
     public function getDateStart(): DateTime{
-        $this->attributes['arrival'];
+        return $this->attributes['arrival'];
     }
 
     public function setDateStart(DateTime $dateStart): void{
@@ -98,20 +98,6 @@ class ReservationTask extends Task
         $this->attributes['departure'];
     }
 
-    public function getDateInterval(): array{
-    }
-
-    public function setDateInterval($dateStart, $dateEnd): void{
-    }
-
-    public function getCreator(): Employee{
-        return $this->attributes['creator'];
-    }
-
-    public function setCreator(Employee $employee): void{
-        $this->attributes['creator'] = (array)$employee;
-    }
-
     public function getReservingGuest(): Guest{
         return $this->attributes['reserving_guest'];
     }
@@ -120,14 +106,6 @@ class ReservationTask extends Task
         $this->attributes['reserving_guest'] = (array)$guest;
     }
 
-    public function getGuests(): array{
-    }
-
-    public function setGuests(array $guests): bool{
-    }
-
-    public function addGuest(Guest $guest): void{
-    }
 
     public function hasBreakfast(): bool{
         return $this->attributes['has_breakfast'];
@@ -162,19 +140,10 @@ class ReservationTask extends Task
     }
 
     public function calculateNights(): int{
-        /*return (int)date_diff(
-            DateTime::createFromFormat('Y-m-d', $this->attributes['departure']),
-            DateTime::createFromFormat('Y-m-d', $this->attributes['arrival']))->format('%d');
-        */
-
         $arrival = Carbon::parse($this->attributes['arrival']);
         $departure = Carbon::parse($this->attributes['departure']);
         return $arrival->diffInDays($departure);
 
-    }
-
-    public function calculateDays(): int{
-        return calculateNights() + 1;
     }
     
     //Gekoppeld aan room_id in de database
@@ -190,27 +159,7 @@ class ReservationTask extends Task
         return $this->attributes['room_id'];
     }
   
-    public function guest(): BelongsToMany{
-      
-    }
-  
     public function guests(): BelongsToMany{
         return $this->belongsToMany(Guest::class, "guests_reservations");
     }
-    
-
-    /*public function addReservation(ReservationTask $reservation, int $roomid): void{
-        $this->create([
-            'room_id' => $roomid,
-            'adults' => $reservation->getAdults(),
-            'children' => $reservation->getChildren(),
-            'room_type' => $reservation->getRoomType(),
-            'room_view' => $reservation->getRoomView(),
-            'baby_bed' => $reservation->getBabyBed(),
-            'handicap' => $reservation->getHandicap(),
-            'arrival' => $reservation->getArrival(),
-            'departure' => $reservation->getDeparture(),
-            'comment' => $reservation->getComment()
-        ]);
-    }*/
 }
