@@ -83,9 +83,12 @@
 
         <div>
             <a href="{{"/addGuest/"}}">
-            <button type="button" class="submit"> Back to add guest</button></a>
+            <button type="button" class="submit">Go Back</button></a>
+        </div>
+
+        <div class="">
             <a href="{{"/extraGuest/"}}" >
-            <button type="submit" class="submit">Add Extra Guest</button></a>
+            <button type="submit" class="label label-default pull-xs-right">Add extra guest(s)</button></a>
         </div>
 
     </div>
