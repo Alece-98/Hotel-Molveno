@@ -28,8 +28,6 @@ class ReservationInfoController extends Controller
         $guestId = $this->getGuestIdWithReservationId($reservation[0]->id)[0];
         $guestInfo = $this->getGuestInfoWithId($guestId->guest_id)[0];
         echo $guestInfo;
-
-
     }
 
     private function getReservationById($id) : Collection
