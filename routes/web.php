@@ -98,6 +98,6 @@ Route::post('/verwijderReservering/{id}', [VerwijderReserveringController::class
 
 Route::post('/CheckIn/{id}', [CheckInController::class, 'checkIn'])->name('CheckIn.post');
 
-// Route::get('/SingleReservation/{id}', [ReservationInfoController::class, 'show']);
+Route::get('/SingleReservation/{id}', [ReservationInfoController::class, 'show']);
 // Route::post('/SingleReservation/{id}', [ReservationInfoController::class, 'post']);
 

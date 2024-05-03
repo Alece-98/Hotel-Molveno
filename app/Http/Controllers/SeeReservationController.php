@@ -15,7 +15,6 @@ class SeeReservationController extends Controller
         $query->whereNull('old');
         })
         ->get();
-
         
         return view('SeeReservations', compact('roomsWithReservations'));
     }

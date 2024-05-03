@@ -67,6 +67,8 @@
 .smallInput {
     width: 10px;
     flex-grow: 1;
+    background-color: transparent !important;
+    border: none;
 }
 
 .spaceBetween {
@@ -87,6 +89,8 @@
     height: 240px;
     resize: none !important;
     padding: 8px 12px;
+    background-color: transparent !important;
+    border: none;
 }
 
 .blocked
@@ -102,6 +106,11 @@
 .occupied
 {
     background-color: #d8d0c5;
+}
+
+.left
+{
+    justify-content: flex-start !important;
 }
 
 
