@@ -124,7 +124,7 @@
                     <label class="width100" for="arrival">
                         <p>Arrival:</p>
                     </label>
-                    <input disabled class="smallInput textboxinput" name="arrival" id="arrival" type="date"
+                    <input disabled class="smallInput invisibleTextArea" name="arrival" id="arrival" type="date"
                         value="{{ $arrivalDate }}">
                 </div>
 
@@ -132,7 +132,7 @@
                     <label class="width100" for="departure">
                         <p>Departure:</p>
                     </label>
-                    <input disabled class="smallInput textboxinput" name="departure" id="departure" type="date"
+                    <input disabled class="smallInput invisibleTextArea" name="departure" id="departure" type="date"
                         value="{{ $departureDate }}">
                 </div>
             </div>
@@ -140,7 +140,7 @@
             @if ($guestRoomInfo->comment != null)
                 <div class="flex widthFull comment">
                     <label class="width100 paddin8" for="comments">Comments:</label>
-                    <textarea class="flexGrow textArea" name="comments" id="comments" cols="30" rows="10" placeholder=""
+                    <textarea class="flexGrow textArea invisibleTextArea" name="comments" id="comments" cols="30" rows="10" placeholder=""
                         disabled>{{ $guestRoomInfo->comment }}</textarea>
                 </div>
             @endif
