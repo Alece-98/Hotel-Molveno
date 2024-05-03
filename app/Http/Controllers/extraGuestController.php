@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\extraGuest;
+use App\Models\ExtraGuest;
 use Illuminate\Http\Request;
-class extraGuestController extends Controller
+class ExtraGuestController extends Controller
 {
 
     private $reservation;
@@ -30,7 +30,7 @@ class extraGuestController extends Controller
 
         ]);
 
-        $extraGuest = new extraGuest();
+        $extraGuest = new ExtraGuest();
         $extraGuest->first_name = $request->input('firstname');
         $extraGuest->last_name = $request->input('lastname');
         $extraGuest->phone = $request->input('phone');

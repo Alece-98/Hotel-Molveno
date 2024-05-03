@@ -1,0 +1,110 @@
+[1mdiff --git a/app/Http/Controllers/RoomController.php b/app/Http/Controllers/RoomController.php[m
+[1mindex 150c84d8..f49ab8c6 100644[m
+[1m--- a/app/Http/Controllers/RoomController.php[m
+[1m+++ b/app/Http/Controllers/RoomController.php[m
+[36m@@ -2,8 +2,8 @@[m
+ [m
+ namespace App\Http\Controllers;[m
+ [m
+[31m-use App\Models\ReservationModel;[m
+[31m-use App\Models\RoomModel;[m
+[32m+[m[32muse App\Models\ReservationTask;[m
+[32m+[m[32muse App\Models\Room;[m
+ use Carbon\Carbon;[m
+ use Illuminate\Database\Eloquent\Collection;[m
+ [m
+[36m@@ -19,17 +19,17 @@[m [mpublic function show()[m
+ [m
+     public function getRoomByRoomID($id)[m
+     {[m
+[31m-        return RoomModel::where('id', $id)->get();[m
+[32m+[m[32m        return Room::where('id', $id)->get();[m
+     }[m
+ [m
+     public function getAllRoomsOrderByRoomNumber(): Collection[m
+     {[m
+[31m-        return RoomModel::orderBy('number', 'asc')->get();[m
+[32m+[m[32m        return Room::orderBy('number', 'asc')->get();[m
+     }[m
+ [m
+     public function getAllReservationsWithRoomID($roomId): Collection[m
+     {[m
+[31m-        return ReservationModel::where('room_id', $roomId)->get();[m
+[32m+[m[32m        return ReservationTask::where('room_id', $roomId)->get();[m
+     }[m
+ [m
+     public function checkAvailability($roomCollection)[m
+[1mdiff --git a/app/Http/Controllers/extraGuestController.php b/app/Http/Controllers/extraGuestController.php[m
+[1mindex 28d0deef..da16e20e 100644[m
+[1m--- a/app/Http/Controllers/extraGuestController.php[m
+[1m+++ b/app/Http/Controllers/extraGuestController.php[m
+[36m@@ -3,9 +3,9 @@[m
+ namespace App\Http\Controllers;[m
+ [m
+ use App\Http\Controllers\Controller;[m
+[31m-use App\Models\extraGuest;[m
+[32m+[m[32muse App\Models\ExtraGuest;[m
+ use Illuminate\Http\Request;[m
+[31m-class extraGuestController extends Controller[m
+[32m+[m[32mclass ExtraGuestController extends Controller[m
+ {[m
+ [m
+     private $reservation;[m
+[36m@@ -30,7 +30,7 @@[m [mpublic function store(Request $request){[m
+ [m
+         ]);[m
+ [m
+[31m-        $extraGuest = new extraGuest();[m
+[32m+[m[32m        $extraGuest = new ExtraGuest();[m
+         $extraGuest->first_name = $request->input('firstname');[m
+         $extraGuest->last_name = $request->input('lastname');[m
+         $extraGuest->phone = $request->input('phone');[m
+[1mdiff --git a/app/Models/ReservationModel.php b/app/Models/ReservationModel.php[m
+[1mdeleted file mode 100644[m
+[1mindex c2f7afa6..00000000[m
+[1m--- a/app/Models/ReservationModel.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,12 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Models;[m
+[31m-[m
+[31m-use Illuminate\Database\Eloquent\Factories\HasFactory;[m
+[31m-use Illuminate\Database\Eloquent\Model;[m
+[31m-[m
+[31m-class ReservationModel extends Model[m
+[31m-{[m
+[31m-    use HasFactory;[m
+[31m-    protected $table = 'reservations';[m
+[31m-}[m
+[1mdiff --git a/app/Models/RoomModel.php b/app/Models/RoomModel.php[m
+[1mdeleted file mode 100644[m
+[1mindex 104fd417..00000000[m
+[1m--- a/app/Models/RoomModel.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,12 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Models;[m
+[31m-[m
+[31m-use Illuminate\Database\Eloquent\Factories\HasFactory;[m
+[31m-use Illuminate\Database\Eloquent\Model;[m
+[31m-[m
+[31m-class RoomModel extends Model[m
+[31m-{[m
+[31m-    use HasFactory;[m
+[31m-    protected $table = 'rooms';[m
+[31m-}[m
+[1mdiff --git a/app/Models/extraGuest.php b/app/Models/extraGuest.php[m
+[1mindex 5daa2210..cdd35296 100644[m
+[1m--- a/app/Models/extraGuest.php[m
+[1m+++ b/app/Models/extraGuest.php[m
+[36m@@ -8,7 +8,7 @@[m
+ use Illuminate\Database\Eloquent\Relations\BelongsToMany;[m
+ [m
+ [m
+[31m-class extraGuest extends Model[m
+[32m+[m[32mclass ExtraGuest extends Model[m
+ {[m
+     // use HasFactory;[m
+ [m

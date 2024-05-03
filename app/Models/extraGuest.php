@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
-class extraGuest extends Model
+class ExtraGuest extends Model
 {
     // use HasFactory;
 
