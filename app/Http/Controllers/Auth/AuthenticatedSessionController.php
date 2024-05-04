@@ -38,8 +38,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::logout();
-
-        return redirect('/');
+        return redirect('/MakeReservation');
     }
 }
 

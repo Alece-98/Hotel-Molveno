@@ -88,11 +88,8 @@ Route::get('/reservation', function () {
     return view('reservation_form');
 });
 
-// Route voor het verwerken van de reserveringsaanvraag
-Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
 
-
-Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
+Route::get('/room/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
 
 Route::post('/verwijderReservering/{id}', [VerwijderReserveringController::class, 'old'])->name('VerwijderReservering.post');
 

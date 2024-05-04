@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ReservationTask>
  */
-class ReservationTaskFactory extends Factory
+class ReservationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,11 +22,6 @@ class ReservationTaskFactory extends Factory
         $arrivalDate = fake()->dateTimeInInterval('-4 weeks', '+6 months');
         $departureDate = fake()->dateTimeInInterval($arrivalDate, '+3 weeks');
         $roomID = fake()->numberBetween(1, 25);
-
-        /*print($adults);
-        print($children);
-        print($arrivalDate->format('Y-m-d'));
-        print($departureDate->format('Y-m-d'));*/
 
         return [
             'adults' => fake()->numberBetween(1, $adults),

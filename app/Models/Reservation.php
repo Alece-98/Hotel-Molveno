@@ -5,8 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Enums\RoomType;
@@ -14,7 +12,7 @@ use App\Enums\RoomView;
 use DateTime;
 
 
-class ReservationTask extends Task
+class Reservation extends Model
 {
     use HasFactory;
 

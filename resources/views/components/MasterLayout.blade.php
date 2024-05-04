@@ -55,25 +55,29 @@
         <h2><a href="/SeeReservations">See Reservations</a></h2>
 
         <h2><a href="/RoomOverview">Room Overview</a></h2>
-
+        
+        @if (is_null(Auth::user()))
         <form action="{{ route('login') }}" method="GET">
                                 @csrf    
                                 @method('POST')
                                 <button class="loginbutton" type="submit">Login </button>
                             </form>
-
+        @endif
+        @if (!is_null(Auth::user()))
         <form action="{{ route('logout') }}" method="GET">
                                 @csrf    
                                 @method('POST')
                                 <button class="logoutbutton" type="submit">Logout </button>
                             </form>
+        @endif
+        @if (!is_null(Auth::user()))
 
                             <form action="{{ route('register') }}" method="GET">
                                 @csrf    
                                 @method('POST')
                                 <button class="loginbutton" type="submit">Register staff</button>
                             </form>
-
+        @endif
 
     </nav>
 

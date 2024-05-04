@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ReservationTask;
+use App\Models\Reservation;
 use App\Models\Room;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
@@ -29,7 +29,7 @@ class MakeReservationController extends Controller
     }
 
     public function store(Request $request){
-        $reservation = new ReservationTask();
+        $reservation = new Reservation();
         $room = new Room();
 
         $this->validate($request, [
@@ -114,7 +114,7 @@ class MakeReservationController extends Controller
     }
 
     public function getAllReservationsWithRoomID($roomID){
-        return ReservationTask::where('room_id', $roomID)->get();
+        return Reservation::where('room_id', $roomID)->get();
     }
 
     public function isRoomAvailableWithinDates($roomId, $arrival, $departure){

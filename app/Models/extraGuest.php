@@ -67,9 +67,7 @@ class ExtraGuest extends Model
     public function setExtraGuestCountry(string $extraGuestCountry): string {
         return $this->attributes['country'] = $extraGuestCountry;
     }
-
-    public function reservationTask(): BelongsToMany {
-        return $this->belongsToMany(ReservationTask::class, "guests_reservations", "guest_id");
-
+    public function reservation(): BelongsToMany {
+        return $this->belongsToMany(Reservation::class, "guests_reservations", "guest_id");
     }
 }

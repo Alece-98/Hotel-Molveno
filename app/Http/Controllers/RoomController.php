@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReservationTask;
+use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,7 +29,7 @@ class RoomController extends Controller
 
     public function getAllReservationsWithRoomID($roomId): Collection
     {
-        return ReservationTask::where('room_id', $roomId)->get();
+        return Reservation::where('room_id', $roomId)->get();
     }
 
     public function checkAvailability($roomCollection)

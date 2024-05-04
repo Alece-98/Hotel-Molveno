@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReservationTask;
+use App\Models\Reservation;
 class VerwijderReserveringController extends Controller
 {
     public function old($id)
     {
-        $reservation = ReservationTask::find($id);
+        $reservation = Reservation::find($id);
         if ($reservation->old === 'old') { 
             $reservation->old = null;
         } else {

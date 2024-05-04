@@ -52,7 +52,7 @@ class AddGuestController extends Controller
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
         $guest->save();
         $reservation->save();
-        $guest->reservationTask()->attach($this->reservation);
+        $guest->reservation()->attach($this->reservation);
         return redirect("SeeReservations")->send();
     }
 

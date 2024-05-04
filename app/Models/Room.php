@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use App\Classes\RoomPriceCalculator;
-use App\Models\ReservationTask;
+use App\Models\Reservation;
 use App\Traits\DatabaseStringNormalization;
 use Illuminate\Database\Eloquent\Relations;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -99,7 +99,7 @@ class Room extends Model
 
     public function reservations()
     {
-        return $this->hasMany(ReservationTask::class);
+        return $this->hasMany(Reservation::class);
     }
 
     // Price
@@ -119,7 +119,7 @@ class Room extends Model
         $this->attributes['capacity'] = $capacity;
     }
 
-    public function calculateTotalPrice(ReservationTask $reservation){
+    public function calculateTotalPrice(Reservation $reservation){
         $totalPrice = RoomPriceCalculator::calculateReservationCostInCents($reservation, $this);
         $reportedValue = RoomPriceCalculator::formatToEuro($totalPrice);
         return $reportedValue;
