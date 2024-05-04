@@ -13,7 +13,7 @@
 
         @foreach ($rooms as $room)
             <div class="listRow {{$availability[$loop->index]}}">
-                <a href="/rooms/{{$room->id}}" class="listRow">
+                <a href="/Room/{{$room->id}}" class="listRow">
                     <p class="fixedWidth15">{{ $room->number }}</p>
                     <p class="fixedWidth15">{{ $room->type }}</p>
                     <p class="fixedWidth15">{{ $room->view }}</p>
