@@ -8,12 +8,43 @@ use App\Http\Controllers\RoomInfoController;
 use App\Http\Controllers\AddGuestController;
 use Illuminate\Http\Request;
 
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+
+
+
+
+
+
+
+
 Route::get('/RoomOverview', [RoomController::class, 'show']);
 
-Route::get('/SelectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
+Route::get('/selectReservationRoom', [SelectReservationRoomController::class, 'show'])->name('SelectReservationRoom');
 
 Route::get('/MakeReservation', [MakeReservationController::class, 'show']);
 
+// Route::get('/extraGuest', function () {
+//     return view('extraGuest');
+// });
+// Route::post('/extraGuest', function () {
+//     return view('extraGuest');
+// });
 Route::get('/extraGuest', [extraGuestController::class, 'show'])->name('extraGuest.show');
 
 Route::post('/extraGuest',[extraGuestController::class, 'store'])->name('extraGuest.store');
@@ -57,12 +88,16 @@ Route::get('/reservation', function () {
     return view('reservation_form');
 });
 
-Route::get('/Room/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
+// Route voor het verwerken van de reserveringsaanvraag
+Route::get('/calculate-reservation-cost', [ReservationController::class, 'calculateReservationCost']);
+
+
+Route::get('/rooms/{room}', [RoomInfoController::class, 'show'])->name('rooms.show');
 
 Route::post('/verwijderReservering/{id}', [VerwijderReserveringController::class, 'old'])->name('VerwijderReservering.post');
 
 Route::post('/CheckIn/{id}', [CheckInController::class, 'checkIn'])->name('CheckIn.post');
 
-// Route::get('/SingleReservation/{id}', [ReservationInfoController::class, 'show']);
+Route::get('/SingleReservation/{id}', [ReservationInfoController::class, 'show']);
 // Route::post('/SingleReservation/{id}', [ReservationInfoController::class, 'post']);
 
