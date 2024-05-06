@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\PageButtonNavigationHandler;
+use Illuminate\Database\Eloquent\Collection;
 
 class SelectReservationRoomController extends Controller
 {
@@ -16,6 +17,7 @@ class SelectReservationRoomController extends Controller
     }
 
     public function show(Request $request){
+        //dd(session()->get('reservation'));
         return view('selectReservationRoom', ['rooms' => session('rooms'), 'reservation' => session('reservation')]);
     }
 
@@ -23,9 +25,11 @@ class SelectReservationRoomController extends Controller
         $room = $request->input('room');
         $reservation = session('reservation');
         $reservation->setRoomID((int)$room);
+        $guests = new Collection();
         session()->put('reservation', $reservation);
         session()->put('inputData', $request->all());
-        return redirect()->route('AddGuest')->send(); //This ->send() is needed, unsure why
+        session()->put('guests', $guests);
+        return redirect()->route('AddGuest')->send();
     }
 
     public function goBack(){

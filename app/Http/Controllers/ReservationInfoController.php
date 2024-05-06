@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use App\Models\Guest_Reservations;
-use App\Models\ReservationModel;
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -32,12 +32,12 @@ class ReservationInfoController extends Controller
 
     private function getReservationById($id) : Collection
     {
-        return ReservationModel::where('id', $id)->get();
+        return Reservation::where('id', $id)->get();
     }
 
     private function getGuestIdWithReservationId($reservationId)
     {
-        return Guest_Reservations::where('reservation_task_id', $reservationId)->get();
+        return Guest_Reservations::where('reservation_id', $reservationId)->get();
     }
 
     private function getGuestInfoWithId($guestId)

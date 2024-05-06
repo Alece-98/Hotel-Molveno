@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReservationTask;
+use App\Models\Reservation;
 
 class CheckInController extends Controller
 {
     public function checkIn($id)
     {
-        $reservation = ReservationTask::find($id);
+        $reservation = Reservation::find($id);
         
         if ($reservation->check_in === 'Checked in') { 
             $reservation->check_in = null;
-        } else {
+        } 
+        else {
             $reservation->check_in = 'Checked in';
         }
 

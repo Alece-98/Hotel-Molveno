@@ -17,15 +17,15 @@ class GuestFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->word(),
-            'last_name' => $this->faker->word(),
-            'phone' => $this->faker->numberBetween(111111111,9999999999),
+            'country' => $this->faker->country(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
-            'street_name' => $this->faker-> words(2, true),
+            'street_name' => $this->faker->streetName(),
             'house_number' => $this->faker->numberBetween(0,999),
-            'city' => $this->faker->word(),
-            'zipcode' => $this->faker->numberBetween(1111,9999),
-            'country' => $this->faker->word(),
+            'city' => $this->faker->city(),
+            'zipcode' => $this->faker->postcode(),
         ];
     }
 }

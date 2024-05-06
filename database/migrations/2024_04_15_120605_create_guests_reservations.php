@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('guests_reservations', function (Blueprint $table) {
             $table->unsignedBigInteger("guest_id");
-            $table->unsignedBigInteger("reservation_task_id");
+            $table->unsignedBigInteger("reservation_id");
             $table->foreign("guest_id")->references('id')->on('guests');
-            $table->foreign("reservation_task_id")->references('id')->on('reservations');
+            $table->foreign("reservation_id")->references('id')->on('reservations');
         });
     }
 

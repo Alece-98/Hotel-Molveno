@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
-use App\Models\ReservationTask;
-use App\Models\Guest;
+use App\Models\Reservation;
 use App\Models\Room;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Validation\Validator;
-use DateTime;
 
 class MakeReservationController extends Controller
 {
@@ -29,12 +25,11 @@ class MakeReservationController extends Controller
     }
 
     public function show(){
-        //dd($this->reservation);
         return view('MakeReservation', [$reservation = $this->reservation]);
     }
 
     public function store(Request $request){
-        $reservation = new ReservationTask();
+        $reservation = new Reservation();
         $room = new Room();
 
         $this->validate($request, [
@@ -70,6 +65,7 @@ class MakeReservationController extends Controller
         //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
+        $reservation->setPeopleLeftToReserve();
         $reservation->setArrival(Carbon::parse(request('arrival')));
         $reservation->setDeparture(Carbon::parse(request('departure')));
         $reservation->setComment(request('comment'));
@@ -91,17 +87,11 @@ class MakeReservationController extends Controller
             $reservation->hasBabyBed(),
             $reservation->getHandicap()
         );
-
         session()->put('reservation', $reservation);
         session()->put('rooms', $rooms);
         session()->put('inputData', $request->all());
 
         return redirect()->route('SelectReservationRoom')->send();
-    }
-
-    private function convertToDate(string $date){
-        return date_create_from_format('d/M/Y', date('d/M/Y', strtotime($date)));
-
     }
 
     private function findAppropriateRooms(int $capacity, Carbon $arrivalDate, Carbon $departureDate, RoomType $roomType, RoomView $roomView, bool $babyBed, bool $handicapAccessible): Collection{
@@ -124,7 +114,7 @@ class MakeReservationController extends Controller
     }
 
     public function getAllReservationsWithRoomID($roomID){
-        return ReservationTask::where('room_id', $roomID)->get();
+        return Reservation::where('room_id', $roomID)->get();
     }
 
     public function isRoomAvailableWithinDates($roomId, $arrival, $departure){

@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Guest;
-use App\Models\Room;
-use App\Models\ReservationTask;
-use Illuminate\Database\Eloquent\Relations;
 use App\Traits\PageButtonNavigationHandler;
 
 class AddGuestController extends Controller
@@ -22,11 +19,14 @@ class AddGuestController extends Controller
             return $next($request);
         });
     }
+
     public function show(){
         $hidden=$this->hiddenButton();
+        $reservation = $this->reservation;
         session()->put('reservation', $this->reservation);
-        return view('addGuest', compact(["hidden"]), [$reservation = $this->reservation]);
+        return view('addGuest', compact(["hidden", "reservation"]));
     }
+
     private function hiddenButton() {
         if($this->reservation->getAdults() > 1 && $this->reservation->getAdults() < 5) {
             return "notHidden";
@@ -36,8 +36,11 @@ class AddGuestController extends Controller
             return "hidden";
         }
     }
+
     public function store(Request $request){
         $reservation = session('reservation');
+        $guests = session('guests');
+
         $this->validate($request, [
             'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
@@ -49,12 +52,22 @@ class AddGuestController extends Controller
             'zipcode' => 'required|string|max:7',
             'country' => 'required|string|max:63',
         ]);
+
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
-        $guest->save();
-        $reservation->save();
-        $guest->reservationTask()->attach($this->reservation);
-        return redirect("SeeReservations")->send();
-        // dd(ReservationTask::whereBelongsTo($room)->get());
+        $guests->push($guest); //Ignore the IDE error, it does not know that $guests will be a Collection
+        if ($reservation->getPeopleLeftToReserve() <= 1){
+            $reservation->save();
+            foreach($guests as $guest){
+                $guest->save();
+                $guest->reservation()->attach($this->reservation);
+            }
+            return redirect("SeeReservations")->send();
+        }
+        else {
+            $reservation->decrementPeopleToReserve();
+            return redirect()->route('AddGuest')->send();
+        }
+
     }
 
     private function retrieveFillAndReturnGuest(Guest $guest, Request $request): Guest{
@@ -69,14 +82,9 @@ class AddGuestController extends Controller
         $guest->setCountry($request->input("country"));
 
         return $guest;
-
-
-
     }
 
     public function goBack(){
-        $data = session()->pull('inputData');
-        $data = session()->put('inputData', $data);
-        return redirect()->route('SelectReservation')->withInput($data)->send();
+        return redirect()->route('SelectReservation')->send();
     }
 }

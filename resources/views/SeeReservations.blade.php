@@ -1,24 +1,21 @@
 @vite(['resources/css/SeeReservations.css'])
 
 <x-MasterLayout>
-
     <title>Alle Reserveringen</title>
 
-    </head>
-
-    <body>
-
+    <div class="p-10">
         @foreach ($roomsWithReservations as $room)
-            @if (!$room->reservations->isEmpty())
+            @if (!$room->reservations->isEmpty() && $room->reservations->first()->guests->count() > 0)
                 <p>Kamer: {{ $room->number }} - Type: {{ $room->type ?? 'Niet gespecificeerd' }}</p>
-                <table style="width:100%">
+                <table class="w-full">
 
-                    <tbody style="width:100%">
+                    <tbody>
                         @foreach ($room->reservations as $reservation)
                             @if (is_null($reservation->old))
-                                <tr style="width:100%">
+                                <tr class="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr] divide-x gap-0 no-border">
 
-                                    <td class="guest-name">
+                                    <td>
+
                                         @foreach ($reservation->guests as $guest)
                                             @if ($loop->index == count($reservation->guests) - 1)
                                                 <a href="/SingleReservation/{{ $reservation->id }}">{{ $guest->getFirstName() }} {{ $guest->getLastName() }}</a>
@@ -30,14 +27,17 @@
                                     </td>
 
                                     @foreach ($reservation->guests as $guest)
-                                        <td class="arrival"><a href="/SingleReservation/{{ $reservation->id }}">{{ $guest->phone }} </a></td>
+
+                                        <td ><a href="/SingleReservation/{{ $reservation->id }}">{{ $guest->phone }} </a></td>
+
                                     @break
                                 @endforeach
 
 
-                                <td class="arrival"><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->arrival }} </a></td>
-                                <td class="departure"><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->departure }} </a></td>
-                                <td class="departure">
+                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->arrival }} </a></td>
+                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->departure }} </a></td>
+                                <td>
+
                                     <form action="{{ route('VerwijderReservering.post', $reservation->id) }}"
                                         method="POST">
                                         @csrf
@@ -45,14 +45,18 @@
                                         <button class="reservationButtons" type="submit">Verwijder</button>
                                     </form>
                                 </td>
-                                <td class="departure">
+
+                                <td>
+
                                     <form action="{{ route('CheckIn.post', $reservation->id) }}" method="POST">
                                         @csrf
                                         @method('POST')
                                         <button class="reservationButtons" type="submit">Check in</button>
                                     </form>
                                 </td>
-                                <td class="departure">{{ $reservation->check_in }} </td>
+
+                                <td>{{ $reservation->check_in }} </td>
+
 
 
                             </tr>
@@ -64,9 +68,6 @@
         @endif
     @endforeach
 
-
-</body>
-
-</html>
+    </div>
 
 </x-MasterLayout>

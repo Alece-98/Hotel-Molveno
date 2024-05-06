@@ -6,8 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Interfaces\IPerson;
-use Illuminate\Database\Eloquent\Relations;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Guest extends Model implements IPerson
@@ -98,28 +96,8 @@ class Guest extends Model implements IPerson
         $this->people = $people;
     }
 
-    public function reservationTask(): BelongsToMany {
-        return $this->belongsToMany(ReservationTask::class, "guests_reservations");
-    }
-
-    //Deze functie werkt nog niet helemaal naar behoren
-    private function setAttributeAndReplaceIfEmptyString(string $attribute, mixed $variable){
-        $attributeValue = $this->attributes[$attribute];
-        if (empty($attributeValue)){
-            $this->attributes[$attribute] = 'unknown';
-        }
-        else{
-            $this->attributes[$attribute] = $variable;
-        }
-    }
-
-    private function setAttributeAndReplaceIfEmptyInt(string $attribute, mixed $variable){
-        if (empty($attribute)){
-            $this->attributes[$attribute] = '-1';
-        }
-        else{
-            $this->attributes[$attribute] = $variable;
-        }
+    public function reservation(): BelongsToMany {
+        return $this->belongsToMany(Reservation::class, "guests_reservations");
     }
 }
 

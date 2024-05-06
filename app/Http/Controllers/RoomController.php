@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReservationModel;
-use App\Models\RoomModel;
+use App\Models\Reservation;
+use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -19,17 +19,17 @@ class RoomController extends Controller
 
     public function getRoomByRoomID($id)
     {
-        return RoomModel::where('id', $id)->get();
+        return Room::where('id', $id)->get();
     }
 
     public function getAllRoomsOrderByRoomNumber(): Collection
     {
-        return RoomModel::orderBy('number', 'asc')->get();
+        return Room::orderBy('number', 'asc')->get();
     }
 
     public function getAllReservationsWithRoomID($roomId): Collection
     {
-        return ReservationModel::where('room_id', $roomId)->get();
+        return Reservation::where('room_id', $roomId)->get();
     }
 
     public function checkAvailability($roomCollection)

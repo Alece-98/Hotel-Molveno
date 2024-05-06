@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Guest;
-use App\Models\ReservationModel;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +20,7 @@ class Guest_ReservationsFactory extends Factory
     {
         return [
             'guest_id' => Guest::all()->random()->id,
-            'reservation_task_id' => ReservationModel::all()->random()->id
+            'reservation_id' => Reservation::all()->random()->id
         ];
     }
 }

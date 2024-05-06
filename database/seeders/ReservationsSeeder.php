@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ReservationTask;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Reservation;
 
 class ReservationsSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class ReservationsSeeder extends Seeder
      */
     public function run(): void
     {
-        ReservationTask::factory()->times(50)->create();
+        Reservation::factory()->times(10)->create();
     }
 }

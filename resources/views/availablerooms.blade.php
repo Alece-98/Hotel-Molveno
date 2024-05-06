@@ -1,10 +1,4 @@
 <!DOCTYPE HTML>
-
-<head>
-
-</head>
-
-<body>
     <table>
         <tr>
             <th>Room number</th>
@@ -15,4 +9,3 @@
         </tr>
         @endforeach
     </table>
-</body>

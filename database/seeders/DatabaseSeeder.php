@@ -21,8 +21,6 @@ class DatabaseSeeder extends Seeder
             GuestSeeder::class,
             Guest_ReservationsSeeder::class]
         );
-        \App\Models\User::factory(3)->create();
-
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

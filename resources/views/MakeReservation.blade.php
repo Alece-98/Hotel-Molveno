@@ -25,7 +25,8 @@
                     <label class="width100" for="children">
                         <p>Children: *</p>
                     </label>
-                    <input class="smallInput" name="children" id="children" type="number" placeholder="0" value="{{old('children')}}">
+                    <input class="smallInput" name="children" id="children" type="number" placeholder="0" value="0" @if(!is_null(old('children'))) value="{{old('children')}}" @endif>
+
                 </div>
             </div>
 

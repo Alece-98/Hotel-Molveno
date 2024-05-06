@@ -2,14 +2,14 @@
     namespace App\Classes;
 
     use App\Models\Room;
-    use App\Models\ReservationTask;
+    use App\Models\Reservation;
 
     abstract class RoomPriceCalculator{
         const BABY_BED_PRICE = 750;
         const ADULT_BREAKFAST_PRICE = 1450;
         const CHILD_BREAKFAST_PRICE = 1000;
 
-        public static function calculateReservationCostInCents(ReservationTask $reservation, Room $room): string
+        public static function calculateReservationCostInCents(Reservation $reservation, Room $room): string
         {
     
             $roomPrice = $room->getPricePerNight();

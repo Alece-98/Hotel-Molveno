@@ -13,6 +13,6 @@ class GuestSeeder extends Seeder
      */
     public function run(): void
     {
-        Guest::factory()->times(50)->create();
+        Guest::factory()->times(30)->create();
     }
 }
