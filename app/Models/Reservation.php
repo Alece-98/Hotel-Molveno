@@ -10,13 +10,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Enums\RoomType;
 use App\Enums\RoomView;
 use DateTime;
+use Illuminate\Queue\SerializesModels;
 
 
 class Reservation extends Model
 {
     use HasFactory;
+    use SerializesModels;
 
     //Table name for database
+    private int $peopleLeftToReserve;
     private RoomType $roomType;
     private RoomView $roomView;
     private bool $isHandicapAccessible;
@@ -45,6 +48,18 @@ class Reservation extends Model
 
     public function getAmountOfPeople(): int{
         return $this->getAdults() + $this->getChildren();
+    }
+
+    public function getPeopleLeftToReserve(): int{
+        return $this->peopleLeftToReserve;
+    }
+
+    public function setPeopleLeftToReserve(): void{
+        $this->peopleLeftToReserve = $this->getAdults() + $this->getChildren();
+    }
+
+    public function decrementPeopleToReserve(): void{
+        $this->peopleLeftToReserve -= 1;
     }
 
     public function hasBabyBed(): bool{

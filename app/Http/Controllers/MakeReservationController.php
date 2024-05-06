@@ -65,6 +65,7 @@ class MakeReservationController extends Controller
         //Deze worden uiteindelijk wel opgeslagen
         $reservation->setAdults(request('adults'));
         $reservation->setChildren(request('children'));
+        $reservation->setPeopleLeftToReserve();
         $reservation->setArrival(Carbon::parse(request('arrival')));
         $reservation->setDeparture(Carbon::parse(request('departure')));
         $reservation->setComment(request('comment'));
@@ -86,7 +87,6 @@ class MakeReservationController extends Controller
             $reservation->hasBabyBed(),
             $reservation->getHandicap()
         );
-
         session()->put('reservation', $reservation);
         session()->put('rooms', $rooms);
         session()->put('inputData', $request->all());

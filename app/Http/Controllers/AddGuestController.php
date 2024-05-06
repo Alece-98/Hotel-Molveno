@@ -38,6 +38,8 @@ class AddGuestController extends Controller
 
     public function store(Request $request){
         $reservation = session('reservation');
+        $guests = session('guests');
+
         $this->validate($request, [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -49,11 +51,22 @@ class AddGuestController extends Controller
             'zipcode' => 'required|string|max:7',
             'country' => 'required|string|max:63',
         ]);
+
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
-        $guest->save();
-        $reservation->save();
-        $guest->reservation()->attach($this->reservation);
-        return redirect("SeeReservations")->send();
+        $guests->push($guest); //Ignore the IDE error, it does not know that $guests will be a Collection
+        if ($reservation->getPeopleLeftToReserve() == 0){
+            $reservation->save();
+            foreach($guests as $guest){
+                $guest->save();
+                $guest->reservation()->attach($this->reservation);
+            }
+            return redirect("SeeReservations")->send();
+        }
+        else {
+            $reservation->decrementPeopleToReserve();
+            return redirect()->route('AddGuest')->send();
+        }
+
     }
 
     private function retrieveFillAndReturnGuest(Guest $guest, Request $request): Guest{
