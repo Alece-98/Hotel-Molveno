@@ -43,7 +43,7 @@ class AddGuestController extends Controller
 
         $this->validate($request, [
             'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'email' => 'required|email:rfc,dns',
             'streetname' => 'required|string|max:63',
