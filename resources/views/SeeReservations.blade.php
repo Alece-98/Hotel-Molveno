@@ -4,7 +4,7 @@
     <title>Alle Reserveringen</title>
     <div class="p-10">
         @foreach ($roomsWithReservations as $room)
-            @if (!$room->reservations->isEmpty())
+            @if (!$room->reservations->isEmpty() && $room->reservations->first()->guests->count() > 0)
                 <p>Kamer: {{ $room->number }} - Type: {{ $room->type ?? 'Niet gespecificeerd' }}</p>
                 <table class="w-full">
 

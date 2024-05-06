@@ -22,8 +22,9 @@ class AddGuestController extends Controller
 
     public function show(){
         $hidden=$this->hiddenButton();
+        $reservation = $this->reservation;
         session()->put('reservation', $this->reservation);
-        return view('addGuest', compact(["hidden"]), [$reservation = $this->reservation]);
+        return view('addGuest', compact(["hidden", "reservation"]));
     }
 
     private function hiddenButton() {
@@ -54,7 +55,7 @@ class AddGuestController extends Controller
 
         $guest = $this->retrieveFillAndReturnGuest(new Guest(), $request);
         $guests->push($guest); //Ignore the IDE error, it does not know that $guests will be a Collection
-        if ($reservation->getPeopleLeftToReserve() == 0){
+        if ($reservation->getPeopleLeftToReserve() <= 1){
             $reservation->save();
             foreach($guests as $guest){
                 $guest->save();

@@ -13,14 +13,6 @@
 <form class="flex reservationContainer" method="POST">
     @csrf
     <div class="column width45 flex flexVertical gap20">
-        <h3>First add all extra guests if there are still any extra guests left</h3>
-        <div class=" {{ $hidden }}">
-            <a href="{{"/extraGuest/"}}" >
-            <button type="button" class="label label-default pull-xs-right">Add Extra Guest(s)</button></a>
-        </div>
-        
-        <h3>Then fill in main guest</h3>
-
         <div class="flex widthFull">
             <label class="width150" for="firstname">
                 <p>First Name:</p>
@@ -85,7 +77,11 @@
         </div>
         <div class="flex widthFull !justify-around">
             <button onclick="window.location.href='/selectReservationRoom'" type="button">Go back</button>
+            @if ($reservation->getPeopleLeftToReserve() > 1)
+            <button type="submit">Add next guest</button>
+            @else
             <button type="submit">Complete Reservation</button>
+            @endif
         </div>
         {{-- <button type="submit">Gast toevoegen</button> --}}
     </div>
