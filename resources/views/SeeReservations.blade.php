@@ -14,7 +14,7 @@
                             @if (is_null($reservation->old))
                                 <tr class="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr] divide-x gap-0 no-border">
 
-                                    <td>
+                                    <td class="align-center">
 
                                         @foreach ($reservation->guests as $guest)
                                             @if ($loop->index == count($reservation->guests) - 1)
@@ -28,17 +28,17 @@
 
                                     @foreach ($reservation->guests as $guest)
 
-                                        <td ><a href="/SingleReservation/{{ $reservation->id }}">{{ $guest->phone }} </a></td>
+                                        <td class="flex flex-row align-center"><a href="/SingleReservation/{{ $reservation->id }}">{{ $guest->phone }} </a></td>
 
                                     @break
                                 @endforeach
 
 
-                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->getFormattedArrival() }} </a></td>
-                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->getFormattedDeparture() }} </a></td>
-                                <td>
+                                <td class="flex flex-row align-center"><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->getFormattedArrival() }} </a></td>
+                                <td class="flex flex-row align-center"><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->getFormattedDeparture() }} </a></td>
+                                <td class="flex flex-row align-center">
 
-                                    <form action="{{ route('VerwijderReservering.post', $reservation->id) }}"
+                                    <form class="m-0" action="{{ route('VerwijderReservering.post', $reservation->id) }}"
                                         method="POST">
                                         @csrf
                                         @method('POST')
@@ -46,16 +46,16 @@
                                     </form>
                                 </td>
 
-                                <td>
+                                <td class="flex flex-row align-center">
 
-                                    <form action="{{ route('CheckIn.post', $reservation->id) }}" method="POST">
+                                    <form class="m-0" action="{{ route('CheckIn.post', $reservation->id) }}" method="POST">
                                         @csrf
                                         @method('POST')
                                         <button class="reservationButtons" type="submit">Check in</button>
                                     </form>
                                 </td>
 
-                                <td>{{ $reservation->check_in }} </td>
+                                <td class="flex flex-row align-center">{{ $reservation->check_in }} </td>
 
 
 
