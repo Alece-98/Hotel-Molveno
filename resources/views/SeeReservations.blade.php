@@ -30,8 +30,8 @@
                                 @endforeach
 
 
-                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->arrival }} </a></td>
-                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->departure }} </a></td>
+                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->getFormattedArrival() }} </a></td>
+                                <td><a href="/SingleReservation/{{ $reservation->id }}">{{ $reservation->getFormattedDeparture() }} </a></td>
                                 <td>
                                     <form action="{{ route('VerwijderReservering.post', $reservation->id) }}"
                                         method="POST">

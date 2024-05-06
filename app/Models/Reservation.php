@@ -111,6 +111,15 @@ class Reservation extends Model
         $this->attributes['departure'];
     }
 
+    public function getFormattedArrival(): string{
+        return Carbon::parse($this->attributes['arrival'])->toDateString();
+    }
+
+    public function getFormattedDeparture(): string{
+        return Carbon::parse($this->attributes['departure'])->toDateString();
+    }
+
+
     public function getReservingGuest(): Guest{
         return $this->attributes['reserving_guest'];
     }
